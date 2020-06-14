@@ -132,4 +132,8 @@ class Identify_SAMPEX_Microbursts:
 
 if __name__ == '__main__':
     m = Identify_SAMPEX_Microbursts()
-    m.loop()
+    try:
+        m.loop()
+    except:
+        m.save_catalog('microburst_test_catalog.csv')
+        raise
