@@ -135,5 +135,6 @@ if __name__ == '__main__':
     try:
         m.loop()
     except:
-        m.save_catalog('microburst_test_catalog.csv')
         raise
+    finally:
+        m.save_catalog('microburst_test_catalog.csv')
