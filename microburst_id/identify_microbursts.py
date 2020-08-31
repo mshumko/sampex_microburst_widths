@@ -1,13 +1,13 @@
 import pathlib
+import re
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import re
 
 import dirs
-import microburst_detection.signal_to_background.signal_to_background \
-        as signal_to_background
-import mission_tools.sampex.load_hilt_data as load_hilt_data
+import signal_to_background
+import load_hilt_data
 
 class Identify_SAMPEX_Microbursts:
     def __init__(self, baseline_width_s=0.500, threshold=10, 
