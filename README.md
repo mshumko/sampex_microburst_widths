@@ -6,7 +6,7 @@ To install the dependencies, run these three shell commands:
 
 ```
 python3 -m venv env
-activate env/bin/activate
+source env/bin/activate
 pip3 install -r requirements.txt
 ```
 
