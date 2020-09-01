@@ -2,7 +2,7 @@
 Identify and estimate widths of microbursts in the SAMPEX/HILT 20 ms data.
 
 ## Installation
-To install the dependencies, run these three shell commands:
+To install the dependencies into a virtual environment, run these three shell commands:
 
 ```
 python3 -m venv env

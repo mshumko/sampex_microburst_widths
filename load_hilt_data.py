@@ -83,6 +83,11 @@ class Load_SAMPEX_HILT:
         Parse the seconds of day column to a datetime column. 
         If time_index=True, the time column will become the index.
         """
+        # Check if the seconds are monitonically increasing.
+        np_time = self.hilt['Time'].to_numpy()
+        if np.any(np_time[1:] < np_time[:-1]):
+            raise RuntimeError('The SAMPEX HITL data is not in order.')
+        # Convert seconds of day to a datetime object.
         day_seconds_obj = pd.to_timedelta(self.hilt['Time'], unit='s')
         self.hilt['Time'] = pd.Timestamp(self.load_date) + day_seconds_obj
         if time_index:

@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import dirs
+from sampex.sampex_microbursts import dirs
 import signal_to_background
-import load_hilt_data
+from sampex.sampex_microbursts import load_hilt_data
 
 class Identify_SAMPEX_Microbursts:
     def __init__(self, baseline_width_s=0.500, threshold=10, 
@@ -32,7 +32,7 @@ class Identify_SAMPEX_Microbursts:
         self.microburst_times = pd.DataFrame(data=np.zeros((0, 2)), 
                                             columns=['dateTime', 'burst_param'])
 
-        for hilt_file in self.hilt_files[2:]:
+        for hilt_file in self.hilt_files:
             date = self.get_filename_date(hilt_file)
 
             # Skip if the file name date was during the SAMPEX spin.
@@ -47,8 +47,14 @@ class Identify_SAMPEX_Microbursts:
                 zipped = False
 
             # Load the data
-            self.hilt_obj = load_hilt_data.Load_SAMPEX_HILT(date, 
-                            zipped=zipped)
+            try:
+                self.hilt_obj = load_hilt_data.Load_SAMPEX_HILT(date, 
+                                zipped=zipped)
+            except RuntimeError as err:
+                if str(err) == "The SAMPEX HITL data is not in order.":
+                    continue
+                else:
+                    raise
             # Resolve the 20 ms data
             self.hilt_obj.resolve_counts_state4()
 
@@ -118,7 +124,7 @@ class Identify_SAMPEX_Microbursts:
 
     def save_catalog(self, save_name):
         """ Saves the microburst_times DataFrame to a csv file. """
-        save_path = pathlib.Path('.', 'data', save_name) 
+        save_path = pathlib.Path('..', 'data', save_name) 
         self.microburst_times.to_csv(save_path, index=False)
 
     def test_detections(self):

@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-import locateConsecutiveNumbers
+import locate_consecutive_numbers
 
 class SignalToBackground:
     def __init__(self, counts, cadence, background_width_s):
@@ -63,7 +63,7 @@ class SignalToBackground:
         if len(self.criteria_idt) <= 1:
             raise ValueError('No detections found')
 
-        interval_start, interval_end = locateConsecutiveNumbers(self.criteria_idt)
+        interval_start, interval_end = locate_consecutive_numbers.locateConsecutiveNumbers(self.criteria_idt)
         self.peak_idt = np.nan*np.ones(interval_start.shape[0])
 
         # Loop over each continous interval and find the peak index.
