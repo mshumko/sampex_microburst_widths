@@ -9,13 +9,15 @@ here = pathlib.Path(__file__).parent.resolve()
 
 if (len(sys.argv) > 1) and (sys.argv[1] in ['init', 'config', 'configure']):
     print('Running the configuration script.')
-    HILT_DIR = input('What is the SAMPEX/HILT data directory? ')
+    s = (f'What is the SAMPEX data directory? (It must contain the '
+         f'attitude and hilt child directories) ')
+    HILT_DIR = input(s)
     # Check that the directory exists
     if not pathlib.Path(HILT_DIR).exists():
         raise OSError(f'The HILT path "{HILT_DIR}" does not exist. Exiting.')
     with open(pathlib.Path(here, 'config.py'), 'w') as f:
         f.write('import pathlib\n\n')
-        f.write(f'HILT_DIR = pathlib.Path("{HILT_DIR}")\n')
+        f.write(f'SAMPEX_DIR = pathlib.Path("{HILT_DIR}")\n')
         f.write(f'PROJECT_DIR = pathlib.Path("{here}")')
 
 else:

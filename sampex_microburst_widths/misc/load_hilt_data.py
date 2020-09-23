@@ -1,14 +1,15 @@
 # This program loads the HILT data and parses it into a nice format
 import argparse
-import pandas as pd
 import pathlib
-from datetime import datetime, date
 import zipfile
-import numpy as np
 import re
+from datetime import datetime, date
 
-hilt_dir = '/home/mike/research/sampex/data/hilt'
-attitude_dir = '/home/mike/research/sampex/data/attitude'
+import pandas as pd
+import numpy as np
+
+from sampex_microburst_widths import config
+
 
 class Load_SAMPEX_HILT:
     def __init__(self, load_date, zipped=True, extract=False, 
@@ -35,7 +36,7 @@ class Load_SAMPEX_HILT:
         # Get the filename and search for it. If multiple or no
         # unique files are found this will raise an assertion error.
         file_name = f'hhrr{self.load_date.year}{doy}{extention}'
-        matched_files = list(pathlib.Path(hilt_dir).rglob(file_name))
+        matched_files = list(pathlib.Path(config.SAMPEX_DIR, 'hilt').rglob(file_name))
         assert len(matched_files) == 1, (f'0 or >1 matched HILT files found.'
                                         f'\n{file_name}'
                                         f'\nmatched_files={matched_files}')
@@ -146,7 +147,7 @@ class Load_SAMPEX_Attitude:
         Uses pathlib.rglob to find the attitude file that contains 
         the DOY from self.load_date
         """
-        attitude_files = list(pathlib.Path(attitude_dir).rglob('PSSet_6sec_*_*.txt'))
+        attitude_files = list(pathlib.Path(config.SAMPEX_DIR, 'attitude').rglob('PSSet_6sec_*_*.txt'))
         start_end_dates = [re.findall(r'\d+', str(f))[1:] for f in attitude_files]
         
         current_date_int = int(self.load_date.year*1000 + self.doy)
@@ -217,60 +218,3 @@ class Load_SAMPEX_Attitude:
         if remove_old_time_cols:
             self.attitude.drop(['Year', 'Day-of-year', 'Sec_of_day'], axis=1, inplace=True)
         return
-
-
-class Load_SAMPEX_HILT_ATTITUDE:
-    def __init__(self, date):
-        """
-        This is a child class of Load_SAMPEX_HILT and Load_SAMPEX_Attitude
-        that loads the SAMPEX HILT and attitude data and merges the two
-        datasets using the merge_asof pandas function.
-        """
-        raise NotImplementedError
-        return
-
-    def merge_data(self):
-        """ 
-        This method uses pd.merge_asof to merge the SAMPEX attitude data with
-        the HILT data with a maximum threshold of 6 seconds.
-        """ 
-        raise NotImplementedError
-        return
-
-if __name__ == '__main__':
-    import time
-    import matplotlib.pyplot as plt
-
-    start_time = time.time()
-
-    l = Load_SAMPEX_HILT(datetime(2000, 4, 4))
-    l.resolve_counts_state4()
-    a = Load_SAMPEX_Attitude(datetime(2000, 4, 4))
-
-    print(f'Run time = {time.time()-start_time} s')
-
-    plt.plot(l.hilt_resolved.index, l.hilt_resolved.counts)
-    plt.show()
-
-
-    ### Copied AC6 code to make a command-line interface to plot the daily SAMPEX data 
-    ### once Load_SAMPEX_HILT_ATTITUDE is written.
-    # parser = argparse.ArgumentParser(description=('This script plots the '
-    #     'SAMPEX HILT data.'))
-    # parser.add_argument('date', nargs=3, type=int,
-    #     help=('This is the date to plot formatted as YYYY MM DD')) 
-    # parser.add_argument('-d', '--dtype', type=str, default='10Hz',
-    #     help=('AC6 data type to plot (10Hz or survey)'))  
-    # parser.add_argument('-p', '--plot', type=bool, default=True,
-    #     help=('Plot AC6 data'))
-    # args = parser.parse_args()
-
-    # date = datetime(*args.date)
-    # import time
-    # t = time.time()
-    # data = read_ac_data_wrapper(args.sc_id, date, dType=args.dtype, 
-    #         tRange=None)
-
-    # if args.plot:
-    #     p = Plot_AC6(data, args.sc_id, args.dtype)
-    #     p.plot_data()
