@@ -1,4 +1,4 @@
-# sampex_microbursts
+# sampex_microburst_widths
 Identify and estimate widths of microbursts in the SAMPEX/HILT 20 ms data.
 
 ## Installation

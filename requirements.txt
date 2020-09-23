@@ -1,7 +1,16 @@
-matplotlib==3.1.3
-numpy==1.18.1
-pandas==1.1.0
-progressbar2==3.47.0
-pylint==2.4.4
-scipy==1.4.1
-spacepy==0.2.1
+# Force the dependency source to the pypi url
+--index-url https://pypi.python.org/simple/ 
+
+# Specific dependencies to this package
+matplotlib>=3.1.3
+numpy>=1.18.1
+pandas>=1.1.0
+progressbar2>=3.47.0
+pylint>=2.4.4
+scipy>=1.4.1
+spacepy>=0.2.1
+
+# Finally install this package in editable (-e) 
+# mode so I can develop it 
+# without reinstalling it after every change.
+-e .
