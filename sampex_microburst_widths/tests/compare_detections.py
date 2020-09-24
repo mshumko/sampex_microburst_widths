@@ -3,8 +3,15 @@ import re
 
 import pandas as pd
 import scipy.io
+import matplotlib.pyplot as plt
+import numpy as np
 
-import dirs
+from sampex_microburst_widths.misc import load_hilt_data
+try:
+    from sampex_microburst_widths import config
+except ModuleNotFoundError:
+    print('The config.py file is not found. Run "python3 -m sampex_microburst_widths init"')
+    raise
 
 class CompareDetections:
     def __init__(self, thresh_s=0.1):
@@ -15,11 +22,11 @@ class CompareDetections:
         self.thresh_s = thresh_s
         return
 
-    def load_test_data(self, test_dir='test_data/'):
+    def load_test_data(self, test_dir='tests'):
         """
         Load Lauren's test data and put it into one DataFrame.
         """
-        files_path_gen = pathlib.Path(dirs.BASE_DIR, test_dir).glob('*.mat')
+        files_path_gen = pathlib.Path(config.PROJECT_DIR, test_dir).glob('*.mat')
         files_path_list = sorted(list(files_path_gen))
         array_list = len(files_path_list)*[None]
 
@@ -32,7 +39,7 @@ class CompareDetections:
         """
 
         """
-        cat_path = pathlib.Path(dirs.BASE_DIR, 'data', catalog_name)
+        cat_path = pathlib.Path(config.PROJECT_DIR, 'data', catalog_name)
         self.cat = pd.read_csv(cat_path, index_col=0, parse_dates=True)
         return
 
@@ -40,6 +47,22 @@ class CompareDetections:
         self.merged_df = pd.merge_asof(self.mat_times, self.cat, 
         left_on='dateTime', right_index=True, direction='nearest', 
         tolerance=pd.Timedelta(self.thresh_s, unit='s'))
+        return
+
+    def plot_detections(self, date='1999-05-02'):
+        """ Plots Lauren's and my detections on top of the HILT data """
+        l = load_hilt_data.Load_SAMPEX_HILT(date)
+        l.resolve_counts_state4()
+        # a = load_hilt_data.Load_SAMPEX_Attitude(date)
+
+        filtered_mat_times = self.mat_times.loc[date].index
+        filtered_cat_times = self.cat.loc[date].index
+
+        plt.plot(l.hilt_resolved.index[::10], l.hilt_resolved.counts[::10])
+        plt.scatter(filtered_mat_times, 10*np.ones(filtered_mat_times.shape[0]), c='r')
+        plt.scatter(filtered_cat_times, 15*np.ones(filtered_cat_times.shape[0]), c='b')
+        plt.yscale('log')
+        plt.show()
         return
 
     def load_mat_file(self, file_path):
@@ -52,6 +75,7 @@ class CompareDetections:
         burst_hr = mat_data['time_hr'][burst_index, 0]
         df = pd.DataFrame(date + pd.to_timedelta(burst_hr, unit='hr'), 
                         columns=['dateTime'])
+        df.index = df.dateTime
         return df
 
     def get_year_from_filename(self, file_name):
@@ -69,4 +93,5 @@ if __name__ == '__main__':
     c = CompareDetections()
     c.load_test_data()
     c.load_microburst_catalog('microburst_test_catalog.csv')
-    c.merge_catalogs()
+    # c.merge_catalogs()
+    c.plot_detections()

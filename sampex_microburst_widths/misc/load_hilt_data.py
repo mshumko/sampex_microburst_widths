@@ -22,6 +22,10 @@ class Load_SAMPEX_HILT:
         otherwise the index is just an enumerated list.
         """
         self.load_date = load_date
+        # If date is in string format, convert to a pd.Timestamp object
+        if isinstance(self.load_date, str):
+            self.load_date = pd.to_datetime(self.load_date)
+
         if zipped:
             extention='.txt.zip'
         else:
@@ -128,6 +132,9 @@ class Load_SAMPEX_Attitude:
         columns into datetime objects
         """
         self.load_date = load_date
+        # If date is in string format, convert to a pd.Timestamp object
+        if isinstance(self.load_date, str):
+            self.load_date = pd.to_datetime(self.load_date)
 
         # Figure out how to calculate the day of year (DOY)
         if isinstance(self.load_date, pd.Timestamp):
@@ -147,8 +154,8 @@ class Load_SAMPEX_Attitude:
         Uses pathlib.rglob to find the attitude file that contains 
         the DOY from self.load_date
         """
-        attitude_files = list(pathlib.Path(config.SAMPEX_DIR, 'attitude').rglob('PSSet_6sec_*_*.txt'))
-        start_end_dates = [re.findall(r'\d+', str(f))[1:] for f in attitude_files]
+        attitude_files = sorted(list(pathlib.Path(config.SAMPEX_DIR, 'attitude').rglob('PSSet_6sec_*_*.txt')))
+        start_end_dates = [re.findall(r'\d+', str(f.name))[1:] for f in attitude_files]
         
         current_date_int = int(self.load_date.year*1000 + self.doy)
         self.attitude_file = None

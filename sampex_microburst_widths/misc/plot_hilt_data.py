@@ -19,12 +19,12 @@ parser.add_argument('-d', '--dtype', type=str, default='10Hz',
 args = parser.parse_args()
 date = datetime(*args.date)
 
-
 start_time = time.time()
 l = load_hilt_data.Load_SAMPEX_HILT(date)
 l.resolve_counts_state4()
-a = load_hilt_data.Load_SAMPEX_Attitude(date)
+# a = load_hilt_data.Load_SAMPEX_Attitude(date)
 print(f'Load time = {time.time()-start_time} s')
 
-plt.plot(l.hilt_resolved.index, l.hilt_resolved.counts)
+plt.plot(l.hilt_resolved.index[::10], l.hilt_resolved.counts[::10])
+plt.yscale('log')
 plt.show()
