@@ -1,17 +1,15 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 30 11:12:10 2017
-
-@author: mike
-"""
 import numpy as np
 
 def get_index_intervals(x):
     """
     NAME:    get_index_intervals(x)
     USE:     Locates consecutive numbers (indices) in an array x.
-    INPUT:   An sorted array of numbers.
-    RETURNS: startInd and endInd arrays of consecutive numbers.
+             for ith inerval, that interval in x is given by
+             x[start_index[i]:end_index[i]]. Technically end_index[i]
+             is one greater because Python's indexing excludes the last
+             index, i.e. x[0:5] returns x_0, x_1,... x_4 and NOT x_5.
+    INPUT:   An sorted array of integers.
+    RETURNS: start_index and end_index arrays of consecutive numbers.
     AUTHOR:  Mykhaylo Shumko
     MOD:     2020-09-23
     """
