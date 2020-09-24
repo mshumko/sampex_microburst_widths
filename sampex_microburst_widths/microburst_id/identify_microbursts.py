@@ -4,6 +4,7 @@ import re
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import progressbar
 
 from sampex_microburst_widths import config
 from sampex_microburst_widths.misc import load_hilt_data
@@ -12,7 +13,7 @@ from sampex_microburst_widths.microburst_id import signal_to_background
 class Identify_SAMPEX_Microbursts:
     def __init__(self, baseline_width_s=0.500, threshold=10, 
                 spin_file_name='spin_times.csv'):
-        self.hilt_dir = pathlib.Path(load_hilt_data.hilt_dir, 'State4')
+        self.hilt_dir = pathlib.Path(config.SAMPEX_DIR, 'hilt', 'State4')
         self.spin_file_name = spin_file_name
         self.baseline_width_s = baseline_width_s
         self.threshold = threshold
@@ -32,7 +33,7 @@ class Identify_SAMPEX_Microbursts:
         self.microburst_times = pd.DataFrame(data=np.zeros((0, 2)), 
                                             columns=['dateTime', 'burst_param'])
 
-        for hilt_file in self.hilt_files:
+        for hilt_file in progressbar.progressbar(self.hilt_files, redirect_stdout=True):
             date = self.get_filename_date(hilt_file)
 
             # Skip if the file name date was during the SAMPEX spin.
