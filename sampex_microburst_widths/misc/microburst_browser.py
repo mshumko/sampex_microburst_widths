@@ -10,6 +10,7 @@ from matplotlib.dates import date2num, num2date
 from matplotlib.widgets import Button, TextBox
 
 from sampex_microburst_widths import config
+from sampex_microburst_widths.misc import load_hilt_data
 
 plot_save_dir = pathlib.Path(config.PROJECT_DIR, '/plots/')
 matplotlib.rcParams["savefig.directory"] = plot_save_dir
@@ -23,7 +24,7 @@ class Browser:
         detections in the future and past with buttons. Also there is a button
         to mark the event as a microburst.
         """
-        self.plot_width_s=plot_width_s
+        self.plot_half_width_s=pd.Timedelta(seconds=plot_width_s/2)
         self.catalog_name = catalog_name
         # self.filter_catalog(filterDict=filterDict, defaultFilter=defaultFilter)
 
@@ -38,6 +39,9 @@ class Browser:
         self.catalog_save_path = pathlib.Path(config.PROJECT_DIR, 
                                             'data', self.catalog_save_name)
 
+        # Load the original catalog
+        self.load_microburst_catalog()
+
         # Load the filtered catalog if it already exists. This is
         # userful if you can't sort all microbursts at once!
         if pathlib.Path(self.catalog_save_path).exists():
@@ -45,7 +49,7 @@ class Browser:
         else:
             self.microburst_idx = np.array([])
 
-        self.current_date = date.min
+        self.prev_date = date.min
         self._init_plot()
         if jump_to_latest and len(self.microburst_idx):
             self.index = self.microburst_idx[-1]
@@ -125,15 +129,20 @@ class Browser:
         print('Index position = {}/{}'.format(
                     self.index, self.catalog.shape[0]-1))
         current_row = self.catalog.iloc[self.index]
+        current_time = self.catalog.index[self.index]
+        print(current_time)
         self.index_box.set_val(self.index)
         self._clear_ax()
 
-        if current_row['dateTime'].date() != self.current_date:
+        if current_time.date() != self.prev_date:
             # Load current day AC-6 data if not loaded already
-            print('Loading data from {}...'.format(current_row['dateTime'].date()), 
+            print('Loading data from {}...'.format(current_time.date()), 
                     end=' ', flush=True)
-            self.load_ten_hz_data(current_row.dateTime.date())
-            self.current_date = current_row.dateTime.date()
+            l = load_hilt_data.Load_SAMPEX_HILT(current_time)
+            l.resolve_counts_state4()
+            self.hilt = l.hilt_resolved
+            #self.counts = l.hilt_resolved
+            self.prev_date = current_time.date()
             print('done.')
 
         # Turn microburst button green if this index has been marked as a microburst.
@@ -141,21 +150,24 @@ class Browser:
             self.bmicroburst.color = 'g'
         else:
             self.bmicroburst.color = '0.85'
-           
-        self.make_plot(current_row, savefig=False, plot_dos2_and_dos3=False)
-        self.ax[0].set_title('AC6 Curtain Browser\n {} {}'.format(
-                        current_row['dateTime'].date(), 
-                        current_row['dateTime'].time()))
-        self.ax[0].set_ylabel('dos1rate\n[counts/s]')
-        self.ax[1].set_ylabel('dos1rate\n[counts/s]')
-        self.ax[1].set_xlabel('UTC')
+
+        start_time = current_time-self.plot_half_width_s
+        end_time = current_time+self.plot_half_width_s
+        filtered_hilt = self.hilt.loc[start_time:end_time, :] 
+        self.ax.plot(filtered_hilt.index, filtered_hilt.counts)
+        self.ax.set_title('SAMPEX Microburst Browser\n {} {}'.format(
+                        current_time.date(), 
+                        current_time.time()))
+        self.ax.set_ylabel('[counts/s]')
+        self.ax.set_xlabel('UTC')
         
         # self._print_aux_info(current_row)
 
-        t = num2date(self.ax[0].get_xlim()[0]).replace(tzinfo=None).replace(microsecond=0)
+        t = num2date(self.ax.get_xlim()[0]).replace(tzinfo=None).replace(microsecond=0)
         save_datetime = t.strftime('%Y%m%d_%H%M')
-        self.fig.canvas.get_default_filename = lambda: (f'{save_datetime}_'
-                f'{int(current_row.Lag_In_Track)}s_curtain.png')
+        self.fig.canvas.get_default_filename = lambda: (
+            f'{save_datetime}_sampex_microburst.png'
+            )
 
         plt.draw()
         return
@@ -192,14 +204,14 @@ class Browser:
         return
 
     def _clear_ax(self):
-        [a.clear() for a in self.ax]
+        self.ax.clear()
         return 
 
     def _init_plot(self):
         """
         Initialize subplot objects and text box.
         """
-        self.fig, self.ax = plt.subplots(2, figsize=(8, 7))
+        self.fig, self.ax = plt.subplots(figsize=(8, 7))
         plt.subplots_adjust(bottom=0.2)
 
         # Define button axes.
