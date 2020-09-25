@@ -1,6 +1,6 @@
 import pathlib
+import dateutil.parser
 from datetime import date, datetime
-import dateutil.parser 
 
 import numpy as np
 import pandas as pd
@@ -9,53 +9,46 @@ import matplotlib.pyplot as plt
 from matplotlib.dates import date2num, num2date
 from matplotlib.widgets import Button, TextBox
 
-import plot_curtains
-import dirs
 from sampex_microburst_widths import config
 
-catalog_save_dir = dirs.CATALOG_DIR
-
-plot_save_dir = '/home/mike/research/ac6_curtains/plots/'
+plot_save_dir = pathlib.Path(config.PROJECT_DIR, '/plots/')
 matplotlib.rcParams["savefig.directory"] = plot_save_dir
 
-class Browser(plot_curtains.PlotCurtains):
-    def __init__(self, catalog_version, plot_width=5, catalog_name=None,
-                catalog_save_name=None, width_tol=None, filterDict={}, 
-                defaultFilter=False, jump_to_latest=True):
+class Browser:
+    def __init__(self, plot_width_s=5, catalog_name=None,
+                catalog_save_name=None, filterDict={}, 
+                jump_to_latest=True):
         """
         This class plots the AC6 microbursts and allows the user to browse
         detections in the future and past with buttons. Also there is a button
         to mark the event as a microburst.
         """
-        plot_curtains.PlotCurtains.__init__(self, catalog_version,                      
-                                catalog_name=catalog_name,
-                                plot_width=plot_width, plot_width_flag=False, 
-                                make_plt_dir_flag=False)
-        self.filter_catalog(filterDict=filterDict, defaultFilter=defaultFilter)
-        # Filter out events with widths whithin a width_tol.
-        if width_tol is not None:
-            self.catalog = self.catalog[np.isclose(
-                            self.catalog['peak_width_A'], 
-                            self.catalog['peak_width_B'], rtol=width_tol)]
+        self.plot_width_s=plot_width_s
+        self.catalog_name = catalog_name
+        # self.filter_catalog(filterDict=filterDict, defaultFilter=defaultFilter)
 
         if catalog_save_name is None:
-            self.catalog_save_name = f'AC6_curtains_sorted_v{catalog_version}.txt'
+            catalog_name_split =self.catalog_name.split('.')
+            self.catalog_save_name = (catalog_name_split[0]+'_sorted'+
+                                    catalog_name_split[-1])
         else:
             self.catalog_save_name = catalog_save_name
+        self.catalog_path = pathlib.Path(config.PROJECT_DIR, 
+                                            'data', self.catalog_name)
         self.catalog_save_path = pathlib.Path(config.PROJECT_DIR, 
                                             'data', self.catalog_save_name)
 
         # Load the filtered catalog if it already exists. This is
         # userful if you can't sort all microbursts at once!
-        if os.path.exists(self.catalog_save_path):
+        if pathlib.Path(self.catalog_save_path).exists():
             self.load_filtered_catalog()
         else:
-            self.curtain_idx = np.array([])
+            self.microburst_idx = np.array([])
 
         self.current_date = date.min
         self._init_plot()
-        if jump_to_latest and len(self.curtain_idx):
-            self.index = self.curtain_idx[-1]
+        if jump_to_latest and len(self.microburst_idx):
+            self.index = self.microburst_idx[-1]
         else:
             # Start at row 0 in the dataframe.
             self.index = 0 
@@ -80,19 +73,19 @@ class Browser(plot_curtains.PlotCurtains):
         self.plot()
         return
 
-    def append_remove_curtain(self, event):
+    def append_remove_microburst(self, event):
         """ 
         Appends or removes the current catalog row to 
         self.filtered_catalog which will then
         be saved to a file for later processing.
         """
-        if self.index not in self.curtain_idx:
-            self.curtain_idx = np.append(self.curtain_idx, self.index)
+        if self.index not in self.microburst_idx:
+            self.microburst_idx = np.append(self.microburst_idx, self.index)
             self.bmicroburst.color = 'g'
             print('Curtain saved at', self.catalog.iloc[self.index].dateTime)
         else:
-            self.curtain_idx = np.delete(self.curtain_idx, 
-                np.where(self.curtain_idx == self.index)[0])
+            self.microburst_idx = np.delete(self.microburst_idx, 
+                np.where(self.microburst_idx == self.index)[0])
             self.bmicroburst.color = '0.85'
             print('Curtain removed at', self.catalog.iloc[self.index].dateTime)
         return
@@ -104,7 +97,7 @@ class Browser(plot_curtains.PlotCurtains):
         if event.key == 'm':
             # Mark as a curtain (can't use the "c" key since it is 
             # the clear command)
-            self.append_remove_curtain(event)
+            self.append_remove_microburst(event)
         elif event.key == 'a':
             # Move self.index back and replot.
             self.prev(event)
@@ -144,7 +137,7 @@ class Browser(plot_curtains.PlotCurtains):
             print('done.')
 
         # Turn microburst button green if this index has been marked as a microburst.
-        if self.index in self.curtain_idx:
+        if self.index in self.microburst_idx:
             self.bmicroburst.color = 'g'
         else:
             self.bmicroburst.color = '0.85'
@@ -157,7 +150,7 @@ class Browser(plot_curtains.PlotCurtains):
         self.ax[1].set_ylabel('dos1rate\n[counts/s]')
         self.ax[1].set_xlabel('UTC')
         
-        self._print_aux_info(current_row)
+        # self._print_aux_info(current_row)
 
         t = num2date(self.ax[0].get_xlim()[0]).replace(tzinfo=None).replace(microsecond=0)
         save_datetime = t.strftime('%Y%m%d_%H%M')
@@ -220,7 +213,7 @@ class Browser(plot_curtains.PlotCurtains):
         self.bprev = Button(self.axprev, 'Previous (a)', hovercolor='g')
         self.bprev.on_clicked(self.prev)
         self.bmicroburst = Button(self.axburst, 'Curtain (m)', hovercolor='g')
-        self.bmicroburst.on_clicked(self.append_remove_curtain)
+        self.bmicroburst.on_clicked(self.append_remove_microburst)
 
         # Define the textbox axes.
         self.textbox = plt.axes([0.1, 0.05, 0.2, 0.075])
@@ -234,6 +227,30 @@ class Browser(plot_curtains.PlotCurtains):
         self.fig.canvas.mpl_connect('key_press_event', self.key_press)
         return
 
+    def load_microburst_catalog(self):
+        """
+        Loads the original microburst catalog and saves to self.catalog.
+        """
+        self.catalog = pd.read_csv(self.catalog_path, 
+                                index_col=0, parse_dates=True)
+        return
+
+    def load_filtered_catalog(self):
+        """
+        Load a filtered catalog and populate the self.microbirst_idx array
+        with existing detections. This method exists to help the user resume
+        the 
+        """
+        filtered_catalog = pd.read_csv(self.catalog_save_path, 
+                                    index_col=0, parse_dates=True)
+        # Convert times to numeric for faster computation of what times 
+        flt_times_numeric = date2num(filtered_catalog.index)
+        times_numeric = date2num(self.catalog.index)
+        # Find the start microburst index
+        self.microburst_idx = np.where(np.in1d(times_numeric, flt_times_numeric, 
+                                    assume_unique=True))[0]
+        return
+
     def save_filtered_catalog(self):
         """
         For every index that a user clicked microburst on, save
@@ -244,42 +261,20 @@ class Browser(plot_curtains.PlotCurtains):
         if not hasattr(self, 'curtain_idx'):
             return
         # Remove duplicates indicies
-        self.curtain_idx = np.unique(self.curtain_idx)
-        save_path = os.path.join(catalog_save_dir, self.catalog_save_name)
-        print('Saving filtered catalog to {}'.format(save_path))
-        df = self.catalog.iloc[self.curtain_idx]
+        self.microburst_idx = np.unique(self.microburst_idx)
+        print('Saving filtered catalog to {}'.format(self.catalog_save_path))
+        df = self.catalog.iloc[self.microburst_idx]
         # Remove duplicate times (different than indicies since the same time
         # from the other sc may be assigned to a different index. 
-        df.drop_duplicates(subset='dateTime', inplace=True)
-
-        # Now look for duplicate spatial times. 
-
+        #df.drop_duplicates(subset='dateTime', inplace=True)
 
         # Save to csv file.
-        df.to_csv(save_path, index=False)
-        return
-
-    def load_filtered_catalog(self):
-        """
-        Load a filtered catalog and populate the self.microbirst_idx array
-        with existing detections. This method exists to help the user resume
-        the 
-        """
-        filtered_catalog = pd.read_csv(self.catalog_save_path)
-        # Convert the catalog times to datetime objects
-        for timeKey in ['dateTime', 'time_spatial_A', 'time_spatial_B']:
-            filtered_catalog[timeKey] = pd.to_datetime(filtered_catalog[timeKey])
-        # Convert times to numeric for easier comparison
-        flt_times_numeric = date2num(filtered_catalog.dateTime)
-        times_numeric = date2num(self.catalog.dateTime)
-        self.curtain_idx = np.where(np.in1d(times_numeric, flt_times_numeric, 
-                                    assume_unique=True))[0]
+        df.to_csv(self.catalog_save_path, index=True)
         return
 
 
-# callback = Browser(8, width_tol=None, filterDict={})
-callback = Browser(None, catalog_name='ac6_curtains_baseline_method_v0.csv',            
-                    width_tol=None, filterDict={}, plot_width=10)
+callback = Browser(catalog_name='microburst_test_catalog.csv',            
+                    filterDict={}, plot_width_s=10)
 # Initialize the GUI
 plt.show()
 # Save the catalog.
