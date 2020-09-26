@@ -18,7 +18,7 @@ class SignalToBackground:
         Parameters
         ----------
         counts : array
-            Array of counts. Should be continious
+            Array of counts. Should be continuous
         background_width_s : float
             The baseline width in time to calculate the running mean
         """
@@ -41,8 +41,10 @@ class SignalToBackground:
         Returns a pandas DataFrame object that can be 
         converted to numpy using the .to_numpy() method.
         """
-        self.rolling_average = self._running_average(self.counts)
-        self.n_std = (self.counts-self.rolling_average)/np.sqrt(self.rolling_average+1)
+        self.rolling_background_counts = self._running_average(self.counts, self.background_width_s)
+        self.rolling_microburst_counts = self._running_average(self.counts, 0.1)
+        self.n_std = ((self.rolling_microburst_counts-self.rolling_background_counts)/\
+                    np.sqrt(self.rolling_background_counts+1))
         return self.n_std
 
     def find_microburst_peaks(self, std_thresh=2):
@@ -75,9 +77,9 @@ class SignalToBackground:
         self.peak_idt = self.peak_idt.astype(int)
         return self.peak_idt
 
-    def _running_average(self, counts):
+    def _running_average(self, counts, window_width):
         """
         Calculate the running average of the counts array.
         """
-        background_width_samples = int(self.background_width_s/self.cadence)
-        return counts.rolling(background_width_samples, center=True).mean()
+        n_samples = int(window_width/self.cadence)
+        return counts.rolling(n_samples, center=True).mean()
