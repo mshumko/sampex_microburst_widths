@@ -114,6 +114,20 @@ class Identify_SAMPEX_Microbursts:
                                     self.baseline_width_s)
         self.stb.significance()
         self.stb.find_microburst_peaks(std_thresh=self.threshold)
+
+        # Remove detections made near data gaps (invalid baseline)
+        times = self.hilt_obj.hilt_resolved.index
+        dt = (times[1:] - times[:-1]).total_seconds()
+        bad_indices = np.array([])
+        bad_index_range = int(5/(dt[0]*2))
+        # Loop over every peak and check that the nearby data has no
+        # time gaps longer than 1 second.
+        for i, peak_i in enumerate(self.stb.peak_idt):
+            if dt[peak_i-bad_index_range:peak_i+bad_index_range].max() > 1:
+                bad_indices = np.append(bad_indices, i)
+        self.stb.peak_idt = np.delete(self.stb.peak_idt, bad_indices.astype(int))
+
+        # Save to a DataFrame
         df = pd.DataFrame(
             data={
                 'dateTime':pd.Series(self.hilt_obj.times[self.stb.peak_idt]),

@@ -13,7 +13,7 @@ from sampex_microburst_widths import config
 
 class Load_SAMPEX_HILT:
     def __init__(self, load_date, zipped=True, extract=False, 
-                time_index=True):
+                time_index=True, verbose=False):
         """
         Load the HILT data given a date. If zipped is True, this class will
         look for txt.zip file with the date and open it (without extracting).
@@ -22,6 +22,7 @@ class Load_SAMPEX_HILT:
         otherwise the index is just an enumerated list.
         """
         self.load_date = load_date
+        self.verbose = verbose
         # If date is in string format, convert to a pd.Timestamp object
         if isinstance(self.load_date, str):
             self.load_date = pd.to_datetime(self.load_date)
@@ -79,7 +80,8 @@ class Load_SAMPEX_HILT:
         Reads in the CSV file given either the filename or the 
         zip file reference
         """
-        print(f'Loading SAMPEX HILT data from {self.load_date.date()} from {path.name}')
+        if self.verbose:
+            print(f'Loading SAMPEX HILT data from {self.load_date.date()} from {path.name}')
         self.hilt = pd.read_csv(path, sep=' ')
         return
 
@@ -94,7 +96,7 @@ class Load_SAMPEX_HILT:
             raise RuntimeError('The SAMPEX HITL data is not in order.')
         # Convert seconds of day to a datetime object.
         day_seconds_obj = pd.to_timedelta(self.hilt['Time'], unit='s')
-        self.hilt['Time'] = pd.Timestamp(self.load_date) + day_seconds_obj
+        self.hilt['Time'] = pd.Timestamp(self.load_date.date()) + day_seconds_obj
         if time_index:
             self.hilt.index = self.hilt['Time']
             del(self.hilt['Time'])
@@ -178,8 +180,9 @@ class Load_SAMPEX_Attitude:
         If remove_old_time_cols is True, the year, DOY, and second columns are 
         delited to conserve memory.
         """
-        print(f'Loading SAMPEX attitude data from {self.load_date.date()} from'
-            f' {self.attitude_file.name}')
+        if self.verbose:
+            print(f'Loading SAMPEX attitude data from {self.load_date.date()} from'
+                f' {self.attitude_file.name}')
         # A default set of hard-coded list of columns to load
         if columns=='default':
             columns = {

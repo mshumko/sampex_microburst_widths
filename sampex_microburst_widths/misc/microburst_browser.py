@@ -1,6 +1,7 @@
 import pathlib
 import dateutil.parser
 from datetime import date, datetime
+import inspect
 
 import numpy as np
 import pandas as pd
@@ -113,6 +114,7 @@ class Browser:
     def change_index(self, index):
         try:
             self.index = int(index)
+            print('in change_index()')
         except ValueError:
             # Assume the passed value is a time.
             t = dateutil.parser.parse(index)
@@ -126,11 +128,16 @@ class Browser:
         """ 
         Given a self.current_row in the dataframe, make a space-time plot 
         """
-        print('Index position = {}/{}'.format(
-                    self.index, self.catalog.shape[0]-1))
+
+        # DEBUG
+        curframe = inspect.currentframe()
+        calframe = inspect.getouterframes(curframe, 2)
+        print('caller name:', calframe[1][3])
+
         current_row = self.catalog.iloc[self.index]
         current_time = self.catalog.index[self.index]
-        print(current_time)
+        print(f'Index position = {self.index}/{self.catalog.shape[0]-1} | '
+            f'at time = {current_time}')
         self.index_box.set_val(self.index)
         self._clear_ax()
 
@@ -141,7 +148,6 @@ class Browser:
             l = load_hilt_data.Load_SAMPEX_HILT(current_time)
             l.resolve_counts_state4()
             self.hilt = l.hilt_resolved
-            #self.counts = l.hilt_resolved
             self.prev_date = current_time.date()
             print('done.')
 
@@ -154,7 +160,8 @@ class Browser:
         start_time = current_time-self.plot_half_width_s
         end_time = current_time+self.plot_half_width_s
         filtered_hilt = self.hilt.loc[start_time:end_time, :] 
-        self.ax.plot(filtered_hilt.index, filtered_hilt.counts)
+        self.ax.plot(filtered_hilt.index, filtered_hilt.counts, c='k')
+        self.ax.axvline(current_time, ls=':', c='g')
         self.ax.set_title('SAMPEX Microburst Browser\n {} {}'.format(
                         current_time.date(), 
                         current_time.time()))
@@ -168,7 +175,6 @@ class Browser:
         self.fig.canvas.get_default_filename = lambda: (
             f'{save_datetime}_sampex_microburst.png'
             )
-
         plt.draw()
         return
 
@@ -286,7 +292,7 @@ class Browser:
 
 
 callback = Browser(catalog_name='microburst_test_catalog.csv',            
-                    filterDict={}, plot_width_s=10)
+                    filterDict={}, plot_width_s=5)
 # Initialize the GUI
 plt.show()
 # Save the catalog.

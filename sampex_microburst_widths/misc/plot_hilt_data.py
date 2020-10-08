@@ -14,8 +14,6 @@ parser = argparse.ArgumentParser(description=('This script plots the '
     'SAMPEX HILT data.'))
 parser.add_argument('date', nargs=3, type=int,
     help=('This is the date to plot formatted as YYYY MM DD')) 
-parser.add_argument('-d', '--dtype', type=str, default='10Hz',
-    help=('AC6 data type to plot (10Hz or survey)'))  
 args = parser.parse_args()
 date = datetime(*args.date)
 
@@ -26,5 +24,5 @@ l.resolve_counts_state4()
 print(f'Load time = {time.time()-start_time} s')
 
 plt.plot(l.hilt_resolved.index[::10], l.hilt_resolved.counts[::10])
-plt.yscale('log')
+# plt.yscale('log')
 plt.show()
