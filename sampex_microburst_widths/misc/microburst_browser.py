@@ -162,6 +162,16 @@ class Browser:
         filtered_hilt = self.hilt.loc[start_time:end_time, :] 
         self.ax.plot(filtered_hilt.index, filtered_hilt.counts, c='k')
         self.ax.axvline(current_time, ls=':', c='g')
+
+        # Plot the peak width in red
+        print(self.catalog.columns)
+        if 'left_peak_base' in self.catalog.columns:
+            print(current_row[['width_height', 'left_peak_base', 'right_peak_base']])
+            self.ax.hlines(current_row['width_height'], 
+                        current_row['left_peak_base'],
+                        current_row['right_peak_base'],
+                        colors='r')
+
         self.ax.set_title('SAMPEX Microburst Browser\n {} {}'.format(
                         current_time.date(), 
                         current_time.time()))
@@ -251,6 +261,9 @@ class Browser:
         """
         self.catalog = pd.read_csv(self.catalog_path, 
                                 index_col=0, parse_dates=True)
+        if 'left_peak_base' in self.catalog.columns:
+            self.catalog['left_peak_base'] = pd.to_datetime(self.catalog['left_peak_base'])
+            self.catalog['right_peak_base'] = pd.to_datetime(self.catalog['right_peak_base'])
         return
 
     def load_filtered_catalog(self):
