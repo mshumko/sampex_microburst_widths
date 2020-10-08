@@ -31,7 +31,7 @@ class Browser:
 
         if catalog_save_name is None:
             catalog_name_split =self.catalog_name.split('.')
-            self.catalog_save_name = (catalog_name_split[0]+'_sorted'+
+            self.catalog_save_name = (catalog_name_split[0]+'_sorted.'+
                                     catalog_name_split[-1])
         else:
             self.catalog_save_name = catalog_save_name
@@ -87,12 +87,12 @@ class Browser:
         if self.index not in self.microburst_idx:
             self.microburst_idx = np.append(self.microburst_idx, self.index)
             self.bmicroburst.color = 'g'
-            print('Curtain saved at', self.catalog.iloc[self.index].dateTime)
+            print('Microburst saved at', self.catalog.iloc[self.index].dateTime)
         else:
             self.microburst_idx = np.delete(self.microburst_idx, 
                 np.where(self.microburst_idx == self.index)[0])
             self.bmicroburst.color = '0.85'
-            print('Curtain removed at', self.catalog.iloc[self.index].dateTime)
+            print('Microburst removed at', self.catalog.iloc[self.index].dateTime)
         return
 
     def key_press(self, event):
@@ -100,8 +100,7 @@ class Browser:
         Calls an appropriate method depending on what key was pressed.
         """
         if event.key == 'm':
-            # Mark as a curtain (can't use the "c" key since it is 
-            # the clear command)
+            # Mark as a microburst
             self.append_remove_microburst(event)
         elif event.key == 'a':
             # Move self.index back and replot.
@@ -109,6 +108,8 @@ class Browser:
         elif event.key =='d':
             # Move the self.index forward and replot.
             self.next(event)
+        elif event.key == 'w':
+            print('Width not recorded!')
         return
        
     def change_index(self, index):
@@ -178,7 +179,7 @@ class Browser:
         self.ax.set_ylabel('[counts/s]')
         self.ax.set_xlabel('UTC')
         
-        # self._print_aux_info(current_row)
+        self._print_aux_info(current_row)
 
         t = num2date(self.ax.get_xlim()[0]).replace(tzinfo=None).replace(microsecond=0)
         save_datetime = t.strftime('%Y%m%d_%H%M')
@@ -196,27 +197,10 @@ class Browser:
         current_row = current_row.copy()
 
         # Replace a few default values if they don't exist.
-        if not hasattr(current_row, 'peak_width_A'):
-            current_row['peak_width_A'] = np.nan
-            current_row['peak_width_B'] = np.nan
-        if not hasattr(current_row, 'time_cc'):
-            current_row['time_cc'] = np.nan
-            current_row['space_cc'] = np.nan
-
-        col1 = ('Lag_In_Track = {} s\nDist_In_Track = {} km\n'
-                    'Dist_total = {} km\npeak_width_A = {} s\n'
-                    'peak_width_B = {} s'.format(
-                    round(current_row['Lag_In_Track'], 1), 
-                    round(current_row['Dist_In_Track'], 1), 
-                    round(current_row['Dist_Total'], 1), 
-                    round(current_row['peak_width_A'], 2), 
-                    round(current_row['peak_width_B'], 2)))
-        col2 = ('time_cc = {}\nspace_cc = {}\n'.format(
-                    round(current_row['time_cc'], 2), 
-                    round(current_row['space_cc'], 1)
-                    ))
-        self.textbox.text(0, 1, col1, va='top')
-        self.textbox.text(1.3, 1, col2, va='top')
+        if hasattr(current_row, 'width_s'):
+            s = f"microburst_width = {round(current_row['width_s'], 2)} s"
+            self.textbox.text(0, 1, s, va='top')
+        # self.textbox.text(1.3, 1, col2, va='top')
         return
 
     def _clear_ax(self):
@@ -231,7 +215,8 @@ class Browser:
         plt.subplots_adjust(bottom=0.2)
 
         # Define button axes.
-        self.axprev = plt.axes([0.54, 0.06, 0.12, 0.075])
+        self.axprev = plt.axes([0.41, 0.06, 0.12, 0.075])
+        self.axwidth = plt.axes([0.54, 0.06, 0.12, 0.075])
         self.axburst = plt.axes([0.67, 0.06, 0.13, 0.075])
         self.axnext = plt.axes([0.81, 0.06, 0.12, 0.075])
 
@@ -240,7 +225,9 @@ class Browser:
         self.bnext.on_clicked(self.next)
         self.bprev = Button(self.axprev, 'Previous (a)', hovercolor='g')
         self.bprev.on_clicked(self.prev)
-        self.bmicroburst = Button(self.axburst, 'Curtain (m)', hovercolor='g')
+        self.bwidth = Button(self.axwidth, 'Width (w)', hovercolor='g')
+        # self.bwidth.on_clicked(self.prev)
+        self.bmicroburst = Button(self.axburst, 'Microburst (m)', hovercolor='g')
         self.bmicroburst.on_clicked(self.append_remove_microburst)
 
         # Define the textbox axes.
@@ -289,7 +276,7 @@ class Browser:
         name of self.catalog_save_name.
         """
         # Return if there are no micriobursts to save.
-        if not hasattr(self, 'curtain_idx'):
+        if not hasattr(self, 'microburst_idx'):
             return
         # Remove duplicates indicies
         self.microburst_idx = np.unique(self.microburst_idx)
@@ -305,7 +292,7 @@ class Browser:
 
 
 callback = Browser(catalog_name='microburst_test_catalog.csv',            
-                    filterDict={}, plot_width_s=5)
+                    filterDict={}, plot_width_s=2)
 # Initialize the GUI
 plt.show()
 # Save the catalog.
