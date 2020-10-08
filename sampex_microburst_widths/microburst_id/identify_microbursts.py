@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import progressbar
+import scipy.signal
 
 from sampex_microburst_widths import config
 from sampex_microburst_widths.misc import load_hilt_data
@@ -12,11 +13,12 @@ from sampex_microburst_widths.microburst_id import signal_to_background
 
 class Identify_SAMPEX_Microbursts:
     def __init__(self, baseline_width_s=0.500, threshold=10, 
-                spin_file_name='spin_times.csv'):
+                spin_file_name='spin_times.csv', prominence_rel_height=0.5):
         self.hilt_dir = pathlib.Path(config.SAMPEX_DIR, 'hilt', 'State4')
         self.spin_file_name = spin_file_name
         self.baseline_width_s = baseline_width_s
         self.threshold = threshold
+        self.prominence_rel_height = prominence_rel_height
         return
 
     def loop(self):
@@ -127,15 +129,40 @@ class Identify_SAMPEX_Microbursts:
                 bad_indices = np.append(bad_indices, i)
         self.stb.peak_idt = np.delete(self.stb.peak_idt, bad_indices.astype(int))
 
+        widths_s, width_height, left_peak_base, right_peak_base = self.calc_prominence_widths()
+
         # Save to a DataFrame
         df = pd.DataFrame(
             data={
                 'dateTime':pd.Series(self.hilt_obj.times[self.stb.peak_idt]),
+                'width_s':widths_s,
+                'width_height':width_height,
+                'left_peak_base':left_peak_base,
+                'right_peak_base':right_peak_base,
                 'burst_param':np.round(self.stb.n_std.values[self.stb.peak_idt].flatten(), 1)
                 }
             )
         self.microburst_times = self.microburst_times.append(df)
-        return 
+        return
+
+    def calc_prominence_widths(self):
+        """
+        Use scipy to find the peak width at self.prominence_rel_height prominence
+        """
+        # Check that self.stb.peak_idt cprrespond to the max values
+        peak_check_thresh = 5 # 5 = 100 ms
+        for i, index_i in enumerate(self.stb.peak_idt):
+            self.stb.peak_idt[i] = index_i - peak_check_thresh + \
+                np.argmax(self.hilt_obj.counts[index_i-peak_check_thresh:index_i+peak_check_thresh])
+
+        # Use scipy to find the peak width at self.prominence_rel_height prominence
+        widths_tuple = scipy.signal.peak_widths(self.hilt_obj.counts, self.stb.peak_idt, 
+                                            rel_height=self.prominence_rel_height)
+        self.widths_s = 20E-3*widths_tuple[0]   
+        self.width_height = widths_tuple[1]
+        self.left_peak_base = self.hilt_obj.times[np.round(widths_tuple[2]).astype(int)]
+        self.right_peak_base = self.hilt_obj.times[np.round(widths_tuple[3]).astype(int)]                                 
+        return self.widths_s, self.width_height, self.left_peak_base, self.right_peak_base
 
     def save_catalog(self, save_name):
         """ Saves the microburst_times DataFrame to a csv file. """
