@@ -2,6 +2,7 @@ import pathlib
 import dateutil.parser
 from datetime import date, datetime
 import inspect
+import sys
 
 import numpy as np
 import pandas as pd
@@ -9,6 +10,10 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.dates import date2num, num2date
 from matplotlib.widgets import Button, TextBox
+
+if sys.platform == 'darwin': # Mac users
+    import matplotlib
+    matplotlib.use('tkagg')  # Can also use 'tkagg' or 'webagg'
 
 from sampex_microburst_widths import config
 from sampex_microburst_widths.misc import load_hilt_data
