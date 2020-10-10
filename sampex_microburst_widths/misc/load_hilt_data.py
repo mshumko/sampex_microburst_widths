@@ -127,13 +127,14 @@ class Load_SAMPEX_HILT:
 
 
 class Load_SAMPEX_Attitude:
-    def __init__(self, load_date):
+    def __init__(self, load_date, verbose=False):
         """ 
         This class loads the appropriate SAMEX attitude file, 
         parses the complex header and converts the time 
         columns into datetime objects
         """
         self.load_date = load_date
+        self.verbose = verbose
         # If date is in string format, convert to a pd.Timestamp object
         if isinstance(self.load_date, str):
             self.load_date = pd.to_datetime(self.load_date)
@@ -196,7 +197,8 @@ class Load_SAMPEX_Attitude:
             self._skip_header(f)
             # Save the rest to a file using columns specified by the columns.keys() with the 
             # columns values for the column names.
-            self.attitude = pd.read_csv(f, sep=' ', names=[columns[key] for key in columns.keys()], 
+            self.attitude = pd.read_csv(f, sep=' ',
+                                        names=columns.values(), 
                                         usecols=columns.keys())
         self._parse_attitude_datetime(remove_old_time_cols)
         return
@@ -204,12 +206,15 @@ class Load_SAMPEX_Attitude:
     def _skip_header(self, f):
         """ 
         Read in the "f" attitude file stream line by line until the 
-        "BEGIN DATA" line is reached. Then return Returns a list of column
+        "BEGIN DATA" line is reached. Then return the row index to the
         names from the parsed header.
         """
-        for line in f:
+        for i, line in enumerate(f):
             if "BEGIN DATA" in line:
-                return f 
+                # because for some reason the first attitude row has 
+                # an extra column so skip the first "normal" row.
+                next(f) 
+                return 
         return None
 
     def _parse_attitude_datetime(self, remove_old_time_cols):
