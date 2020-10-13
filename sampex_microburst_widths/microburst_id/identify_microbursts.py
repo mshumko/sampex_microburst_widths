@@ -1,5 +1,6 @@
 import pathlib
 import re
+import subprocess
 
 import numpy as np
 import pandas as pd
@@ -164,11 +165,56 @@ class Identify_SAMPEX_Microbursts:
         self.right_peak_base = self.hilt_obj.times[np.round(widths_tuple[3]).astype(int)]                                 
         return self.widths_s, self.width_height, self.left_peak_base, self.right_peak_base
 
-    def save_catalog(self, save_name):
-        """ Saves the microburst_times DataFrame to a csv file. """
-        save_path =pathlib.Path(config.PROJECT_DIR, 'data', save_name)
+    def save_catalog(self, save_name=None):
+        """ 
+        Saves the microburst_times DataFrame to a csv file 
+        with the save_name filename. If save_name is none,
+        a default catalog name will be used:
+        'microburst_catalog_###.csv', where ### is a verion 
+        counter, starting from 0. If a filename already exists,
+        the counter increments and checks if that filename 
+        already exists.
+
+        This method also saves the creation time, catalog name,
+        and git revision hash to catalog_log.csv also in the
+        data subdirectory.
+        """
+        # If the save_name is None, save to a default filename
+        # that gets incremented if it already exists.
+        if save_name is None:
+            counter = 0
+            while True:
+                save_path = pathlib.Path(config.PROJECT_DIR, 'data',
+                    'microburst_catalog_{:02d}.csv'.format(counter))
+                if not save_path.exists():
+                    break
+                counter += 1
+        else:
+            save_path = pathlib.Path(config.PROJECT_DIR, 'data', save_name)
+
+        # Save the microburst catalog
+        log_path = pathlib.Path(config.PROJECT_DIR, 'data', 'catalog_log.csv')
         self.microburst_times.to_csv(save_path, index=False)
-        return
+
+        # Log the saved catalog info.
+        git_revision_hash = subprocess.check_output(
+            ['git', 'rev-parse', 'HEAD']
+            ).strip().decode()
+        log = pd.DataFrame(
+            index=[0],
+            data={ 
+                'time':pd.Timestamp.today(),
+                'catalog_name':save_path.name,
+                'git_revision_hash':git_revision_hash
+                })
+        # Determine if the header needs to be written
+        if log_path.exists():
+            header=False
+        else:
+            header=True
+        log.to_csv(log_path, 
+                mode='a', header=header, index=False)
+        return save_path
 
     def test_detections(self):
         """ This method plots the microburst detections """
@@ -178,12 +224,3 @@ class Identify_SAMPEX_Microbursts:
                     self.hilt_obj.counts[self.stb.peak_idt], 
                     c='r', marker='D')
         plt.show()
-
-if __name__ == '__main__':
-    m = Identify_SAMPEX_Microbursts()
-    try:
-        m.loop()
-    except:
-        raise
-    finally:
-        m.save_catalog('microburst_test_catalog.csv')
