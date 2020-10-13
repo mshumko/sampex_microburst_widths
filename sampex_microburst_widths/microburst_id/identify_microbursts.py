@@ -13,11 +13,13 @@ from sampex_microburst_widths.misc import load_hilt_data
 from sampex_microburst_widths.microburst_id import signal_to_background
 
 class Identify_SAMPEX_Microbursts:
-    def __init__(self, baseline_width_s=0.500, threshold=10, 
-                spin_file_name='spin_times.csv', prominence_rel_height=0.5):
+    def __init__(self, baseline_width_s=0.500, foreground_width_s=0.1,
+                threshold=10, spin_file_name='spin_times.csv', 
+                prominence_rel_height=0.5):
         self.hilt_dir = pathlib.Path(config.SAMPEX_DIR, 'hilt', 'State4')
         self.spin_file_name = spin_file_name
         self.baseline_width_s = baseline_width_s
+        self.foreground_width_s = foreground_width_s
         self.threshold = threshold
         self.prominence_rel_height = prominence_rel_height
         return
@@ -114,7 +116,8 @@ class Identify_SAMPEX_Microbursts:
         """ Use SignalToBackground class to identify microbursts """
         self.stb = signal_to_background.SignalToBackground(
                                     self.hilt_obj.counts, 20E-3, 
-                                    self.baseline_width_s)
+                                    self.baseline_width_s,
+                                    foreground_width_s=self.foreground_width_s)
         self.stb.significance()
         self.stb.find_microburst_peaks(std_thresh=self.threshold)
 

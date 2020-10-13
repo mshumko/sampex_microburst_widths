@@ -7,7 +7,8 @@ import numpy as np
 from sampex_microburst_widths.microburst_id import index_intervals
 
 class SignalToBackground:
-    def __init__(self, counts, cadence, background_width_s):
+    def __init__(self, counts, cadence, background_width_s, 
+                foreground_width_s=0.1):
         """ 
         This class implements the signal to background 
         microburst detection. This method is a generalization 
@@ -30,6 +31,7 @@ class SignalToBackground:
 
         self.cadence = cadence
         self.background_width_s = background_width_s
+        self.foreground_width_s = foreground_width_s
         return
 
     def significance(self):
@@ -41,8 +43,8 @@ class SignalToBackground:
         Returns a pandas DataFrame object that can be 
         converted to numpy using the .to_numpy() method.
         """
+        self.rolling_microburst_counts = self._running_average(self.counts, self.foreground_width_s)
         self.rolling_background_counts = self._running_average(self.counts, self.background_width_s)
-        self.rolling_microburst_counts = self._running_average(self.counts, 0.1)
         self.n_std = ((self.rolling_microburst_counts-self.rolling_background_counts)/\
                     np.sqrt(self.rolling_background_counts+1))
         return self.n_std
