@@ -12,7 +12,7 @@ from sampex_microburst_widths.misc import plot_annotator_decorator
 def main():
     df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_test_catalog.csv'))
 
-    df.plot(x='')
+    df.plot(x='MLT', y='width_s')
 
     # fig, ax = plt.subplots()
     # ax.hist(df['width_s'], bins=np.linspace(0, 0.2, num=20), color='k', histtype='step')
