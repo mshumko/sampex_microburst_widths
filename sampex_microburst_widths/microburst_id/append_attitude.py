@@ -30,7 +30,7 @@ class Append_Attitude:
             # load the next attitude file)
             if ((not hasattr(self, 'attitude')) or 
                 (self.attitude.attitude[self.attitude.attitude.index.date == unique_date].shape[0] == 0)):
-                print('Loading attitude file')
+                print(f'Loading attitude file for {unique_date}')
                 try:
                     self.attitude = load_hilt_data.Load_SAMPEX_Attitude(unique_date)
                 except ValueError as err:
