@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import progressbar
+import scipy.optimize
 import scipy.signal
 
 from sampex_microburst_widths import config
@@ -121,7 +122,34 @@ class Identify_SAMPEX_Microbursts:
         self.stb.significance()
         self.stb.find_microburst_peaks(std_thresh=self.threshold)
 
-        # Remove detections made near data gaps (invalid baseline)
+        # Remove detections made near data gaps (where the baseline is invalid)
+        self.remove_detections_near_time_gaps()
+
+        # Calculate the microburst widths using the prominence method and
+        # the Gaussian fit.
+        gaus = SAMPEX_Microburst_Widths(self.hilt_obj.hilt_resolved, self.stb.peak_idt)
+        gaus.calc_prominence_widths(self.prominence_rel_height)
+        gaus.calc_gaus_widths()
+
+
+        # Save to a DataFrame
+        df = pd.DataFrame(
+            data={
+                'dateTime':pd.Series(self.hilt_obj.times[self.stb.peak_idt]),
+                'width_s':gaus.prom_widths_s,
+                'width_height':gaus.width_height,
+                'left_peak_base':gaus.left_peak_base,
+                'right_peak_base':gaus.right_peak_base,
+                'burst_param':np.round(self.stb.n_std.values[self.stb.peak_idt].flatten(), 1)
+                }
+            )
+        self.microburst_times = self.microburst_times.append(df)
+        return
+
+    def remove_detections_near_time_gaps(self):
+        """
+
+        """
         times = self.hilt_obj.hilt_resolved.index
         dt = (times[1:] - times[:-1]).total_seconds()
         bad_indices = np.array([])
@@ -132,41 +160,7 @@ class Identify_SAMPEX_Microbursts:
             if dt[peak_i-bad_index_range:peak_i+bad_index_range].max() > 1:
                 bad_indices = np.append(bad_indices, i)
         self.stb.peak_idt = np.delete(self.stb.peak_idt, bad_indices.astype(int))
-
-        widths_s, width_height, left_peak_base, right_peak_base = self.calc_prominence_widths()
-
-        # Save to a DataFrame
-        df = pd.DataFrame(
-            data={
-                'dateTime':pd.Series(self.hilt_obj.times[self.stb.peak_idt]),
-                'width_s':widths_s,
-                'width_height':width_height,
-                'left_peak_base':left_peak_base,
-                'right_peak_base':right_peak_base,
-                'burst_param':np.round(self.stb.n_std.values[self.stb.peak_idt].flatten(), 1)
-                }
-            )
-        self.microburst_times = self.microburst_times.append(df)
         return
-
-    def calc_prominence_widths(self):
-        """
-        Use scipy to find the peak width at self.prominence_rel_height prominence
-        """
-        # Check that self.stb.peak_idt cprrespond to the max values
-        peak_check_thresh = 5 # 5 = 100 ms
-        for i, index_i in enumerate(self.stb.peak_idt):
-            self.stb.peak_idt[i] = index_i - peak_check_thresh + \
-                np.argmax(self.hilt_obj.counts[index_i-peak_check_thresh:index_i+peak_check_thresh])
-
-        # Use scipy to find the peak width at self.prominence_rel_height prominence
-        widths_tuple = scipy.signal.peak_widths(self.hilt_obj.counts, self.stb.peak_idt, 
-                                            rel_height=self.prominence_rel_height)
-        self.widths_s = 20E-3*widths_tuple[0]   
-        self.width_height = widths_tuple[1]
-        self.left_peak_base = self.hilt_obj.times[np.round(widths_tuple[2]).astype(int)]
-        self.right_peak_base = self.hilt_obj.times[np.round(widths_tuple[3]).astype(int)]                                 
-        return self.widths_s, self.width_height, self.left_peak_base, self.right_peak_base
 
     def save_catalog(self, save_name=None):
         """ 
@@ -227,3 +221,97 @@ class Identify_SAMPEX_Microbursts:
                     self.hilt_obj.counts[self.stb.peak_idt], 
                     c='r', marker='D')
         plt.show()
+
+class SAMPEX_Microburst_Widths:
+    def __init__(self, hilt_data, peak_idt, width_multiplier=2, plot_width_s=5):
+        """
+        
+        """
+        self.hilt_data = hilt_data
+        self.hilt_times = self.hilt_data.index.to_numpy()
+        self.peak_idt = peak_idt
+        self.width_multiplier = width_multiplier
+        self.plot_width_s = plot_width_s
+        return
+
+    def calc_prominence_widths(self, prominence_rel_height=0.5):
+        """
+        Use scipy to find the peak width at self.prominence_rel_height prominence
+        """
+        # Check that self.stb.peak_idt correspond to the max values
+        peak_check_thresh = 5 # Look 100 ms around the peak count to find the true peak. 
+        for i, index_i in enumerate(self.peak_idt):
+            self.peak_idt[i] = index_i - peak_check_thresh + \
+                np.argmax(self.hilt_data['counts'][index_i-peak_check_thresh:index_i+peak_check_thresh])
+
+        # Use scipy to find the peak width at self.prominence_rel_height prominence
+        widths_tuple = scipy.signal.peak_widths(self.hilt_data['counts'], self.peak_idt, 
+                                            rel_height=prominence_rel_height)
+        self.prom_widths_s = 20E-3*widths_tuple[0]   
+        self.width_height = widths_tuple[1]
+        self.left_peak_base = self.hilt_times[np.round(widths_tuple[2]).astype(int)]
+        self.right_peak_base = self.hilt_times[np.round(widths_tuple[3]).astype(int)]                                 
+        return self.prom_widths_s, self.width_height, self.left_peak_base, self.right_peak_base
+
+    def calc_gaus_widths(self, debug=True):
+        """
+
+        """
+        if not hasattr(self, 'prom_widths_s'):
+            raise AttributeError('No prior width estimate exists. Run the '
+                                'calc_prominence_widths method first.')
+        
+        # Loop over every peak
+        for peak_i, width_i, height_i in zip(self.peak_idt, self.prom_widths_s, self.width_height):
+            time_range = [
+                self.hilt_times[peak_i]-pd.Timedelta(seconds=width_i)*self.width_multiplier,
+                self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
+                        ]
+            self.fit_gaus(time_range, (height_i, peak_i, width_i))
+            if debug:
+                self.fit_test_plot(self.hilt_times[peak_i], time_range)
+        return
+
+    def fit_gaus(time_range, p_i):
+        """
+        Fits a gausian shape with an optinal linear detrending term.
+        """
+        popt, pcov = scipy.optimize.curve_fit(self.fit_function, )
+        return
+
+    def fit_function(self, t, args):
+        """
+        Args is an array of either 3 or 5 elements. First three elements are
+        the Guassian amplitude, center time, and width. The last two optional
+        elements are the y-intercept and slope for a linear trend. 
+        """
+        exp_arg = -(t-args[1])**2/(2*args[2]**2)
+        y = args[0]*np.exp(exp_arg)
+
+        if len(args) == 5:
+            y += args[3] + t*args[4]
+        return y
+
+
+    def fit_test_plot(self, peak_time, time_range, ax=None):
+        """
+        Make a test plot of the microburst fit.
+        """
+        print(peak_time)
+        if ax is None:
+            _, ax = plt.subplots()
+        plot_trange = [
+            peak_time - pd.Timedelta(seconds=self.plot_width_s/2),
+            peak_time + pd.Timedelta(seconds=self.plot_width_s/2)
+        ]
+        ax.plot(self.hilt_data.loc[plot_trange[0]:plot_trange[-1], 'counts'])
+        for t_i in time_range:
+            ax.axvline(t_i)
+
+        ax.set(title=f'SAMPEX microburst fit\n{peak_time}')
+        plt.show()
+        return
+
+    def goodness_of_fit(self):
+
+        return

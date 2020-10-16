@@ -9,8 +9,8 @@ try:
     m.loop()
 except:
     raise
-finally:
-    cat_path = m.save_catalog()
+# finally:
+#     cat_path = m.save_catalog()
 
 a = append_attitude.Append_Attitude(cat_path)
 a.loop()
