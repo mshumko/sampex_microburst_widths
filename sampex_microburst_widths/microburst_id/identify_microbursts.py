@@ -5,6 +5,7 @@ import subprocess
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.dates import date2num, num2date
 import progressbar
 import scipy.optimize
 import scipy.signal
@@ -267,19 +268,25 @@ class SAMPEX_Microburst_Widths:
                 self.hilt_times[peak_i]-pd.Timedelta(seconds=width_i)*self.width_multiplier,
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
-            self.fit_gaus(time_range, (height_i, peak_i, width_i))
+            popt, pcov = self.fit_gaus(time_range, [height_i, peak_i, width_i])
             if debug:
                 self.fit_test_plot(self.hilt_times[peak_i], time_range)
+                print(popt)
         return
 
-    def fit_gaus(time_range, p_i):
+    def fit_gaus(self, time_range, p0):
         """
         Fits a gausian shape with an optinal linear detrending term.
         """
-        popt, pcov = scipy.optimize.curve_fit(self.fit_function, )
-        return
+        x_data = self.hilt_data.loc[time_range[0]:time_range[1], :].index.to_numpy()
+        x_data_numeric = date2num(x_data)
+        # p0[1] = date2num(p0[1])
+        y_data = self.hilt_data.loc[time_range[0]:time_range[1], 'counts']
+        popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_numeric, 
+                                            y_data, p0=p0)
+        return popt, pcov
 
-    def fit_function(self, t, args):
+    def fit_function(self, t, *args):
         """
         Args is an array of either 3 or 5 elements. First three elements are
         the Guassian amplitude, center time, and width. The last two optional
@@ -297,7 +304,6 @@ class SAMPEX_Microburst_Widths:
         """
         Make a test plot of the microburst fit.
         """
-        print(peak_time)
         if ax is None:
             _, ax = plt.subplots()
         plot_trange = [
