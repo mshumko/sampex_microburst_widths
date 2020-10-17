@@ -72,7 +72,9 @@ class Identify_SAMPEX_Microbursts:
             except ValueError as err:
                 if str(err) == 'No detections found':
                     print(err, hilt_file.name)
-                continue
+                    continue
+                else:
+                    raise
             # self.test_detections()
         return
 
@@ -268,10 +270,10 @@ class SAMPEX_Microburst_Widths:
                 self.hilt_times[peak_i]-pd.Timedelta(seconds=width_i)*self.width_multiplier,
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
-            popt, pcov = self.fit_gaus(time_range, [height_i, peak_i, width_i])
+            t0 = self.hilt_times[peak_i]
+            popt, pcov = self.fit_gaus(time_range, [height_i, date2num(t0), width_i])
             if debug:
-                self.fit_test_plot(self.hilt_times[peak_i], time_range)
-                print(popt)
+                self.fit_test_plot(t0, time_range, popt)
         return
 
     def fit_gaus(self, time_range, p0):
@@ -280,10 +282,9 @@ class SAMPEX_Microburst_Widths:
         """
         x_data = self.hilt_data.loc[time_range[0]:time_range[1], :].index.to_numpy()
         x_data_numeric = date2num(x_data)
-        # p0[1] = date2num(p0[1])
         y_data = self.hilt_data.loc[time_range[0]:time_range[1], 'counts']
         popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_numeric, 
-                                            y_data, p0=p0)
+                                            y_data, p0=p0, maxfev=5000)
         return popt, pcov
 
     def fit_function(self, t, *args):
@@ -300,17 +301,28 @@ class SAMPEX_Microburst_Widths:
         return y
 
 
-    def fit_test_plot(self, peak_time, time_range, ax=None):
+    def fit_test_plot(self, peak_time, time_range, popt, ax=None):
         """
         Make a test plot of the microburst fit.
         """
         if ax is None:
             _, ax = plt.subplots()
-        plot_trange = [
+        plot_time_range = [
             peak_time - pd.Timedelta(seconds=self.plot_width_s/2),
             peak_time + pd.Timedelta(seconds=self.plot_width_s/2)
         ]
-        ax.plot(self.hilt_data.loc[plot_trange[0]:plot_trange[-1], 'counts'])
+
+        time_array = self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1]].index
+        numeric_time_array = date2num(time_array)
+        # ax.plot(time_array, self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1], 'counts'], 
+        #         c='k')
+        print(peak_time, num2date(popt[1]), popt)
+        print()
+        gaus_y = self.fit_function(numeric_time_array, *popt)
+        ax.plot(time_array, gaus_y, c='r')
+
+        # [height_i, t0, width_i]
+
         for t_i in time_range:
             ax.axvline(t_i)
 
