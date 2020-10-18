@@ -9,7 +9,7 @@ from matplotlib.dates import date2num, num2date
 import progressbar
 import scipy.optimize
 import scipy.signal
-
+import sklearn.metrics
 from sampex_microburst_widths import config
 from sampex_microburst_widths.misc import load_hilt_data
 from sampex_microburst_widths.microburst_id import signal_to_background
@@ -271,7 +271,7 @@ class SAMPEX_Microburst_Widths:
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
             t0 = self.hilt_times[peak_i]
-            popt, pcov = self.fit_gaus(time_range, [height_i, t0, width_i])
+            popt, pcov = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
             if debug:
                 self.fit_test_plot(t0, time_range, popt)
         return
@@ -296,10 +296,16 @@ class SAMPEX_Microburst_Widths:
 
         popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_seconds, 
                                             y_data, p0=p0, maxfev=5000)
-        popt_np = -1*np.ones(3, dtype=object)
+        popt_np = -1*np.ones(len(popt), dtype=object)
         popt_np[0] = popt[0]
         popt_np[1] = current_date + pd.Timedelta(seconds=float(popt[1]))
         popt_np[2] = (2*np.sqrt(2*np.log(2)))*popt[2]
+        if len(popt) == 5:
+            # If superposed a Gaussian on a linear trend...
+            popt_np[3:] = popt[3:]
+
+        y_pred = self.fit_function(x_data_seconds, *popt)
+        print(f'r2={self.goodness_of_fit(y_data, y_pred)}')
         return popt_np, np.sqrt(np.diag(pcov))
 
     def fit_function(self, t, *args):
@@ -332,21 +338,32 @@ class SAMPEX_Microburst_Widths:
         x_data_seconds = (time_array-current_date).total_seconds()
         y_data = self.hilt_data.loc[plot_time_range[0]:plot_time_range[1], 'counts']
 
-        # p0[0] *= 2
         popt[1] = (popt[1] - current_date).total_seconds()
         popt[2] = popt[2]/2.355 # Convert the Gaussian FWHM to std
 
         gaus_y = self.fit_function(x_data_seconds, *popt)
-        plt.plot(time_array, y_data, c='k')
-        plt.plot(time_array, gaus_y, c='r')
+        ax.plot(time_array, y_data, c='k')
+        ax.plot(time_array, gaus_y, c='r')
 
         for t_i in time_range:
-            ax.axvline(t_i, c='k')
+            ax.axvline(t_i, c='g')
 
-        ax.set(title=f'SAMPEX microburst fit\n{peak_time}')
+
+        s = (f'A = {round(popt[0])} [counts]\n'
+            f't0 = {round(popt[1])} [sec_of_day]\n'
+            f'FWHM = {round(popt[2]*2.355, 2)} [s]')
+        if len(popt) == 5:
+            s += (f'\ny-intercept = {round(popt[3])}\n'
+                  f'slope = {round(popt[4])}')
+        ax.text(0, 0.95, s, va='top', ha='left', transform=ax.transAxes, fontsize=12)
+
+        ax.set(title=f'SAMPEX microburst fit\n{peak_time}', ylim=(y_data.min(), 1.1*y_data.max()))
         plt.show()
         return
 
-    def goodness_of_fit(self):
+    def goodness_of_fit(self, y_true, y_pred):
+        """
 
-        return
+        """
+        r2 = sklearn.metrics.r2_score(y_true, y_pred)
+        return r2
