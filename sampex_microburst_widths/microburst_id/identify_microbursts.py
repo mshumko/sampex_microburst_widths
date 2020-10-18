@@ -296,11 +296,11 @@ class SAMPEX_Microburst_Widths:
 
         popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_seconds, 
                                             y_data, p0=p0, maxfev=5000)
-        print(p0[1], popt[1])
-        print(type(current_date), type(pd.Timedelta(seconds=float(popt[1]))))
-        popt[1] = current_date.to_pydatetime() + pd.Timedelta(seconds=float(popt[1]))
-        popt[2] = (2*np.sqrt(2*np.log(2)))*popt[2]
-        return popt, pcov
+        popt_np = -1*np.ones(3, dtype=object)
+        popt_np[0] = popt[0]
+        popt_np[1] = current_date + pd.Timedelta(seconds=float(popt[1]))
+        popt_np[2] = (2*np.sqrt(2*np.log(2)))*popt[2]
+        return popt_np, np.sqrt(np.diag(pcov))
 
     def fit_function(self, t, *args):
         """
@@ -328,17 +328,20 @@ class SAMPEX_Microburst_Widths:
         ]
 
         time_array = self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1]].index
-        numeric_time_array = date2num(time_array)
-        ax.plot(time_array, self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1], 'counts'], 
-                c='k')
-        print(peak_time, num2date(popt[1]), popt)
-        gaus_y = self.fit_function(numeric_time_array, *popt)
-        ax.plot(time_array, gaus_y, c='r')
+        current_date = time_array[0].floor('d')
+        x_data_seconds = (time_array-current_date).total_seconds()
+        y_data = self.hilt_data.loc[plot_time_range[0]:plot_time_range[1], 'counts']
 
-        # [height_i, t0, width_i]
+        # p0[0] *= 2
+        popt[1] = (popt[1] - current_date).total_seconds()
+        popt[2] = popt[2]/2.355 # Convert the Gaussian FWHM to std
+
+        gaus_y = self.fit_function(x_data_seconds, *popt)
+        plt.plot(time_array, y_data, c='k')
+        plt.plot(time_array, gaus_y, c='r')
 
         for t_i in time_range:
-            ax.axvline(t_i)
+            ax.axvline(t_i, c='k')
 
         ax.set(title=f'SAMPEX microburst fit\n{peak_time}')
         plt.show()
