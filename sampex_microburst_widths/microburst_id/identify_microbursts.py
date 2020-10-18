@@ -271,7 +271,7 @@ class SAMPEX_Microburst_Widths:
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
             t0 = self.hilt_times[peak_i]
-            popt, pcov = self.fit_gaus(time_range, [height_i, date2num(t0), width_i])
+            popt, pcov = self.fit_gaus(time_range, [height_i, t0, width_i])
             if debug:
                 self.fit_test_plot(t0, time_range, popt)
         return
@@ -280,11 +280,26 @@ class SAMPEX_Microburst_Widths:
         """
         Fits a gausian shape with an optinal linear detrending term.
         """
-        x_data = self.hilt_data.loc[time_range[0]:time_range[1], :].index.to_numpy()
-        x_data_numeric = date2num(x_data)
+        x_data = self.hilt_data.loc[time_range[0]:time_range[1], :].index#.to_numpy()
+        current_date = x_data[0].floor('d')
+        x_data_seconds = (x_data-current_date).total_seconds()
         y_data = self.hilt_data.loc[time_range[0]:time_range[1], 'counts']
-        popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_numeric, 
+
+        p0[0] *= 2
+        p0[1] = (p0[1] - current_date).total_seconds()
+        p0[2] = p0[2]/2 # Convert the microburst width guess to fraction of a second.
+
+        # gaus_y = self.fit_function(x_data_seconds, *p0)
+        # plt.plot(x_data_seconds, y_data, c='k')
+        # plt.plot(x_data_seconds, gaus_y, c='r')
+        # plt.show()
+
+        popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_seconds, 
                                             y_data, p0=p0, maxfev=5000)
+        print(p0[1], popt[1])
+        print(type(current_date), type(pd.Timedelta(seconds=float(popt[1]))))
+        popt[1] = current_date.to_pydatetime() + pd.Timedelta(seconds=float(popt[1]))
+        popt[2] = (2*np.sqrt(2*np.log(2)))*popt[2]
         return popt, pcov
 
     def fit_function(self, t, *args):
@@ -314,10 +329,9 @@ class SAMPEX_Microburst_Widths:
 
         time_array = self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1]].index
         numeric_time_array = date2num(time_array)
-        # ax.plot(time_array, self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1], 'counts'], 
-        #         c='k')
+        ax.plot(time_array, self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1], 'counts'], 
+                c='k')
         print(peak_time, num2date(popt[1]), popt)
-        print()
         gaus_y = self.fit_function(numeric_time_array, *popt)
         ax.plot(time_array, gaus_y, c='r')
 
