@@ -84,6 +84,9 @@ class Identify_SAMPEX_Microbursts:
         """
         hilt_files_generator = self.hilt_dir.glob('*')
         self.hilt_files = sorted(list(hilt_files_generator))
+        if len(self.hilt_files) == 0:
+            raise FileNotFoundError('No HILT files found. Is the data directory avaliable '
+                                    'and defined in config.SAMPEX_DIR?')
         return
 
     def date_during_spin(self, date):
@@ -138,7 +141,7 @@ class Identify_SAMPEX_Microbursts:
         # Save to a DataFrame
         df = pd.DataFrame(
             data={
-                'dateTime':pd.Series(self.hilt_obj.times[self.stb.peak_idt]),
+                'dateTime':self.hilt_obj.hilt_resolved.iloc[self.stb.peak_idt, :].index,
                 'width_s':gaus.prom_widths_s,
                 'width_height':gaus.width_height,
                 'left_peak_base':gaus.left_peak_base,
@@ -270,7 +273,7 @@ class SAMPEX_Microburst_Widths:
         fit_param_names = ['r2', 'A', 't0', 'fwhm']
         if detrend:
             fit_param_names.extend(['y-int', 'slope'])
-        df = pd.DataFrame(data={key:-1*np.ones_like(self.peak_idt) 
+        df = pd.DataFrame(data={key:np.nan*np.ones_like(self.peak_idt) 
                         for key in fit_param_names}, index=self.peak_idt)
         
         # Loop over every peak
@@ -279,7 +282,14 @@ class SAMPEX_Microburst_Widths:
                 self.hilt_times[peak_i]-pd.Timedelta(seconds=width_i)*self.width_multiplier,
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
+            # If too little data points, assume a 200 ms fit width.
+            if len(self.hilt_data.loc[time_range[0]:time_range[1], :].index) < 5:
+                time_range = [
+                            self.hilt_times[peak_i]-pd.Timedelta(seconds=0.1),
+                            self.hilt_times[peak_i]+pd.Timedelta(seconds=0.1)
+                        ]
             t0 = self.hilt_times[peak_i]
+
             if detrend:
                 popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
             else:
@@ -296,22 +306,21 @@ class SAMPEX_Microburst_Widths:
         """
         Fits a gausian shape with an optinal linear detrending term.
         """
-        x_data = self.hilt_data.loc[time_range[0]:time_range[1], :].index#.to_numpy()
+        x_data = self.hilt_data.loc[time_range[0]:time_range[1], :].index
         current_date = x_data[0].floor('d')
         x_data_seconds = (x_data-current_date).total_seconds()
         y_data = self.hilt_data.loc[time_range[0]:time_range[1], 'counts']
 
+        if len(x_data) < len(p0):
+            raise ValueError('Not enough data points to fit. Increase the '
+                            'time_range or self.width_multiplier')
+
         p0[0] *= 2
         p0[1] = (p0[1] - current_date).total_seconds()
-        p0[2] = p0[2]/2 # Convert the microburst width guess to fraction of a second.
-
-        # gaus_y = self.fit_function(x_data_seconds, *p0)
-        # plt.plot(x_data_seconds, y_data, c='k')
-        # plt.plot(x_data_seconds, gaus_y, c='r')
-        # plt.show()
+        p0[2] = p0[2]/2 # Convert the microburst width guess to ~std.
 
         popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_seconds, 
-                                            y_data, p0=p0, maxfev=5000)
+                                                y_data, p0=p0, maxfev=5000)
         popt_np = -1*np.ones(len(popt), dtype=object)
         popt_np[0] = popt[0]
         popt_np[1] = current_date + pd.Timedelta(seconds=float(popt[1]))
@@ -321,7 +330,12 @@ class SAMPEX_Microburst_Widths:
             popt_np[3:] = popt[3:]
 
         y_pred = self.fit_function(x_data_seconds, *popt)
-        r2 = self.goodness_of_fit(y_data, y_pred)
+        try:
+            r2 = self.goodness_of_fit(y_data, y_pred)
+        except ValueError as err:
+            if 'Input contains NaN, infinity or a value too large' in str(err):
+                print(f'y-data={y_data}\ny_pred={y_pred}')
+            raise
         return popt_np, np.sqrt(np.diag(pcov)), r2
 
     def fit_function(self, t, *args):

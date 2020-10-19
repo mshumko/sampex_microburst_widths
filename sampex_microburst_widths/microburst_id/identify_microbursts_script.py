@@ -7,8 +7,6 @@ m = identify_microbursts.Identify_SAMPEX_Microbursts(
     )
 # try:
 m.loop()
-# except:
-#     raise
 # finally:
 #     cat_path = m.save_catalog()
 
