@@ -137,7 +137,6 @@ class Identify_SAMPEX_Microbursts:
         gaus.calc_prominence_widths(self.prominence_rel_height)
         fit_df = gaus.calc_gaus_widths()
 
-
         # Save to a DataFrame
         df = pd.DataFrame(
             data={
@@ -184,6 +183,10 @@ class Identify_SAMPEX_Microbursts:
         and git revision hash to catalog_log.csv also in the
         data subdirectory.
         """
+        # Drop duplicate detections, if any
+        pre_len = self.microburst_times.shape[0]
+        self.microburst_times.drop_duplicates(subset='dateTime', inplace=True)
+        print(f'{pre_len - self.microburst_times.shape[0]} duplicate detections dropped.')
         # If the save_name is None, save to a default filename
         # that gets incremented if it already exists.
         if save_name is None:
@@ -282,13 +285,16 @@ class SAMPEX_Microburst_Widths:
                 self.hilt_times[peak_i]-pd.Timedelta(seconds=width_i)*self.width_multiplier,
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
-            # If too little data points, assume a 200 ms fit width.
+            # If too little data points, assume a 500 ms fit width.
             if len(self.hilt_data.loc[time_range[0]:time_range[1], :].index) < 5:
                 time_range = [
-                            self.hilt_times[peak_i]-pd.Timedelta(seconds=0.1),
-                            self.hilt_times[peak_i]+pd.Timedelta(seconds=0.1)
+                            self.hilt_times[peak_i]-pd.Timedelta(seconds=0.25),
+                            self.hilt_times[peak_i]+pd.Timedelta(seconds=0.25)
                         ]
             t0 = self.hilt_times[peak_i]
+
+            if width_i == 0:
+                width_i = 0.2 # If the prominence method failed, assume a fixed-with for the fit.
 
             if detrend:
                 popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
@@ -334,7 +340,9 @@ class SAMPEX_Microburst_Widths:
             r2 = self.goodness_of_fit(y_data, y_pred)
         except ValueError as err:
             if 'Input contains NaN, infinity or a value too large' in str(err):
-                print(f'y-data={y_data}\ny_pred={y_pred}')
+                print(f'popt={popt}')
+                print(f'y-data={y_data}')
+                print(f'y_pred={y_pred}')
             raise
         return popt_np, np.sqrt(np.diag(pcov)), r2
 
@@ -350,7 +358,6 @@ class SAMPEX_Microburst_Widths:
         if len(args) == 5:
             y += args[3] + t*args[4]
         return y
-
 
     def fit_test_plot(self, peak_time, time_range, popt, ax=None):
         """
