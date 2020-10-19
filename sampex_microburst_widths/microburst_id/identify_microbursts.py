@@ -295,11 +295,15 @@ class SAMPEX_Microburst_Widths:
 
             if width_i == 0:
                 width_i = 0.2 # If the prominence method failed, assume a fixed-with for the fit.
-
-            if detrend:
-                popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
-            else:
-                popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i])
+            try:
+                if detrend:
+                    popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
+                else:
+                    popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i])
+            except RuntimeError as err:
+                if 'Optimal parameters not found: Number of calls to function has reached maxfev' in str(err):
+                    continue
+                raise
 
             # Save to a pd.DataFrame
             df.iloc[i, 0] = r2
