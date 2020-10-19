@@ -132,7 +132,7 @@ class Identify_SAMPEX_Microbursts:
         # the Gaussian fit.
         gaus = SAMPEX_Microburst_Widths(self.hilt_obj.hilt_resolved, self.stb.peak_idt)
         gaus.calc_prominence_widths(self.prominence_rel_height)
-        gaus.calc_gaus_widths()
+        fit_df = gaus.calc_gaus_widths()
 
 
         # Save to a DataFrame
@@ -144,9 +144,11 @@ class Identify_SAMPEX_Microbursts:
                 'left_peak_base':gaus.left_peak_base,
                 'right_peak_base':gaus.right_peak_base,
                 'burst_param':np.round(self.stb.n_std.values[self.stb.peak_idt].flatten(), 1)
-                }
+                },
+            index=self.stb.peak_idt
             )
-        self.microburst_times = self.microburst_times.append(df)
+        merged_df = pd.concat([df, fit_df], axis=1)
+        self.microburst_times = self.microburst_times.append(merged_df)
         return
 
     def remove_detections_near_time_gaps(self):
@@ -256,25 +258,39 @@ class SAMPEX_Microburst_Widths:
         self.right_peak_base = self.hilt_times[np.round(widths_tuple[3]).astype(int)]                                 
         return self.prom_widths_s, self.width_height, self.left_peak_base, self.right_peak_base
 
-    def calc_gaus_widths(self, debug=True):
+    def calc_gaus_widths(self, debug=False, detrend=True):
         """
 
         """
         if not hasattr(self, 'prom_widths_s'):
             raise AttributeError('No prior width estimate exists. Run the '
                                 'calc_prominence_widths method first.')
+
+        # Create empty pd.DataFrames for fit variables.
+        fit_param_names = ['r2', 'A', 't0', 'fwhm']
+        if detrend:
+            fit_param_names.extend(['y-int', 'slope'])
+        df = pd.DataFrame(data={key:-1*np.ones_like(self.peak_idt) 
+                        for key in fit_param_names}, index=self.peak_idt)
         
         # Loop over every peak
-        for peak_i, width_i, height_i in zip(self.peak_idt, self.prom_widths_s, self.width_height):
+        for i, (peak_i, width_i, height_i) in enumerate(zip(self.peak_idt, self.prom_widths_s, self.width_height)):
             time_range = [
                 self.hilt_times[peak_i]-pd.Timedelta(seconds=width_i)*self.width_multiplier,
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
             t0 = self.hilt_times[peak_i]
-            popt, pcov = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
+            if detrend:
+                popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
+            else:
+                popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i])
+
+            # Save to a pd.DataFrame
+            df.iloc[i, 0] = r2
+            df.iloc[i, 1:] = popt 
             if debug:
                 self.fit_test_plot(t0, time_range, popt)
-        return
+        return df
 
     def fit_gaus(self, time_range, p0):
         """
@@ -305,8 +321,8 @@ class SAMPEX_Microburst_Widths:
             popt_np[3:] = popt[3:]
 
         y_pred = self.fit_function(x_data_seconds, *popt)
-        print(f'r2={self.goodness_of_fit(y_data, y_pred)}')
-        return popt_np, np.sqrt(np.diag(pcov))
+        r2 = self.goodness_of_fit(y_data, y_pred)
+        return popt_np, np.sqrt(np.diag(pcov)), r2
 
     def fit_function(self, t, *args):
         """
