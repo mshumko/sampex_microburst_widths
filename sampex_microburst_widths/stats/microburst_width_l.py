@@ -25,14 +25,6 @@ def main():
             ha='right', va='top', transform=ax.transAxes, color='white'
             )
     ax.set(xlabel='L_Shell', ylabel='Width [s]')
-    # MLT_bins = np.arange(0, 25, 3)
-    # MLT_binned = [ 
-    #             df.loc[(df['MLT'] > l_MLT) & (df['MLT'] < u_MLT), 'width_s'].to_numpy()
-    #             for l_MLT, u_MLT in zip(MLT_bins[:-1], MLT_bins[1:])
-    #             ]
-
-    # _, bx = plt.subplots()
-    # bx.boxplot(MLT_binned)
     return df
 
 df = main()
