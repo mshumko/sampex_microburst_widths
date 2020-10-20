@@ -297,16 +297,24 @@ class SAMPEX_Microburst_Widths:
                 # If the prominence method width is small 
                 # change it to a 0.1 s width as a starting guess.
                 width_i = 0.1 
+
+            if detrend:
+                p0 = [height_i, t0, width_i, 50, 0]
+            else:
+                p0 = [height_i, t0, width_i]
+
             try:
-                if detrend:
-                    popt, pcov, r2, adj_r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
-                else:
-                    popt, pcov, r2, adj_r2 = self.fit_gaus(time_range, [height_i, t0, width_i])
+                popt, pcov, r2, adj_r2 = self.fit_gaus(time_range, p0)
             except RuntimeError as err:
-                if 'Optimal parameters not found: Number of calls to function has reached maxfev' in str(err):
+                if ('Optimal parameters not found: Number of calls '
+                    'to function has reached maxfev') in str(err):
                     continue
                 raise
 
+            if popt == p0:
+                # If the intial and final parameters are identical---
+                # the curve_fit code did not find an optimal solution.
+                continue 
             # Save to a pd.DataFrame row.
             df.iloc[i, :2] = r2, adj_r2
             df.iloc[i, 2:] = popt 
