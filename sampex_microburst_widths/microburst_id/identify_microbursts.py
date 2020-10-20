@@ -273,7 +273,7 @@ class SAMPEX_Microburst_Widths:
                                 'calc_prominence_widths method first.')
 
         # Create empty pd.DataFrames for fit variables.
-        fit_param_names = ['r2', 'A', 't0', 'fwhm']
+        fit_param_names = ['r2', 'adj_r2', 'A', 't0', 'fwhm']
         if detrend:
             fit_param_names.extend(['y-int', 'slope'])
         df = pd.DataFrame(data={key:np.nan*np.ones_like(self.peak_idt) 
@@ -299,17 +299,17 @@ class SAMPEX_Microburst_Widths:
                 width_i = 0.1 
             try:
                 if detrend:
-                    popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
+                    popt, pcov, r2, adj_r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
                 else:
-                    popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i])
+                    popt, pcov, r2, adj_r2 = self.fit_gaus(time_range, [height_i, t0, width_i])
             except RuntimeError as err:
                 if 'Optimal parameters not found: Number of calls to function has reached maxfev' in str(err):
                     continue
                 raise
 
-            # Save to a pd.DataFrame
-            df.iloc[i, 0] = r2
-            df.iloc[i, 1:] = popt 
+            # Save to a pd.DataFrame row.
+            df.iloc[i, :2] = r2, adj_r2
+            df.iloc[i, 2:] = popt 
             if debug:
                 self.fit_test_plot(t0, time_range, popt, r2)
         return df
@@ -343,14 +343,14 @@ class SAMPEX_Microburst_Widths:
 
         y_pred = self.fit_function(x_data_seconds, *popt)
         try:
-            r2 = self.goodness_of_fit(y_data, y_pred)
+            r2, adj_r2 = self.goodness_of_fit(y_data, y_pred, len(popt))
         except ValueError as err:
             if 'Input contains NaN, infinity or a value too large' in str(err):
                 print(f'popt={popt}')
                 print(f'y-data={y_data}')
                 print(f'y_pred={y_pred}')
             raise
-        return popt_np, np.sqrt(np.diag(pcov)), r2
+        return popt_np, np.sqrt(np.diag(pcov)), r2, adj_r2
 
     def fit_function(self, t, *args):
         """
@@ -405,9 +405,13 @@ class SAMPEX_Microburst_Widths:
         plt.show()
         return
 
-    def goodness_of_fit(self, y_true, y_pred):
+    def goodness_of_fit(self, y_true, y_pred, n_params):
         """
-
+        Method to calculate the R^2 coefficient of determination
+        and the adjusted R^2 coefficient given the number
+        of fit parameters n_params.
         """
         r2 = sklearn.metrics.r2_score(y_true, y_pred)
-        return r2
+        n = len(y_true)
+        adj_r2 = 1 - (1-r2)*(n-1)/(n-1-n_params)
+        return r2, adj_r2
