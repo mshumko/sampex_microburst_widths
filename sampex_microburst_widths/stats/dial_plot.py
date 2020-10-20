@@ -82,24 +82,3 @@ class Dial:
             self.ax.plot(np.linspace(0, 2*np.pi, earth_resolution), 
                         L*np.ones(earth_resolution), ls=':', c='k')
         return L_labels_names
-
-
-if __name__ == '__main__':
-    import pandas as pd
-    import dirs
-    import os
-
-    CATALOG_NAME = 'AC6_curtains_sorted_v8.txt'
-    CATALOG_PATH = os.path.join(dirs.CATALOG_DIR, CATALOG_NAME)
-    cat = pd.read_csv(CATALOG_PATH)
-
-    mlt_bins = np.arange(0, 25)
-    l_bins = np.arange(2, 10)
-    H, mlt_bins, lm_bins = np.histogram2d(cat.MLT_OPQ, cat.Lm_OPQ,
-                                                bins=[mlt_bins, l_bins])
-
-    fig = plt.figure()
-    ax = plt.subplot(111, projection='polar')
-    d = Dial(ax, mlt_bins, l_bins, H)
-    d.draw_dial(mesh_kwargs={'cmap':'Reds'}, colorbar_kwargs={'label':'Number of curtains'})
-    plt.show()
