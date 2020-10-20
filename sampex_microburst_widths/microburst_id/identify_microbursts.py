@@ -1,6 +1,7 @@
 import pathlib
 import re
 import subprocess
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -10,6 +11,7 @@ import progressbar
 import scipy.optimize
 import scipy.signal
 import sklearn.metrics
+
 from sampex_microburst_widths import config
 from sampex_microburst_widths.misc import load_hilt_data
 from sampex_microburst_widths.microburst_id import signal_to_background
@@ -303,18 +305,19 @@ class SAMPEX_Microburst_Widths:
             else:
                 p0 = [height_i, t0, width_i]
 
-            try:
-                popt, pcov, r2, adj_r2 = self.fit_gaus(time_range, p0)
-            except RuntimeError as err:
-                if ('Optimal parameters not found: Number of calls '
-                    'to function has reached maxfev') in str(err):
-                    continue
-                raise
-
-            if popt == p0:
-                # If the intial and final parameters are identical---
-                # the curve_fit code did not find an optimal solution.
-                continue 
+            # Catch warnings
+            with warnings.catch_warnings(record=True) as w:
+                # Catch exceptions
+                try:
+                    popt, pcov, r2, adj_r2 = self.fit_gaus(time_range, p0)
+                except RuntimeError as err:
+                    if ('Optimal parameters not found: Number of calls '
+                        'to function has reached maxfev') in str(err):
+                        continue
+                    raise
+                if len(w):
+                    print(w[0].message, '\n', p0, popt)
+            
             # Save to a pd.DataFrame row.
             df.iloc[i, :2] = r2, adj_r2
             df.iloc[i, 2:] = popt 
