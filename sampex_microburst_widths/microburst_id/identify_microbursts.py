@@ -293,8 +293,10 @@ class SAMPEX_Microburst_Widths:
                         ]
             t0 = self.hilt_times[peak_i]
 
-            if width_i == 0:
-                width_i = 0.2 # If the prominence method failed, assume a fixed-with for the fit.
+            if width_i < 0.1:
+                # If the prominence method width is small 
+                # change it to a 0.1 s width as a starting guess.
+                width_i = 0.1 
             try:
                 if detrend:
                     popt, pcov, r2 = self.fit_gaus(time_range, [height_i, t0, width_i, 50, 0])
