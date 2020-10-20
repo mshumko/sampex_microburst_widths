@@ -10,18 +10,23 @@ from sampex_microburst_widths.misc import plot_annotator_decorator
 
 @plot_annotator_decorator.annotate_plot
 def main():
-    width_bins=np.linspace(0, 0.50, num=20)
-    L_bins = np.arange(2, 11, 0.5)
+    r2_thresh = 0.9
+    max_width = 0.25
+    width_bins=np.linspace(0, max_width, num=50)
+    L_bins = np.linspace(3, 8, num=50)
     LL, WW = np.meshgrid(L_bins, width_bins)
 
-    df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_00.csv'))
+    df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_01.csv'))
     # df = df[df['width_s'] < max_width]
-    H, _, _ = np.histogram2d(df['L_Shell'], df['width_s'], bins=[L_bins, width_bins])
+    df['fwhm'] = df['fwhm'].abs()
+    df = df[df.r2 > r2_thresh]
+    H, _, _ = np.histogram2d(df['L_Shell'], df['fwhm'], bins=[L_bins, width_bins])
     fig, ax = plt.subplots()
     im = ax.pcolormesh(LL, WW, H.T)
     fig.colorbar(im, ax=ax)
-    ax.text(0.95, 0.95, "O'Brien burst parameter n_100=0.1 ms, a_500=1 s"
-                        "\nWidth at half prominence\nno visual inspection", 
+    ax.text(0.95, 0.95, "O'Brien burst parameter n_100=0.1 s, a_500=1 s"
+                        f"\nGaussian FWHM | min R^2 = {r2_thresh}"
+                        "\nno visual inspection", 
             ha='right', va='top', transform=ax.transAxes, color='white'
             )
     ax.set(xlabel='L_Shell', ylabel='Width [s]')
