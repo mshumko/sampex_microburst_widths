@@ -6,10 +6,10 @@ m = identify_microbursts.Identify_SAMPEX_Microbursts(
     prominence_rel_height=0.5
     )
 try:
-    m.loop()
+    m.loop(debug=True)
 finally:
     cat_path = m.save_catalog()
 
-# a = append_attitude.Append_Attitude(cat_path)
-# a.loop()
-# a.save_catalog()
+a = append_attitude.Append_Attitude(cat_path)
+a.loop()
+a.save_catalog()

@@ -26,7 +26,7 @@ class Identify_SAMPEX_Microbursts:
         self.prominence_rel_height = prominence_rel_height
         return
 
-    def loop(self):
+    def loop(self, debug=False):
         """
         Loop over the HILT files and run the following steps:
         - get the date from the file name,
@@ -68,7 +68,7 @@ class Identify_SAMPEX_Microbursts:
 
             # Use the hilt data to id microbursts  
             try:
-                self.id_microbursts()
+                self.id_microbursts(debug=debug)
             except ValueError as err:
                 if str(err) == 'No detections found':
                     print(err, hilt_file.name)
@@ -119,7 +119,7 @@ class Identify_SAMPEX_Microbursts:
         # Parse the date assuming a YYYYDOY format.
         return pd.to_datetime(year_doy_str, format='%Y%j')
 
-    def id_microbursts(self):
+    def id_microbursts(self, debug=False):
         """ Use SignalToBackground class to identify microbursts """
         self.stb = signal_to_background.SignalToBackground(
                                     self.hilt_obj.counts, 20E-3, 
@@ -135,7 +135,7 @@ class Identify_SAMPEX_Microbursts:
         # the Gaussian fit.
         gaus = SAMPEX_Microburst_Widths(self.hilt_obj.hilt_resolved, self.stb.peak_idt)
         gaus.calc_prominence_widths(self.prominence_rel_height)
-        fit_df = gaus.calc_gaus_widths()
+        fit_df = gaus.calc_gaus_widths(debug=debug)
 
         # Save to a DataFrame
         df = pd.DataFrame(
@@ -309,7 +309,7 @@ class SAMPEX_Microburst_Widths:
             df.iloc[i, 0] = r2
             df.iloc[i, 1:] = popt 
             if debug:
-                self.fit_test_plot(t0, time_range, popt)
+                self.fit_test_plot(t0, time_range, popt, r2)
         return df
 
     def fit_gaus(self, time_range, p0):
@@ -363,7 +363,7 @@ class SAMPEX_Microburst_Widths:
             y += args[3] + t*args[4]
         return y
 
-    def fit_test_plot(self, peak_time, time_range, popt, ax=None):
+    def fit_test_plot(self, peak_time, time_range, popt, r2, ax=None):
         """
         Make a test plot of the microburst fit.
         """
@@ -390,7 +390,8 @@ class SAMPEX_Microburst_Widths:
             ax.axvline(t_i, c='g')
 
 
-        s = (f'A = {round(popt[0])} [counts]\n'
+        s = (f'R^2 = {round(r2, 2)}\n'
+            f'A = {round(popt[0])} [counts]\n'
             f't0 = {round(popt[1])} [sec_of_day]\n'
             f'FWHM = {round(popt[2]*2.355, 2)} [s]')
         if len(popt) == 5:
