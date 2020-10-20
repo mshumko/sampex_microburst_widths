@@ -367,7 +367,8 @@ class SAMPEX_Microburst_Widths:
 
     def fit_test_plot(self, peak_time, time_range, popt, r2, ax=None):
         """
-        Make a test plot of the microburst fit.
+        Make a test plot of the microburst fit and annotate the fit 
+        parameters.
         """
         if ax is None:
             _, ax = plt.subplots()
@@ -391,8 +392,8 @@ class SAMPEX_Microburst_Widths:
         for t_i in time_range:
             ax.axvline(t_i, c='g')
 
-
         s = (f'R^2 = {round(r2, 2)}\n'
+            f'adj R^2 = {round(adj_r2, 2)}\n'
             f'A = {round(popt[0])} [counts]\n'
             f't0 = {round(popt[1])} [sec_of_day]\n'
             f'FWHM = {round(popt[2]*2.355, 2)} [s]')
