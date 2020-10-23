@@ -7,7 +7,7 @@ import pandas as pd
 from sampex_microburst_widths import config
 from sampex_microburst_widths.misc import load_hilt_data
 
-class Append_Attitude:
+class Merge_Attitude:
     def __init__(self, catalog_path):
         self.catalog_path = catalog_path
         self.attitude_keys = ['GEO_Long', 'GEO_Lat', 'Altitude', 'L_Shell', 'MLT']
@@ -66,6 +66,6 @@ class Append_Attitude:
 
 if __name__ == "__main__":
     cat_path = pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_00.csv')
-    a = Append_Attitude(cat_path)
-    a.loop()
-    a.save_catalog()
+    m = Merge_Attitude(cat_path)
+    m.loop()
+    m.save_catalog()
