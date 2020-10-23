@@ -11,22 +11,28 @@ from sampex_microburst_widths.misc import plot_annotator_decorator
 @plot_annotator_decorator.annotate_plot
 def main():
     max_width=0.25
+    width_bins=np.linspace(0, max_width)
+    MLT_bins=np.linspace(0, 24)
+
     r2_thresh = 0.9
-    df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_01.csv'))
+    df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_02.csv'))
 
     if hasattr(df, 'fwhm'):
         df['fwhm'] = df['fwhm'].abs()
         # Filter by the R^2 value with the microburst FWHM 
-        df = df[(df['r2'] > r2_thresh) & (df['fwhm'] < max_width)]
+        df = df[(df['adj_r2'] > r2_thresh) & (df['fwhm'] < max_width)]
     else:
         df = df[df['width_s'] < max_width]
 
     _, ax = plt.subplots()
-    df.plot(x='MLT', y='fwhm', kind='hexbin', ax=ax)
+    # df.plot(x='MLT', y='fwhm', kind='hexbin', ax=ax)
+    H, _, _ = np.histogram2d(df['MLT'], df['fwhm'], bins=(MLT_bins, width_bins))
+    p = ax.pcolormesh(MLT_bins, width_bins, H.T)
+    plt.colorbar(p, ax=ax)
     ax.set_xlim(0, 24)
     ax.set_ylim(0, max_width)
     # df['fwhm'].plot.hist(ax=ax, bins=np.linspace(0, max_width))
-    ax.text(0.95, 0.95, "O'Brien burst parameter n_100=0.1 s, a_500=1 s"
+    ax.text(0.95, 0.95, "O'Brien burst parameter n_100=0.1 s, a_500=0.5 s"
                         f"\nGaussian FWHM | min R^2 = {r2_thresh}"
                         "\nno visual inspection", 
             ha='right', va='top', transform=ax.transAxes

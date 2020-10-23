@@ -16,10 +16,10 @@ def main():
     L_bins = np.linspace(3, 8, num=50)
     LL, WW = np.meshgrid(L_bins, width_bins)
 
-    df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_01.csv'))
+    df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_02.csv'))
     # df = df[df['width_s'] < max_width]
     df['fwhm'] = df['fwhm'].abs()
-    df = df[df.r2 > r2_thresh]
+    df = df[df.adj_r2 > r2_thresh]
     H, _, _ = np.histogram2d(df['L_Shell'], df['fwhm'], bins=[L_bins, width_bins])
     fig, ax = plt.subplots()
     im = ax.pcolormesh(LL, WW, H.T)

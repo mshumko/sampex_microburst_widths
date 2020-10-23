@@ -9,7 +9,7 @@ from sampex_microburst_widths import config
 from sampex_microburst_widths.misc import plot_annotator_decorator
 from sampex_microburst_widths.stats import dial_plot
 
-catalog_name = 'microburst_catalog_01.csv'
+catalog_name = 'microburst_catalog_02.csv'
 
 @plot_annotator_decorator.annotate_plot
 def main():
@@ -24,7 +24,7 @@ def main():
     df.dropna(inplace=True)
     df = df[df['width_s'] < max_width]
     df['fwhm'] = df['fwhm'].abs()
-    df = df[df.r2 > r2_thresh]
+    df = df[df.adj_r2 > r2_thresh]
 
     num_microbursts_H, _, _ = np.histogram2d(df['MLT'], df['L_Shell'],
                                             bins=[MLT_bins, L_bins])
