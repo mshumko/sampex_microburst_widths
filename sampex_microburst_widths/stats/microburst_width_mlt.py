@@ -17,6 +17,8 @@ def main():
     r2_thresh = 0.9
     df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_02.csv'))
 
+    # df = df[df['AE'] < 500]
+
     if hasattr(df, 'fwhm'):
         df['fwhm'] = df['fwhm'].abs()
         # Filter by the R^2 value with the microburst FWHM 
