@@ -322,7 +322,7 @@ class SAMPEX_Microburst_Widths:
             df.iloc[i, :2] = r2, adj_r2
             df.iloc[i, 2:] = popt 
             if debug:
-                self.fit_test_plot(t0, time_range, popt, r2)
+                self.fit_test_plot(t0, time_range, popt, r2, adj_r2)
         return df
 
     def fit_gaus(self, time_range, p0):
@@ -342,8 +342,8 @@ class SAMPEX_Microburst_Widths:
         p0[1] = (p0[1] - current_date).total_seconds()
         p0[2] = p0[2]/2 # Convert the microburst width guess to ~std.
 
-        popt, pcov = scipy.optimize.curve_fit(self.fit_function, x_data_seconds, 
-                                                y_data, p0=p0, maxfev=5000)
+        popt, pcov = scipy.optimize.curve_fit(SAMPEX_Microburst_Widths.gaus_lin_function, 
+                                                x_data_seconds, y_data, p0=p0, maxfev=5000)
         popt_np = -1*np.ones(len(popt), dtype=object)
         popt_np[0] = popt[0]
         popt_np[1] = current_date + pd.Timedelta(seconds=float(popt[1]))
@@ -352,7 +352,7 @@ class SAMPEX_Microburst_Widths:
             # If superposed a Gaussian on a linear trend...
             popt_np[3:] = popt[3:]
 
-        y_pred = self.fit_function(x_data_seconds, *popt)
+        y_pred = SAMPEX_Microburst_Widths.gaus_lin_function(x_data_seconds, *popt)
         try:
             r2, adj_r2 = self.goodness_of_fit(y_data, y_pred, len(popt))
         except ValueError as err:
@@ -363,7 +363,8 @@ class SAMPEX_Microburst_Widths:
             raise
         return popt_np, np.sqrt(np.diag(pcov)), r2, adj_r2
 
-    def fit_function(self, t, *args):
+    @staticmethod
+    def gaus_lin_function(t, *args):
         """
         Args is an array of either 3 or 5 elements. First three elements are
         the Guassian amplitude, center time, and width. The last two optional
@@ -376,7 +377,7 @@ class SAMPEX_Microburst_Widths:
             y += args[3] + t*args[4]
         return y
 
-    def fit_test_plot(self, peak_time, time_range, popt, r2, ax=None):
+    def fit_test_plot(self, peak_time, time_range, popt, r2, adj_r2, ax=None):
         """
         Make a test plot of the microburst fit and annotate the fit 
         parameters.
@@ -396,7 +397,7 @@ class SAMPEX_Microburst_Widths:
         popt[1] = (popt[1] - current_date).total_seconds()
         popt[2] = popt[2]/2.355 # Convert the Gaussian FWHM to std
 
-        gaus_y = self.fit_function(x_data_seconds, *popt)
+        gaus_y = SAMPEX_Microburst_Widths.gaus_lin_function(x_data_seconds, *popt)
         ax.plot(time_array, y_data, c='k')
         ax.plot(time_array, gaus_y, c='r')
 
