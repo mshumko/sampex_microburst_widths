@@ -49,17 +49,10 @@ class Identify_SAMPEX_Microbursts:
             # OR the data is from 1996
             if self.date_during_spin(date) or (date.year == 1996):
                 continue
-            
-            # If the file is zipped set the zipped kwarg to True
-            if 'zip' in hilt_file.suffix:
-                zipped = True
-            else:
-                zipped = False
 
             # Load the data
             try:
-                self.hilt_obj = load_hilt_data.Load_SAMPEX_HILT(date, 
-                                zipped=zipped)
+                self.hilt_obj = load_hilt_data.Load_SAMPEX_HILT(date)
             except RuntimeError as err:
                 if str(err) == "The SAMPEX HITL data is not in order.":
                     continue

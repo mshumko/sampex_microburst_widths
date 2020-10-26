@@ -12,11 +12,12 @@ from sampex_microburst_widths import config
 
 
 class Load_SAMPEX_HILT:
-    def __init__(self, load_date, zipped=True, extract=False, 
+    def __init__(self, load_date, extract=False, 
                 time_index=True, verbose=False):
         """
-        Load the HILT data given a date. If zipped is True, this class will
-        look for txt.zip file with the date and open it (without extracting).
+        Load the HILT data given a date. If this class will look for 
+        a file with the "hhrrYYYYDOY*" filename pattern and open the 
+        found csv file. If the file is zipped, it will first be unzipped. 
         If you want to extract the file as well, set extract=True.
         time_index=True sets the time index of self.hilt to datetime objects
         otherwise the index is just an enumerated list.
@@ -26,11 +27,6 @@ class Load_SAMPEX_HILT:
         # If date is in string format, convert to a pd.Timestamp object
         if isinstance(self.load_date, str):
             self.load_date = pd.to_datetime(self.load_date)
-
-        if zipped:
-            extention='.txt.zip'
-        else:
-            extention='.txt'
         
         # Figure out how to calculate the day of year (DOY)
         if isinstance(self.load_date, pd.Timestamp):
@@ -40,15 +36,19 @@ class Load_SAMPEX_HILT:
 
         # Get the filename and search for it. If multiple or no
         # unique files are found this will raise an assertion error.
-        file_name = f'hhrr{self.load_date.year}{doy}{extention}'
-        matched_files = list(pathlib.Path(config.SAMPEX_DIR, 'hilt').rglob(file_name))
-        assert len(matched_files) == 1, (f'0 or >1 matched HILT files found.'
-                                        f'\n{file_name}'
+        file_name_glob = f'hhrr{self.load_date.year}{doy}*'
+        matched_files = list(
+            pathlib.Path(config.SAMPEX_DIR, 'hilt').rglob(file_name_glob)
+            )
+        # 1 if there is just one file, and 2 if there is a file.txt and 
+        # file.txt.zip files.
+        assert len(matched_files) in [1, 2], (f'0 or >2 matched HILT files found.'
+                                        f'\n{file_name_glob}'
                                         f'\nmatched_files={matched_files}')
         self.file_path = matched_files[0]
 
-        # Load the zipped data and extract if it is set to true
-        if zipped:
+        # Load the zipped data and extract if a zip file was found.
+        if self.file_path.suffix == 'zip':
             self.read_zip(self.file_path, extract=extract)
         else:
             self.read_csv(self.file_path)
