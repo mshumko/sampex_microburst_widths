@@ -8,8 +8,9 @@ import matplotlib.pyplot as plt
 
 from sampex_microburst_widths import config
 from sampex_microburst_widths.microburst_id.identify_microbursts import SAMPEX_Microburst_Widths
-# from sampex_microburst_widths.misc import plot_annotator_decorator
 from sampex_microburst_widths.misc import load_hilt_data
+
+plt.rcParams.update({'font.size': 15})
 
 catalog_name = 'microburst_catalog_02.csv'
 cat = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name), 
@@ -21,12 +22,12 @@ times = pd.to_datetime([
     '1999-11-08 02:45:30.320000',
     '1997-11-09 19:57:09.720000',
     '2000-10-29 10:45:23.180000',
-    '2001-05-09 04:03:30.100000',
+    # '2001-05-09 04:03:30.100000',
     '2003-06-28 17:25:07.320000',
-    '2005-08-31 19:23:00.020000'
+    # '2005-08-31 19:23:00.020000'
     ]).sort_values()
 
-plot_width_s = 3
+plot_width_s = 1
 plot_half_width = pd.Timedelta(seconds=plot_width_s/2)
 
 if random:
@@ -36,9 +37,9 @@ else:
     n = len(times)
     plot_df = cat.loc[times, :]
 
-n_cols = 3
-n_rows = n//n_cols
-fig, ax = plt.subplots(n_rows, n_cols, figsize=(10, 8))
+# n_cols = 3
+# n_rows = n//n_cols
+fig, ax = plt.subplots(1, n, figsize=(10, 4))
 
 for label_i, ax_i, (row_time, row) in zip(string.ascii_lowercase, ax, plot_df.iterrows()):
     print(label_i, row_time)
@@ -70,5 +71,5 @@ for label_i, ax_i, (row_time, row) in zip(string.ascii_lowercase, ax, plot_df.it
     ax_i.set(xlabel='UTC', ylim=min_max)
 
 ax[0].set_ylabel('Counts/s')    
-plt.tight_layout(w_pad=0)
+plt.subplots_adjust(left=0.1, right=0.99, hspace=0.15, bottom=0.15, top=0.92)
 plt.show()
