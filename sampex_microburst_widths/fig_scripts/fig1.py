@@ -24,15 +24,16 @@ cat['t0'] = pd.to_datetime(cat['t0'])
 
 random=False
 times = pd.to_datetime([
-    '1999-11-08 02:45:30.320000',
+    # '1999-11-08 02:45:30.320000',
     '1997-11-09 19:57:09.720000',
-    '2000-10-29 10:45:23.180000',
+    '2000-10-29 10:45:22.100000',
     # '2001-05-09 04:03:30.100000',
     '2003-06-28 17:25:07.320000',
+    '2012-06-12 02:29:50.980000'
     # '2005-08-31 19:23:00.020000'
     ]).sort_values()
 
-plot_width_s = 2
+plot_width_s = 3
 plot_half_width = pd.Timedelta(seconds=plot_width_s/2)
 
 if random:
@@ -86,7 +87,7 @@ for label_i, ax_i, (row_time, row) in zip(string.ascii_lowercase, ax, plot_df.it
                 )
     ax_i.text(0, 1, annotate_str, va='top', ha='left', transform=ax_i.transAxes)
     min_max = [0.9*(count_rate_conversion/yaxis_scale_factor)*hilt_filtered.counts.min(), 
-                1.1*(count_rate_conversion/yaxis_scale_factor)*hilt_filtered.counts.max()]
+                1.2*(count_rate_conversion/yaxis_scale_factor)*hilt_filtered.counts.max()]
     ax_i.set(xlabel=f'seconds after\n{start_time_sec_floor}', ylim=min_max)
 
 plt.suptitle('SAMPEX/HILT Microburst Fits')
