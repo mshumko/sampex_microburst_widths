@@ -71,13 +71,14 @@ class Dial:
         self.ax.set_theta_zero_location("S") # Midnight at bottom
         self.ax.set_xticklabels(mlt_labels) # Transform back from 0->2pi to 0->24.
         self.ax.set_yticks(self.L_labels)
-        self.ax.set_yticklabels(L_labels_names)
+        self.ax.set_yticklabels(L_labels_names, fontdict={'horizontalalignment':'right'})
         return
 
     def _draw_L_contours(self, earth_resolution=50):
         """ Plots a subset of the L shell contours. """
         # Draw azimuthal lines for a subset of L shells.
         L_labels_names = [str(i) for i in self.L_labels[:-1]] + [f'L = {self.L_labels[-1]}']
+        # L_labels_names = [str(i) for i in self.L_labels]
         for L in self.L_labels:
             self.ax.plot(np.linspace(0, 2*np.pi, earth_resolution), 
                         L*np.ones(earth_resolution), ls=':', c='k')
