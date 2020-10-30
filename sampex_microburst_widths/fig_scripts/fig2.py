@@ -1,4 +1,4 @@
-# Make a plot of the microburst width as a function of L and MLT
+# Make a dial plot of the microburst width as a function of L and MLT
 import pathlib
 import string
 
@@ -66,7 +66,7 @@ def main():
 
     for ax_i in ax:
         ax_i.set_rlabel_position(235)
-    plt.suptitle(f'SAMPEX microburst width statistics', fontsize=20)
+    plt.suptitle(f'Distribution of SAMPEX microburst durations in L-MLT', fontsize=20)
     return
 
 main()
