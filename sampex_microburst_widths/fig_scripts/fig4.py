@@ -1,4 +1,7 @@
-# Histogram the microburst widths as a function of AE
+"""
+This script makes Figure 4: a histogram of the microburst durations as a 
+function of AE.
+"""
 import pathlib
 import string
 
@@ -8,12 +11,14 @@ import matplotlib.pyplot as plt
 
 from sampex_microburst_widths import config
 
+### Script parameters ###
+catalog_name = 'microburst_catalog_02.csv'
 max_width=0.5
 width_bins=np.linspace(0, max_width, num=20)
 ae_bins = [0, 100, 300, 1000]
-
 r2_thresh = 0.9
-df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_02.csv'))
+
+df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
 
 df['fwhm'] = df['fwhm'].abs()

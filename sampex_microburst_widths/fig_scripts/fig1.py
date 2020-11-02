@@ -1,4 +1,9 @@
-# Figure 1: N examples of microbursts and their fits.
+"""
+This script makes Figure 1: N examples of microbursts and their fits.
+
+The microbursts can be randomly chosen or specified with a list of
+datetime strings.
+"""
 import pathlib
 import string
 
