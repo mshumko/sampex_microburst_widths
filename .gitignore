@@ -3,3 +3,4 @@ env/
 *.egg-info
 config.py
 .DS_Store
+~*
