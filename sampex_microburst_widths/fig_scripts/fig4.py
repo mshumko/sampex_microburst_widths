@@ -1,6 +1,21 @@
 """
 This script makes Figure 4: a histogram of the microburst durations as a 
 function of AE.
+
+Parameters (modify in script)
+-----------------------------
+catalog_name: str
+    The catalog name to load from the sampex_microburst_widths/data/ directory.
+max_width: float
+    The maximum width to consider, 0.5 is a good value.
+width_bins: np.ndarray
+    The microburst width (FWHM) bins to use. A default of 
+    np.linspace(0, max_width, num=20) works well.
+ae_bins: np.ndarray
+    The AE bins. A good default is [0, 100, 300, 1000]
+r2_thresh: float
+    The adjusted R^2 value to filter the fits by. I consider a good fit when 
+    r2 > 0.9
 """
 import pathlib
 import string

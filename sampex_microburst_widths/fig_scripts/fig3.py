@@ -1,6 +1,16 @@
 """
 This script generates Figure 3: a plot of the marginalized microburst duration 
 as a function of L and MLT.
+
+Parameters
+----------
+catalog_name: str
+    The name of the catalog in the config.PROJECT_DIR/data/ directory.
+r2_thresh: float
+    The adjusted R^2 threshold for the fits. I chose a default value of 0.9.
+max_width: float
+    Maximum microburst width (FWHM) in seconds to histogram. A good default is
+    0.25 [seconds]
 """
 import pathlib
 import string
@@ -22,18 +32,21 @@ width_bins = np.linspace(0, max_width+0.001, num=50)
 L_bins = np.linspace(2, 8.1, num=50)
 MLT_bins = np.linspace(0, 24, num=50)
 
+# Load the catalog, drop the NaN values, and filter by the max_width and
+# R^2 values.
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
 df = df[df['width_s'] < max_width]
 df['fwhm'] = df['fwhm'].abs()
 df = df[df.adj_r2 > r2_thresh]
 
+# Create a histogram of L-FWHM and MLT-FWHM
 H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm'],
                         bins=[L_bins, width_bins])
 H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm'],
                         bins=[MLT_bins, width_bins])
 
-# fig = plt.figure(figsize=(10, 8))
+# Make the two plots.
 _, ax = plt.subplots(1, 2, figsize=(12, 6))
 
 p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)

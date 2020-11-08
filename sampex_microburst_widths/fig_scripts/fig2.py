@@ -1,5 +1,21 @@
 """
-This script makes Figure 2: a dial plot of the microburst width as a function of L and MLT
+This script makes Figure 2: a dial plot of the microburst width as a 
+function of L and MLT
+
+Parameters
+----------
+catalog_name: str
+    The name of the catalog in the config.PROJECT_DIR/data/ directory.
+r2_thresh: float
+    The adjusted R^2 threshold for the fits. I chose a default value of 0.9.
+max_width: float
+    Maximum microburst width (FWHM) in seconds to histogram. A good default is
+    0.25 [seconds]
+percentiles: np.array
+    The distribution percentiles for the FWHM distributions in L-MLT space. 
+    This script implicitly assumes that you supply 3 percentile values, between
+    0 and 100, for the 4 subplots (3 percentiles and 1 microburst occurrence 
+    distribution)
 """
 import pathlib
 import string
