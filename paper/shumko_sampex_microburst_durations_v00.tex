@@ -164,7 +164,26 @@ The choice of $A$ determines the sensitivity of the burst parameter to microburs
 \end{figure}
 
 \subsection{Microburst Duration}
+We estimated the microburst duration using two methods: the duration at half of the microburst's topographic prominence and Guassian fits.
 
+\begin{equation}
+c(t | A, t_0, \sigma, c_0, c_1) = A e^{-\frac{(t-t_0)^2}{2\sigma^2}} + c_0 + c_1 t
+\end{equation} where $A$, $t_0$, and $\sigma$ are the Gaussian amplitude, center time, and standard deviation; while the $c_0$ and $c_1$ are the background count intercept and slope. The fit was applied over the \textcolor{red}{the following duration, and the initial parameter guess was provided by X}. The optimal fit parameters were found using Python's \url{scipy.curve_fit()} function.
+
+To evaluate the fit, the $R^2$ goodness of fit metric was used. $R^2$ is defined as
+\begin{equation}
+R^2 = 1 - \frac{SS_{res}}{SS_{total}} = 1 - \frac{\sum{(c_i-f_i)^2}}{\sum{(c_i-\bar{c})^2}}
+\end{equation} where $SS_{res}$ is the sum of squares of the residuals between the observed counts $c_i$ and the fit counts $f_i$ for each time stamp, and $SS_{total}$ is the sum of squares between $c_i$ and the mean counts $\bar{c}$.
+
+Intuitively, $R^2$ quantifies fractionally how much better the current fit explains the variance in the data, as compared to a null hypothesis fit of a horizontal line at $\bar{c}$. When $R^2=1$, the modeled fit perfectly describes the variance in the data, and $R^2$ can be arbitrarily negative for poor fits (a fit can be much worse than the mean).
+
+To account for overfitting that results from the variable number of data points used for each fit, the adjusted $R^2$, $\bar{R}^2$ was used. It is defined as
+
+\begin{equation}
+\bar{R}^2 = 1 - (1-R^2) \frac{n-1}{n-p-1}
+\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and the $n-p-1$ is the degrees of freedom for the fit model.
+
+Using $A_{500}$ and $N_{100}$, we detected a total of 256,764 microbursts over the 13 year period from 1997 to 2012 and 110,135 microbursts had $R^2 > 0.9$.
 
 \section{Results}\label{results}
 \textcolor{blue}{

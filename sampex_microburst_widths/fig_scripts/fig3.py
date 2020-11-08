@@ -36,9 +36,11 @@ MLT_bins = np.linspace(0, 24, num=50)
 # R^2 values.
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
+initial_shape = df.shape[0]
 df = df[df['width_s'] < max_width]
 df['fwhm'] = df['fwhm'].abs()
 df = df[df.adj_r2 > r2_thresh]
+print(f'The {initial_shape} microbursts were filtered down to {df.shape[0]} microbursts.')
 
 # Create a histogram of L-FWHM and MLT-FWHM
 H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm'],
