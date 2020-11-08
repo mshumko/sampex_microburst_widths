@@ -13,6 +13,7 @@ from sampex_microburst_widths import config
 from sampex_microburst_widths.stats import dial_plot
 
 plt.rcParams.update({'font.size': 13})
+cmap = 'plasma'
 
 catalog_name = 'microburst_catalog_02.csv'
 
@@ -52,6 +53,7 @@ ax = [plt.subplot(2, 2, i, projection='polar') for i in range(1, 5)]
 for i, ax_i in enumerate(ax[:-1]):
     d = dial_plot.Dial(ax_i, MLT_bins, L_bins, H[:, :, i])
     d.draw_dial(L_labels=L_labels,
+            mesh_kwargs={'cmap':cmap},
             colorbar_kwargs={'label':f'microburst duration [s]', 'pad':0.1})
     annotate_str = f'({string.ascii_lowercase[i]}) {percentiles[i]}th percentile'
     ax_i.text(-0.2, 1.2, annotate_str, va='top', transform=ax_i.transAxes, 
@@ -59,7 +61,7 @@ for i, ax_i in enumerate(ax[:-1]):
 
 d4 = dial_plot.Dial(ax[-1], MLT_bins, L_bins, num_microbursts_H)
 d4.draw_dial(L_labels=L_labels,
-            mesh_kwargs={'norm':matplotlib.colors.LogNorm()},
+            mesh_kwargs={'norm':matplotlib.colors.LogNorm(), 'cmap':cmap},
             colorbar_kwargs={'label':'Number of microbursts', 'pad':0.1})
 annotate_str = f'({string.ascii_lowercase[len(ax)-1]}) Microburst occurrence'
 ax[-1].text(-0.2, 1.2, annotate_str, va='top', transform=ax[-1].transAxes, 
