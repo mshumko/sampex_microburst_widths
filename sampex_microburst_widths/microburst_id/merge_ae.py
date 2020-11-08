@@ -17,9 +17,9 @@ class Merge_AE:
 
     def loop(self):
         """
-
+        Loop over the years in the catalog and merge the AE indices 
+        that are within 1 minute. 
         """
-
         catalog_copy = self.catalog.copy() # Keep the original to apply the merge.
         self.catalog['AE'] = np.nan
 
@@ -69,6 +69,6 @@ class Merge_AE:
         self.catalog.to_csv(self.catalog_path, index_label='dateTime')
 
 if __name__ == "__main__":
-    m = Merge_AE(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_02.csv' ))
+    m = Merge_AE(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_03.csv' ))
     m.loop()
     m.save_catalog()
