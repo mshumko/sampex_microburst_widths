@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  8 NOV 2020 16:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  8 NOV 2020 16:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -655,15 +655,15 @@ e-tween $\OML/cmm/m/it/10 c[]$ \OT1/cmr/m/n/10 and
  []
 
 
-Overfull \hbox (9.00525pt too wide) in paragraph at lines 178--179
-[]\OT1/cmr/m/n/10 Intuitively, $\OML/cmm/m/it/10 R[]$ \OT1/cmr/m/n/10 quan-ti-f
-ies frac-tion-ally how much bet-ter the cur-rent fit ex-plains the 
+Overfull \hbox (1.2275pt too wide) in paragraph at lines 178--179
+[]\OT1/cmr/m/n/10 One in-ter-pre-ta-tion of $\OML/cmm/m/it/10 R[]$ \OT1/cmr/m/n
+/10 is: frac-tion-ally how much bet-ter the model fit ex-plains 
  []
 
 
-Overfull \hbox (15.53773pt too wide) in paragraph at lines 178--179
-\OT1/cmr/m/n/10 vari-ance in the data, as com-pared to a null hy-poth-e-sis fit
- of a hor-i-zon-tal line at $[]$. When 
+Overfull \hbox (0.75993pt too wide) in paragraph at lines 178--179
+\OT1/cmr/m/n/10 the vari-ance in the data, com-pared to a null hy-poth-e-sis ho
+r-i-zon-tal line fit at $[]$. When 
  []
 
 
@@ -937,7 +937,7 @@ blic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt9.pfb>
-Output written on shumko_sampex_microburst_durations_v00.pdf (7 pages, 494597 b
+Output written on shumko_sampex_microburst_durations_v00.pdf (7 pages, 494585 b
 ytes).
 PDF statistics:
  362 PDF objects out of 1000 (max. 8388607)
