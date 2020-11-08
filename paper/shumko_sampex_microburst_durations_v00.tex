@@ -147,11 +147,23 @@ In this study we used data taken by the Solar Anomalous Magnetospheric Particle 
 \end{enumerate}
 }
 
+To estimate the microburst duration we first identified microbursts and then we fit them with a Gaussian function.
+
+\subsection{Microburst Identification}\label{microburst_id}
+We identified microbursts using the burst parameter defined by \citeA{O'Brien2003} and used in numerous other microburst studies with SAMPEX \cite<e.g.>{Douma2017}. Assuming Poisson probability for the observed electron counts, the burst parameter is the number of standard deviations of a foreground signal above the background. It is generally defined as
+\begin{equation}
+bp = \frac{N-A}{\sqrt{A+1}}
+\end{equation} \textcolor{red}{Find a better variable than bp. This is not British Petroleum} where $N$ is the number of foreground electron counts (microburst or otherwise), and $A$ is the centered running average counts representing the background. The $1$ in the denominator prevents a division by 0 error. In \citeA{O'Brien2003}, and in the figures in this study, $N$ was summed over 0.1 seconds and is called $N_{100}$, while $A$ parameter was summed over 0.5 seconds and is called $A_{500}$. Henceforth we will use the subscript for $N$ and $A$ for the time window used for the respective variables.
+
+The choice of $A$ determines the sensitivity of the burst parameter to microbursts of various durations (widths). This sensitivity is best illustrated with an example. Given a 1-second wide microburst, if we use $A_{500}$, the centered average background at the microburst time is scewed higher towards the microburst peak. The average is dominated heavily by the microburst counts. On the other hand, if we use $A_{1000}$, the background will not be elevated as much because more true background counts will be included in the average. Therefore, $bp$ will be relatively larger for $A_{1000}$ than $A_{500}$. This sensitivity manifests itself as a bias towards narrower microbursts that we will address later in this study. 
+
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig1.pdf}
-\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits by the dashed red lines. The fit full width at half maximum (FWHM) and the $r^2$ goodness of fit score is annotated in each panel. In each panel, the major ticks are at every second, while the minor ticks are at every 100 milliseconds. Panel a shows how the $r^2$ score can screen out poor fits. The two superposed microbursts were fitted, but the $r^2$ score is less than the 0.9 threshold and so it was not analyzed in this study. Panels b, c and d show example of fits with $r^2$ values greater than 0.9 so therefore they were included in this analysis. Panes c and d show the necessity of the linear trend term in the fit to account for the changing background.}
+\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits by the dashed red lines. The fit full width at half maximum (FWHM) and the $r^2$ goodness of fit score is annotated in each panel. In each panel, the major ticks are at every second, while the minor ticks are at every 100 milliseconds. Panel a shows how the $r^2$ score can screen out poor fits. The two superposed microbursts were fitted, but the $r^2$ score is less than the 0.9 threshold and so it was not analyzed in this study. Panels b, c and d show example of fits with $r^2$ values greater than 0.9 so therefore they were included in this analysis. Panels c and d demonstrate the necessity of the linear trend fit to account for the changing background.}
 \label{fig1}
 \end{figure}
+
+\subsection{Microburst Duration}
 
 
 \section{Results}\label{results}
@@ -193,6 +205,8 @@ In this study we used data taken by the Solar Anomalous Magnetospheric Particle 
     \item A few concluding remarks.
 \end{enumerate}
 }
+
+To address the burst parameter preferential bias to narrower microbursts, as introduced in section \ref{microburst_id}, we ran the microburst identification algorithm on the data using three background values: $A_{500}$, $A_{1000}$, and $A_{1000}$. As described in section \ref{microburst_id}, an detection algorithm who's centered running average is over wider time periods will be more sensitive to wider and less prominent microbursts. Therefore we can identify the bias if there is a relative excess of longer duration microbursts when the average time was increased. We found no such excess for microburst data sets that were made using $A_{1000}$, and $A_{1000}$. Therefore, we believe that $>1$ MeV microbursts are truly narrower than 250 ms and the $A_{500}$ is adequate to identify $>1$ MeV microbursts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Optional Appendix goes here

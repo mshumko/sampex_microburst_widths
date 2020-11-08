@@ -1,0 +1,79 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Douma%
+, Rodger%
+, Blum%
+\BCBL {}\ \BBA {} Clilverd%
+}{%
+Douma%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+Douma2017}
+\APACinsertmetastar {%
+Douma2017}%
+\begin{APACrefauthors}%
+Douma, E.%
+, Rodger, C\BPBI J.%
+, Blum, L\BPBI W.%
+\BCBL {}\ \BBA {} Clilverd, M\BPBI A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Occurrence characteristics of relativistic electron
+  microbursts from {SAMPEX} observations} {Occurrence characteristics of
+  relativistic electron microbursts from {SAMPEX} observations}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{122}{8}{8096--8107}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1002/2017JA024067}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{2017JA024067}
+\newblock
+\begin{APACrefDOI} \doi{10.1002/2017JA024067} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+O'Brien%
+\ \protect \BOthers {.}}{%
+O'Brien%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2003}}%
+}]{%
+O'Brien2003}
+\APACinsertmetastar {%
+O'Brien2003}%
+\begin{APACrefauthors}%
+O'Brien, T\BPBI P.%
+, Lorentzen, K\BPBI R.%
+, Mann, I\BPBI R.%
+, Meredith, N\BPBI P.%
+, Blake, J\BPBI B.%
+, Fennell, J\BPBI F.%
+\BDBL {}Anderson, R\BPBI R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2003}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Energization of relativistic electrons in the presence
+  of ULF power and MeV microbursts: Evidence for dual ULF and VLF
+  acceleration}} {{Energization of relativistic electrons in the presence of
+  ULF power and MeV microbursts: Evidence for dual ULF and VLF
+  acceleration}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{108}{A8}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2002JA009784}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2002JA009784} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}
