@@ -159,7 +159,7 @@ The choice of $A$ determines the sensitivity of the burst parameter to microburs
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig1.pdf}
-\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits by the dashed red lines. The fit full width at half maximum (FWHM) and the $r^2$ goodness of fit score is annotated in each panel. Also in each panel, the major ticks are at every second, while the minor ticks are at every 100 milliseconds. Panel a shows how the $r^2$ score can screen out poor fits. The two superposed microbursts were fitted, but the $r^2$ score is less than the 0.9 threshold and so it was not analyzed in this study. Panels b, c and d show example of fits with $r^2$ values greater than 0.9 so therefore they were included in this analysis. Panels c and d demonstrate the necessity of the linear trend fit to account for the changing background.}
+\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits shown by the dashed red lines. The fit full width at half maximum (FWHM) and the $\bar{R}^2$ goodness of fit metric is annotated in each panel. The major time ticks are at every second, while the minor ticks are at every 100 milliseconds.}
 \label{fig1}
 \end{figure}
 
@@ -181,9 +181,9 @@ To account for overfitting that results from the variable number of data points 
 
 \begin{equation}
 \bar{R}^2 = 1 - (1-R^2) \frac{n-1}{n-p-1}
-\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and the $n-p-1$ is the degrees of freedom for the fit model.
+\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and $n-p-1$ is the degrees of freedom for the fit model. Fits with $\bar{R}^2 > 0.9$ are considered good fits and are used for the rest of this analysis. Figure \ref{fig1}a shows an example of two superposed microbursts that had a fit $\bar{R}^2 = 0.83$ that were excluded from this study. On other hand, Fig. \ref{fig1}b-d show microbursts that were included in this study because the fit $\bar{R}^2 > 0.9$.
 
- and 110,135 microbursts had $R^2 > 0.9$.
+Lastly, Fig. \ref{fig1}c,d demonstrate the necessity of the linear fit to account for the changing background. The linear fit accounts for the non-zero mean background counts and the different amplitudes of the edges of the Gaussian. Of the 256,764 detected microbursts, 110,135 had $R^2 > 0.9$ and were used for the remainder of this study.
 
 \section{Results}\label{results}
 \textcolor{blue}{
@@ -195,6 +195,12 @@ To account for overfitting that results from the variable number of data points 
     \item Show the distribution with AE
 \end{enumerate}
 }
+
+\begin{figure}
+\noindent\includegraphics[width=\textwidth]{figures/figX.pdf}
+\caption{The distribution of all microburst full width at full maximum (FWHM).}
+\label{fig2}
+\end{figure}
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig2.pdf}
