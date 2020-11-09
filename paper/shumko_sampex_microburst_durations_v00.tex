@@ -147,24 +147,26 @@ In this study we used data taken by the Solar Anomalous Magnetospheric Particle 
 \end{enumerate}
 }
 
-To estimate the microburst duration we first identified microbursts and then we fit them with a Gaussian function.
+To estimate the microburst duration we first identified microbursts and then we fit them with a Gaussian model with a linear trend to quantify the duration for each microburst.
 
 \subsection{Microburst Identification}\label{microburst_id}
-We identified microbursts using the burst parameter defined by \citeA{O'Brien2003} and used in numerous other microburst studies with SAMPEX \cite<e.g.>{Douma2017}. Assuming Poisson probability for the observed electron counts, the burst parameter is the number of standard deviations of a foreground signal above the background. It is generally defined as
+We identified microbursts using the burst parameter defined by \citeA{O'Brien2003} and used in numerous other microburst studies with SAMPEX \cite<e.g.>{Douma2017}. Assuming Poisson probability for the observed electron counts, the burst parameter is the number of standard deviations of a foreground signal above the background, expressed as
 \begin{equation}
 bp = \frac{N-A}{\sqrt{A+1}}
-\end{equation} \textcolor{red}{Find a better variable than bp. This is not British Petroleum} where $N$ is the number of foreground electron counts (microburst or otherwise), and $A$ is the centered running average counts representing the background. The $1$ in the denominator prevents a division by 0 error. In \citeA{O'Brien2003}, and in the results in this study, $N$ was summed over 0.1 seconds and is called $N_{100}$, while $A$ parameter was summed over 0.5 seconds and is called $A_{500}$. Henceforth we will specify the time window with the subscript for $N$ and $A$. With $A_{500}$ and $N_{100}$, we detected a total of 256,764 microbursts over the 13 year period from 1997 to 2012. Four examples of microbursts are shown in Fig. \ref{fig1} by the solid black curves.
+\end{equation} \textcolor{red}{Find a better variable than bp. This is not British Petroleum} where $N$ is the number of foreground electron counts (microburst or otherwise), and $A$ is the centered running average background counts. The $1$ in the denominator prevents a division by 0 error. In \citeA{O'Brien2003}, and in the results in this study, $N$ was summed over 0.1 seconds and is called $N_{100}$, while $A$ was summed over 0.5 seconds and is called $A_{500}$.  Henceforth we will specify the time window with the subscript for $N$ and $A$. Times when $\mathrm{bp} > 10$ are classified as microburst times, and the peak count rate in each time interval is saved as a microburst to our data set. With $A_{500}$ and $N_{100}$, we detected a total of 256,764 microbursts over the 13 year period from 1997 to 2012. Four examples of microbursts are shown in Fig. \ref{fig1} by the solid black curves.
 
-The choice of $A$ determines the sensitivity of the burst parameter to microbursts of various durations (widths). This sensitivity is best illustrated with an example. Given a 1-second wide microburst, if we use $A_{500}$, the centered average background at the microburst time is scewed higher towards the microburst peak. The average is dominated heavily by the microburst counts. On the other hand, if we use $A_{1000}$, the background will not be elevated as much because more true background counts will be included in the average. Therefore, $bp$ will be relatively larger for $A_{1000}$ than $A_{500}$. This sensitivity manifests itself as a bias towards narrower microbursts that we will address later in this study. 
+\textcolor{blue}{Check the argument for clarity} The choice of $A$ determines the sensitivity of the burst parameter to microbursts of various durations (widths). This sensitivity is best illustrated with an example. Given a 1-second wide microburst, if we use $A_{500}$, the centered average background at the microburst time is skewed towards the microburst peak and the microburst's $\mathrm{bp}$ is reduced, potentially below the detection threshold. On the other hand, if we use $A_{1000}$, the centered running background will be relatively less elevated at the microburst time so it has a greater $\mathrm{bp}$ and is more likely to be detected. In other words, $bp$ will be relatively larger for $A_{1000}$ than $A_{500}$. This sensitivity manifests itself as a bias towards detecting narrower microbursts that we will address later in this study. 
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig1.pdf}
-\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits shown by the dashed red lines. The fit full width at half maximum (FWHM) and the $\bar{R}^2$ goodness of fit metric is annotated in each panel. The major time ticks are at every second, while the minor ticks are at every 100 milliseconds.}
+\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits shown by the dashed red lines. The fit full width at half maximum (FWHM) and the $\bar{R}^2$ goodness of fit metric is annotated in each panel. Microbursts with $\bar{R}^2 > 0.9$ were used for this study. The major time ticks are at every second, while the minor ticks are at every 100 milliseconds.}
 \label{fig1}
 \end{figure}
 
 \subsection{Microburst Duration}
-We estimated the microburst duration using two methods: the duration at half of the microburst's topographic prominence and Guassian fits.
+We estimated the microburst duration using two methods that yielded similar results: the duration at half of the microburst's topographic prominence and duration from a Gaussian fit.
+
+The topographic prominence 
 
 \textcolor{red}{talk about the prominence method}
 

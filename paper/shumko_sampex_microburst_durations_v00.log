@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  9 NOV 2020 07:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  9 NOV 2020 12:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -476,6 +476,12 @@ d mi-crobursts and then we
  []
 
 
+Overfull \hbox (15.97408pt too wide) in paragraph at lines 150--151
+\OT1/cmr/m/n/10 fit them with a Gaus-sian model with a lin-ear trend to quan-ti
+fy the du-ra-tion for each mi- 
+ []
+
+
 Overfull \hbox (22.71013pt too wide) in paragraph at lines 153--154
 []\OT1/cmr/m/n/10 We iden-ti-fied mi-crobursts us-ing the burst pa-ram-e-ter de
 -fined by []O'Brien et al.[] (2003) 
@@ -494,9 +500,9 @@ counts, the burst pa-ram-e-ter is
  []
 
 
-Overfull \hbox (0.21022pt too wide) in paragraph at lines 153--154
+Overfull \hbox (23.07137pt too wide) in paragraph at lines 153--154
 \OT1/cmr/m/n/10 the num-ber of stan-dard de-vi-a-tions of a fore-ground sig-nal
- above the back-ground. It is 
+ above the back-ground, ex-pressed 
  []
 
 
@@ -512,91 +518,97 @@ nd $\OML/cmm/m/it/10 A$ \OT1/cmr/m/n/10 is the cen-tered run-ning
  []
 
 
-Overfull \hbox (1.29341pt too wide) in paragraph at lines 156--157
-\OT1/cmr/m/n/10 av-er-age counts rep-re-sent-ing the back-ground. The $1$ in th
-e de-nom-i-na-tor pre-vents a di- 
+Overfull \hbox (12.71014pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 av-er-age back-ground counts. The $1$ in the de-nom-i-na-tor pr
+e-vents a di-vi-sion by 0 er-ror. In 
  []
 
 
-Overfull \hbox (24.0851pt too wide) in paragraph at lines 156--157
-\OT1/cmr/m/n/10 vi-sion by 0 er-ror. In []O'Brien et al.[] (2003), and in the r
-e-sults in this study, $\OML/cmm/m/it/10 N$ \OT1/cmr/m/n/10 was summed 
+Overfull \hbox (6.02948pt too wide) in paragraph at lines 156--157
+[]\OT1/cmr/m/n/10 O'Brien et al.[] (2003), and in the re-sults in this study, $
+\OML/cmm/m/it/10 N$ \OT1/cmr/m/n/10 was summed over 0.1 sec-onds 
  []
 
 
-Overfull \hbox (18.06421pt too wide) in paragraph at lines 156--157
-\OT1/cmr/m/n/10 over 0.1 sec-onds and is called $\OML/cmm/m/it/10 N[]$\OT1/cmr/
-m/n/10 , while $\OML/cmm/m/it/10 A$ \OT1/cmr/m/n/10 pa-ram-e-ter was summed ove
-r 0.5 sec-onds and 
+Overfull \hbox (13.18924pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 and is called $\OML/cmm/m/it/10 N[]$\OT1/cmr/m/n/10 , while $\O
+ML/cmm/m/it/10 A$ \OT1/cmr/m/n/10 was summed over 0.5 sec-onds and is called $\
+OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 . Hence-forth 
  []
 
 
-Overfull \hbox (13.12671pt too wide) in paragraph at lines 156--157
-\OT1/cmr/m/n/10 is called $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 . Hence-forth w
-e will spec-ify the time win-dow with the sub-script for $\OML/cmm/m/it/10 N$ \
-OT1/cmr/m/n/10 and 
+Overfull \hbox (5.08487pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 we will spec-ify the time win-dow with the sub-script for $\OML
+/cmm/m/it/10 N$ \OT1/cmr/m/n/10 and $\OML/cmm/m/it/10 A$\OT1/cmr/m/n/10 . Times
+ when $[] \OML/cmm/m/it/10 > \OT1/cmr/m/n/10 10$ 
  []
 
 
-Overfull \hbox (12.74486pt too wide) in paragraph at lines 156--157
-\OML/cmm/m/it/10 A$\OT1/cmr/m/n/10 . With $\OML/cmm/m/it/10 A[]$ \OT1/cmr/m/n/1
-0 and $\OML/cmm/m/it/10 N[]$\OT1/cmr/m/n/10 , we de-tected a to-tal of 256,764 
-mi-crobursts over the 13 year pe- 
+Overfull \hbox (12.87672pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 are clas-si-fied as mi-croburst times, and the peak count rate 
+in each time in-ter-val is saved 
  []
 
 
-Overfull \hbox (6.12686pt too wide) in paragraph at lines 156--157
-\OT1/cmr/m/n/10 riod from 1997 to 2012. Four ex-am-ples of mi-crobursts are sho
-wn in Fig. 1[] by the solid 
+Overfull \hbox (14.16156pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 as a mi-croburst to our data set. With $\OML/cmm/m/it/10 A[]$ \
+OT1/cmr/m/n/10 and $\OML/cmm/m/it/10 N[]$\OT1/cmr/m/n/10 , we de-tected a to-ta
+l of 256,764 mi- 
  []
 
 
-Overfull \hbox (4.6267pt too wide) in paragraph at lines 158--159
-[]\OT1/cmr/m/n/10 The choice of $\OML/cmm/m/it/10 A$ \OT1/cmr/m/n/10 de-ter-min
-es the sen-si-tiv-ity of the burst pa-ram-e-ter to mi-crobursts 
+Overfull \hbox (7.21016pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 crobursts over the 13 year pe-riod from 1997 to 2012. Four ex-a
+m-ples of mi-crobursts are 
  []
 
 
-Overfull \hbox (15.77965pt too wide) in paragraph at lines 158--159
-\OT1/cmr/m/n/10 of var-i-ous du-ra-tions (widths). This sen-si-tiv-ity is best 
-il-lus-trated with an ex-am-ple. Given 
+Overfull \hbox (2.18224pt too wide) in paragraph at lines 158--159
+[][]\OT1/cmr/m/n/10 Check the ar-gu-ment for clar-ity[] The choice of $\OML/cmm
+/m/it/10 A$ \OT1/cmr/m/n/10 de-ter-mines the sen-si-tiv-ity of the 
  []
 
 
-Overfull \hbox (10.11282pt too wide) in paragraph at lines 158--159
-\OT1/cmr/m/n/10 a 1-second wide mi-croburst, if we use $\OML/cmm/m/it/10 A[]$\O
-T1/cmr/m/n/10 , the cen-tered av-er-age back-ground at the mi- 
+Overfull \hbox (11.01563pt too wide) in paragraph at lines 158--159
+\OT1/cmr/m/n/10 il-lus-trated with an ex-am-ple. Given a 1-second wide mi-crobu
+rst, if we use $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 , the cen- 
  []
 
 
-Overfull \hbox (8.1545pt too wide) in paragraph at lines 158--159
-\OT1/cmr/m/n/10 croburst time is scewed higher to-wards the mi-croburst peak. T
-he av-er-age is dom-i-nated 
+Overfull \hbox (14.23787pt too wide) in paragraph at lines 158--159
+\OT1/cmr/m/n/10 tered av-er-age back-ground at the mi-croburst time is skewed t
+o-wards the mi-croburst peak 
  []
 
 
-Overfull \hbox (4.62685pt too wide) in paragraph at lines 158--159
-\OT1/cmr/m/n/10 heav-ily by the mi-croburst counts. On the other hand, if we us
-e $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 , the back-ground 
+Overfull \hbox (2.68236pt too wide) in paragraph at lines 158--159
+\OT1/cmr/m/n/10 and the mi-croburst's $[]$ is re-duced, po-ten-tially be-low th
+e de-tec-tion thresh-old. On the 
  []
 
 
-Overfull \hbox (3.71008pt too wide) in paragraph at lines 158--159
-\OT1/cmr/m/n/10 will not be el-e-vated as much be-cause more true back-ground c
-ounts will be in-cluded in 
+Overfull \hbox (4.93231pt too wide) in paragraph at lines 158--159
+\OT1/cmr/m/n/10 other hand, if we use $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 , t
+he cen-tered run-ning back-ground will be rel-a-tively less el- 
  []
 
 
-Overfull \hbox (0.65802pt too wide) in paragraph at lines 158--159
-\OT1/cmr/m/n/10 the av-er-age. There-fore, $\OML/cmm/m/it/10 bp$ \OT1/cmr/m/n/1
-0 will be rel-a-tively larger for $\OML/cmm/m/it/10 A[]$ \OT1/cmr/m/n/10 than $
-\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 . This sen-si-tiv- 
+Overfull \hbox (3.82118pt too wide) in paragraph at lines 158--159
+\OT1/cmr/m/n/10 e-vated at the mi-croburst time so it has a greater $[]$ and is
+ more likely to be de-tected. 
  []
 
 
-Overfull \hbox (7.57114pt too wide) in paragraph at lines 158--159
-\OT1/cmr/m/n/10 ity man-i-fests it-self as a bias to-wards nar-rower mi-croburs
-ts that we will ad-dress later in 
+Overfull \hbox (2.35251pt too wide) in paragraph at lines 158--159
+\OT1/cmr/m/n/10 In other words, $\OML/cmm/m/it/10 bp$ \OT1/cmr/m/n/10 will be r
+el-a-tively larger for $\OML/cmm/m/it/10 A[]$ \OT1/cmr/m/n/10 than $\OML/cmm/m/
+it/10 A[]$\OT1/cmr/m/n/10 . This sen-si-tiv-ity man-i- 
+ []
+
+
+Overfull \hbox (2.57109pt too wide) in paragraph at lines 158--159
+\OT1/cmr/m/n/10 fests it-self as a bias to-wards de-tect-ing nar-rower mi-crobu
+rsts that we will ad-dress later 
  []
 
 <figures/fig1.pdf, id=21, 867.24pt x 289.08pt>
@@ -613,170 +625,173 @@ d the $[]$ good-ness of fit met-ric
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 162--162
-\OT1/cmr/m/n/9 is an-no-tated in each panel. The ma-jor time ticks are at ev-er
-y sec-ond, while the mi-nor ticks are at
- []
-
-
-Overfull \hbox (8.9046pt too wide) in paragraph at lines 167--168
+Overfull \hbox (7.59898pt too wide) in paragraph at lines 167--168
 []\OT1/cmr/m/n/10 We es-ti-mated the mi-croburst du-ra-tion us-ing two meth-ods
-: the du-ra-tion at half of 
+ that yielded sim-i-lar re- 
  []
 
 
-Overfull \hbox (9.68234pt too wide) in paragraph at lines 171--172
+Overfull \hbox (18.59918pt too wide) in paragraph at lines 167--168
+\OT1/cmr/m/n/10 sults: the du-ra-tion at half of the mi-croburst's to-po-graphi
+c promi-nence and du-ra-tion from 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3]
+Overfull \hbox (9.68234pt too wide) in paragraph at lines 173--174
 []\OT1/cmr/m/n/10 An al-ter-na-tive method that can be au-to-mat-i-cally checke
 d is non-linear re-gres-sion. 
  []
 
 
-Overfull \hbox (2.90451pt too wide) in paragraph at lines 171--172
+Overfull \hbox (2.90451pt too wide) in paragraph at lines 173--174
 \OT1/cmr/m/n/10 For a fit model we as-sumed a Gaus-sian su-per-posed with a lin
 -ear trend. The Gaus-sian 
  []
 
 
-Overfull \hbox (18.90456pt too wide) in paragraph at lines 171--172
+Overfull \hbox (18.90456pt too wide) in paragraph at lines 173--174
 \OT1/cmr/m/n/10 mod-els the shape of the mi-croburst; while the lin-ear trend a
 c-counts for the elec-trons that 
  []
 
 
-Overfull \hbox (1.12674pt too wide) in paragraph at lines 171--172
+Overfull \hbox (1.12674pt too wide) in paragraph at lines 173--174
 \OT1/cmr/m/n/10 are ei-ther trapped or quasi-trapped in the drift loss cone. Th
 e fit model is de-fined as:  
  []
 
-[3]
-Overfull \hbox (24.64417pt too wide) in paragraph at lines 174--175
+
+Overfull \hbox (24.64417pt too wide) in paragraph at lines 176--177
 \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 A$\OT1/cmr/m/n/10 , $\OML/cmm/m/it/10 t
 []$\OT1/cmr/m/n/10 , and $\OML/cmm/m/it/10 ^^[$ \OT1/cmr/m/n/10 are the Gaus-si
 an am-pli-tude, cen-ter time, and stan-dard de-vi-a-tion; while 
  []
 
 
-Overfull \hbox (16.30965pt too wide) in paragraph at lines 174--175
+Overfull \hbox (16.30965pt too wide) in paragraph at lines 176--177
 \OT1/cmr/m/n/10 the $\OML/cmm/m/it/10 c[]$ \OT1/cmr/m/n/10 and $\OML/cmm/m/it/1
 0 c[]$ \OT1/cmr/m/n/10 are the back-ground count in-ter-cept and slope. The fit
  was ap-plied over the 
  []
 
 
-Overfull \hbox (10.68242pt too wide) in paragraph at lines 174--175
+Overfull \hbox (10.68242pt too wide) in paragraph at lines 176--177
 []\OT1/cmr/m/n/10 the fol-low-ing du-ra-tion, and the ini-tial pa-ram-e-ter gue
 ss was pro-vided by X[]. The op-ti-mal 
  []
 
 
-Overfull \hbox (10.23921pt too wide) in paragraph at lines 174--175
+Overfull \hbox (10.23921pt too wide) in paragraph at lines 176--177
 \OT1/cmr/m/n/10 fit pa-ram-e-ters were found us-ing Python's $\OT1/cmtt/m/n/10 
 scipy [] .curve [] []fit()$ \OT1/cmr/m/n/10 func-tion. We de-fined the 
  []
 
 
-Overfull \hbox (18.90475pt too wide) in paragraph at lines 174--175
+Overfull \hbox (18.90475pt too wide) in paragraph at lines 176--177
 \OT1/cmr/m/n/10 mi-croburst du-ra-tion as the full width at half max-i-mum (FWH
 M) of the mi-croburst peak, 
  []
 
 
-Overfull \hbox (4.28703pt too wide) in paragraph at lines 182--183
+Overfull \hbox (4.28703pt too wide) in paragraph at lines 184--185
 \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 SS[]$ \OT1/cmr/m/n/10 is the sum of squ
 ares of the resid-u-als be-tween the ob-served counts $\OML/cmm/m/it/10 c[]$ \O
 T1/cmr/m/n/10 and 
  []
 
 
-Overfull \hbox (6.91153pt too wide) in paragraph at lines 182--183
+Overfull \hbox (6.91153pt too wide) in paragraph at lines 184--185
 \OT1/cmr/m/n/10 the fit counts $\OML/cmm/m/it/10 f[]$ \OT1/cmr/m/n/10 for each 
 time stamp, and $\OML/cmm/m/it/10 SS[]$ \OT1/cmr/m/n/10 is the sum of squares b
 e-tween $\OML/cmm/m/it/10 c[]$ \OT1/cmr/m/n/10 and 
  []
 
 
-Overfull \hbox (1.2275pt too wide) in paragraph at lines 184--185
+Overfull \hbox (1.2275pt too wide) in paragraph at lines 186--187
 []\OT1/cmr/m/n/10 One in-ter-pre-ta-tion of $\OML/cmm/m/it/10 R[]$ \OT1/cmr/m/n
 /10 is: frac-tion-ally how much bet-ter the model fit ex-plains 
  []
 
 
-Overfull \hbox (0.75993pt too wide) in paragraph at lines 184--185
+Overfull \hbox (0.75993pt too wide) in paragraph at lines 186--187
 \OT1/cmr/m/n/10 the vari-ance in the data, com-pared to a null hy-poth-e-sis ho
 r-i-zon-tal line fit at $[]$. When 
  []
 
 
-Overfull \hbox (6.88359pt too wide) in paragraph at lines 184--185
+Overfull \hbox (6.88359pt too wide) in paragraph at lines 186--187
 \OML/cmm/m/it/10 R[] \OT1/cmr/m/n/10 = 1$, the mod-eled fit per-fectly de-scrib
 es the vari-ance in the data, and $\OML/cmm/m/it/10 R[]$ \OT1/cmr/m/n/10 can be
  ar- 
  []
 
 
-Overfull \hbox (17.57126pt too wide) in paragraph at lines 186--187
+Overfull \hbox (17.57126pt too wide) in paragraph at lines 188--189
 []\OT1/cmr/m/n/10 To ac-count for over-fit-ting that re-sults from the vari-abl
 e num-ber of data points used 
  []
 
-
-Overfull \hbox (14.02148pt too wide) in paragraph at lines 190--191
+[4 <./figures/fig1.pdf>]
+Overfull \hbox (14.02148pt too wide) in paragraph at lines 192--193
 \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 n$ \OT1/cmr/m/n/10 is the num-ber of da
 ta points fit, and $\OML/cmm/m/it/10 p$ \OT1/cmr/m/n/10 is the num-ber of pa-ra
 m-e-ters. In-tu-itively, 
  []
 
 
-Overfull \hbox (7.98788pt too wide) in paragraph at lines 190--191
+Overfull \hbox (7.98788pt too wide) in paragraph at lines 192--193
 \OT1/cmr/m/n/10 are used for the rest of this anal-y-sis. []We com-pared the mi
 -croburst du-ra-tions es-ti-mated 
  []
 
 
-Overfull \hbox (14.94968pt too wide) in paragraph at lines 190--191
+Overfull \hbox (14.94968pt too wide) in paragraph at lines 192--193
 \OT1/cmr/m/n/10 with the promi-nence and fit meth-ods. We found that with the $
 [] \OML/cmm/m/it/10 > \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 9$ con
 -straint, both 
  []
 
-[4 <./figures/fig1.pdf>]
-Overfull \hbox (20.12686pt too wide) in paragraph at lines 192--193
+
+Overfull \hbox (20.12686pt too wide) in paragraph at lines 194--195
 \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 83$ that were ex-cluded from
  this study. On other hand, Fig. 1[]b-d show mi-crobursts that 
  []
 
 
-Overfull \hbox (21.37675pt too wide) in paragraph at lines 194--195
+Overfull \hbox (21.37675pt too wide) in paragraph at lines 196--197
 []\OT1/cmr/m/n/10 Lastly, Fig. 1[]c,d demon-strate the ne-ces-sity of the lin-e
 ar fit to ac-count for the chang- 
  []
 
 
-Overfull \hbox (4.26572pt too wide) in paragraph at lines 194--195
+Overfull \hbox (4.26572pt too wide) in paragraph at lines 196--197
 \OT1/cmr/m/n/10 ing back-ground. The lin-ear fit ac-counts for the non-zero mea
 n back-ground counts and 
  []
 
 
-Overfull \hbox (26.72406pt too wide) in paragraph at lines 194--195
+Overfull \hbox (26.72406pt too wide) in paragraph at lines 196--197
 \OT1/cmr/m/n/10 the dif-fer-ent am-pli-tudes of the edges of the Gaus-sian. Of 
 the 256,764 de-tected mi-crobursts, 
  []
 
 
-Overfull \hbox (1.12682pt too wide) in paragraph at lines 197--198
+Overfull \hbox (1.12682pt too wide) in paragraph at lines 199--200
 []\OT1/cmr/m/n/10 The mi-crobursts that had a good fit are used to quan-tify th
 e dis-tri-bu-tion of mi- 
  []
 
 
-Overfull \hbox (2.65463pt too wide) in paragraph at lines 197--198
+Overfull \hbox (2.65463pt too wide) in paragraph at lines 199--200
 \OT1/cmr/m/n/10 croburst du-ra-tion (FWHM) for all mi-crobursts, as a func-tion
  of L and MLT, and as a 
  []
 
 
-Overfull \hbox (9.42189pt too wide) in paragraph at lines 199--200
+Overfull \hbox (9.42189pt too wide) in paragraph at lines 201--202
 []\OT1/cmr/m/n/10 Figure 2[] shows the dis-tri-bu-tion of all mi-crobursts that
  had a good-ness of fit $[] \OML/cmm/m/it/10 > 
  []
@@ -784,33 +799,33 @@ Overfull \hbox (9.42189pt too wide) in paragraph at lines 199--200
 <figures/figX.pdf, id=95, 462.52798pt x 346.89601pt>
 File: figures/figX.pdf Graphic file (type pdf)
 <use figures/figX.pdf>
-Package pdftex.def Info: figures/figX.pdf  used on input line 202.
+Package pdftex.def Info: figures/figX.pdf  used on input line 204.
 (pdftex.def)             Requested size: 397.48499pt x 298.12889pt.
 <figures/fig2.pdf, id=96, 722.7pt x 578.16pt>
 File: figures/fig2.pdf Graphic file (type pdf)
 <use figures/fig2.pdf>
-Package pdftex.def Info: figures/fig2.pdf  used on input line 208.
+Package pdftex.def Info: figures/fig2.pdf  used on input line 210.
 (pdftex.def)             Requested size: 397.48499pt x 317.98898pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
 []\OT1/cmr/bx/n/9 Figure  3. \OT1/cmr/m/n/9 The joint dis-tri-bu-tions of mi-cr
 oburst du-ra-tion (FWHM) as a func-tion of L and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
 \OT1/cmr/m/n/9 MLT. In each L-MLT bin with more than 100 good mi-croburst fits,
  the 25th, 50th, and 75th per-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
 \OT1/cmr/m/n/9 centiles of the du-ra-tion were cal-cu-lated and shown in pan-el
 s a-c, re-spec-tively. The white bins in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
 \OT1/cmr/m/n/9 pan-els a-c have less than 100 good mi-croburst fits. Panel d sh
 ows the dis-tri-bu-tion of the num-ber
  []
@@ -818,10 +833,10 @@ ows the dis-tri-bu-tion of the num-ber
 <figures/fig3.pdf, id=97, 867.24pt x 433.62pt>
 File: figures/fig3.pdf Graphic file (type pdf)
 <use figures/fig3.pdf>
-Package pdftex.def Info: figures/fig3.pdf  used on input line 214.
+Package pdftex.def Info: figures/fig3.pdf  used on input line 216.
 (pdftex.def)             Requested size: 397.48499pt x 198.74641pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
+Underfull \hbox (badness 10000) in paragraph at lines 217--217
 []\OT1/cmr/bx/n/9 Figure  4. \OT1/cmr/m/n/9 The marginal-ized dis-tri-bu-tions 
 of the num-ber of mi-crobursts as a func-tion of mi-
  []
@@ -829,127 +844,120 @@ of the num-ber of mi-crobursts as a func-tion of mi-
 <figures/fig4.pdf, id=98, 867.24pt x 361.35pt>
 File: figures/fig4.pdf Graphic file (type pdf)
 <use figures/fig4.pdf>
-Package pdftex.def Info: figures/fig4.pdf  used on input line 220.
+Package pdftex.def Info: figures/fig4.pdf  used on input line 222.
 (pdftex.def)             Requested size: 397.48499pt x 165.62201pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 221--221
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
 []\OT1/cmr/bx/n/9 Figure  5. \OT1/cmr/m/n/9 The dis-tri-bu-tion of the mi-crobu
 rst du-ra-tion (FWHM) for three ranges of the Au-ro-
  []
 
 
-Underfull \vbox (badness 4391) has occurred while \output is active []
-
- [5 <./figures/figX.pdf>] [6 <./figures/fig2.pdf> <./figures/fig3.pdf
-
-pdfTeX warning: /usr/bin/pdflatex (file ./figures/fig3.pdf): PDF inclusion: mul
-tiple pdfs with page group included in a single page
->]
-Overfull \hbox (7.84894pt too wide) in paragraph at lines 234--234
+Overfull \hbox (7.84894pt too wide) in paragraph at lines 236--236
 []\OT1/cmr/m/n/10 Comment that mi-crobursts at lower en-ergy are wider (data + 
 model). The cited 
  []
 
 
-Overfull \hbox (0.9322pt too wide) in paragraph at lines 236--237
+Overfull \hbox (0.9322pt too wide) in paragraph at lines 238--239
 []\OT1/cmr/m/n/10 To ad-dress the burst pa-ram-e-ter pref-er-en-tial bias to na
 r-rower mi-crobursts, as in- 
  []
 
 
-Overfull \hbox (5.43237pt too wide) in paragraph at lines 236--237
+Overfull \hbox (5.43237pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 tro-duced in sec-tion 3.1[], we ran the mi-croburst iden-ti-fi-
 ca-tion al-go-rithm on the data us- 
  []
 
 
-Overfull \hbox (13.27968pt too wide) in paragraph at lines 236--237
+Overfull \hbox (13.27968pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 ing three back-ground val-ues: $\OML/cmm/m/it/10 A[]$\OT1/cmr/m
 /n/10 , $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 , and $\OML/cmm/m/it/10 A[]$\OT1/
 cmr/m/n/10 . As de-scribed in sec-tion 3.1[], an de- 
  []
 
 
-Overfull \hbox (16.90454pt too wide) in paragraph at lines 236--237
+Overfull \hbox (16.90454pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 tec-tion al-go-rithm who's cen-tered run-ning av-er-age is over
  wider time pe-ri-ods will be more 
  []
 
 
-Overfull \hbox (9.01561pt too wide) in paragraph at lines 236--237
+Overfull \hbox (9.01561pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 sen-si-tive to wider and less promi-nent mi-crobursts. There-fo
 re we can iden-tify the bias if 
  []
 
 
-Overfull \hbox (5.37668pt too wide) in paragraph at lines 236--237
+Overfull \hbox (5.37668pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 there is a rel-a-tive ex-cess of longer du-ra-tion mi-crobursts
  when the av-er-age time was in- 
  []
 
 
-Overfull \hbox (9.65451pt too wide) in paragraph at lines 236--237
+Overfull \hbox (9.65451pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 creased. We found no such ex-cess for mi-croburst data sets tha
 t were made us-ing $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 , 
  []
 
 
-Overfull \hbox (14.15451pt too wide) in paragraph at lines 236--237
+Overfull \hbox (14.15451pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 and $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 . There-fore, we be-l
 ieve that $\OML/cmm/m/it/10 > \OT1/cmr/m/n/10 1$ MeV mi-crobursts are truly nar
 -rower than 250 
  []
 
 
-Overfull \hbox (3.93231pt too wide) in paragraph at lines 252--255
+Overfull \hbox (3.93231pt too wide) in paragraph at lines 254--257
 \OT1/cmr/m/n/10 We are thank-ful for the en-gi-neers and sci-en-tists who made 
 the SAM-PEX mis-sion pos- 
  []
 
 
-Overfull \hbox (7.43245pt too wide) in paragraph at lines 252--255
+Overfull \hbox (7.43245pt too wide) in paragraph at lines 254--257
 \OT1/cmr/m/n/10 si-ble. M. Shumko is thank-ful for the sup-port pro-vided by th
 e NASA Post-doc-toral Pro- 
  []
 
 
-Overfull \hbox (7.64069pt too wide) in paragraph at lines 252--255
+Overfull \hbox (7.64069pt too wide) in paragraph at lines 254--257
 \OT1/cmr/m/n/10 gram at the NASA's God-dard Space Flight Cen-ter, ad-min-is-ter
 ed by Uni-ver-si-ties Space 
  []
 
 
-Overfull \hbox (4.54343pt too wide) in paragraph at lines 252--255
+Overfull \hbox (4.54343pt too wide) in paragraph at lines 254--257
 \OT1/cmr/m/n/10 Re-search As-so-ci-a-tion un-der con-tract with NASA. []Lau-ren
 's and Alex's fund-ing sources[] 
  []
 
 
-Overfull \hbox (6.7642pt too wide) in paragraph at lines 252--255
+Overfull \hbox (6.7642pt too wide) in paragraph at lines 254--257
 \OT1/cmr/m/n/10 The SAM-PEX HILT and at-ti-tude data are lo-cated at $\OT1/cmtt
 /m/n/10 http :// www [] .srl [] .caltech [] .edu / 
  []
 
 
-Overfull \hbox (11.04193pt too wide) in paragraph at lines 252--255
+Overfull \hbox (11.04193pt too wide) in paragraph at lines 254--257
 \OT1/cmtt/m/n/10 sampex / DataCenter / data [] .html$ \OT1/cmr/m/n/10 and the m
 inute ca-dence Au-ro-ral Elec-tro-ject data is lo- 
  []
 
 
-Overfull \hbox (40.46066pt too wide) in paragraph at lines 252--255
+Overfull \hbox (40.46066pt too wide) in paragraph at lines 254--257
 \OT1/cmr/m/n/10 cated at $\OT1/cmtt/m/n/10 ftp :// ftp [] .ngdc [] .noaa [] .go
 v / STP / GEOMAGNETIC [] []DATA / INDICES / AURORAL [] []ELECTROJET / 
  []
 
 
-Overfull \hbox (22.7099pt too wide) in paragraph at lines 252--255
+Overfull \hbox (22.7099pt too wide) in paragraph at lines 254--257
 \OT1/cmtt/m/n/10 ONE [] []MINUTE /$\OT1/cmr/m/n/10 . The anal-y-sis soft-ware i
 s archived at []$\OT1/cmtt/m/n/10 https :// github [] .com / mshumko / sampex [
 ] 
  []
 
-(./shumko_sampex_microburst_durations_v00.bbl
+[5] (./shumko_sampex_microburst_durations_v00.bbl
 Underfull \hbox (badness 7722) in paragraph at lines 17--40
 []\OT1/cmr/m/n/10 Douma, E., Rodger, C. J., Blum, L. W., & Clil-verd, M. A.  (2
 017).  Oc-cur-rence 
@@ -967,7 +975,7 @@ Underfull \hbox (badness 6542) in paragraph at lines 17--40
 2 / 2017JA024067$   \OT1/cmr/m/n/10 (2017JA024067)  doi: 
  []
 
-[7 <./figures/fig4.pdf>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 52--78
 []\OT1/cmr/m/n/10 O'Brien, T. P., Lorentzen, K. R., Mann, I. R., Mered-ith, N. 
 P., Blake, J. B., Fen- 
@@ -991,7 +999,11 @@ Underfull \hbox (badness 3029) in paragraph at lines 52--78
 -phys-i-cal Re-search: Space Physics\OT1/cmr/m/n/10 , 
  []
 
-) [8] (./shumko_sampex_microburst_durations_v00.aux)
+) [6 <./figures/figX.pdf>] [7 <./figures/fig2.pdf> <./figures/fig3.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./figures/fig3.pdf): PDF inclusion: mul
+tiple pdfs with page group included in a single page
+>] [8 <./figures/fig4.pdf>] (./shumko_sampex_microburst_durations_v00.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.45pt have occurred.
@@ -1003,11 +1015,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  3492 strings out of 481239
  50032 string characters out of 5920377
- 300155 words of memory out of 5000000
+ 301155 words of memory out of 5000000
  18692 multiletter control sequences out of 15000+600000
  538541 words of font info for 45 fonts, out of 8000000 for 9000
  1147 hyphenation exceptions out of 8191
- 38i,9n,41p,873b,322s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,8n,41p,967b,314s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
@@ -1029,7 +1041,7 @@ blic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt9.pfb>
-Output written on shumko_sampex_microburst_durations_v00.pdf (8 pages, 508680 b
+Output written on shumko_sampex_microburst_durations_v00.pdf (8 pages, 509082 b
 ytes).
 PDF statistics:
  415 PDF objects out of 1000 (max. 8388607)
