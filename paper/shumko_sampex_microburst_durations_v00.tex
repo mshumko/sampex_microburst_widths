@@ -166,11 +166,17 @@ The choice of $A$ determines the sensitivity of the burst parameter to microburs
 \subsection{Microburst Duration}
 We estimated the microburst duration using two methods: the duration at half of the microburst's topographic prominence and Guassian fits.
 
+\textcolor{red}{talk about the prominence method}
+
+An alternative method that can be automatically checked is non-linear regression. For a fit model we assumed a Gaussian superposed with a linear trend. The Gaussian models the shape of the microburst; while the linear trend accounts for the electrons that are either trapped or quasi-trapped in the drift loss cone. The fit model is defined as:
 \begin{equation}
 c(t | A, t_0, \sigma, c_0, c_1) = A e^{-\frac{(t-t_0)^2}{2\sigma^2}} + c_0 + c_1 t
-\end{equation} where $A$, $t_0$, and $\sigma$ are the Gaussian amplitude, center time, and standard deviation; while the $c_0$ and $c_1$ are the background count intercept and slope. The fit was applied over the \textcolor{red}{the following duration, and the initial parameter guess was provided by X}. The optimal fit parameters were found using Python's \url{scipy.curve_fit()} function.
+\end{equation} where $A$, $t_0$, and $\sigma$ are the Gaussian amplitude, center time, and standard deviation; while the $c_0$ and $c_1$ are the background count intercept and slope. The fit was applied over the \textcolor{red}{the following duration, and the initial parameter guess was provided by X}. The optimal fit parameters were found using Python's \url{scipy.curve_fit()} function. We defined the microburst duration as the full width at half maximum (FWHM) of the microburst peak, defined as
+\begin{equation}
+\mathrm{FWHM} = 2\sqrt{2 \ln{2}} \sigma.
+\end{equation}
 
-To evaluate the fit, the $R^2$ goodness of fit metric was used. $R^2$ is defined as
+To evaluate the fit, we used the $R^2$ goodness of fit metric. $R^2$ is defined as
 \begin{equation}
 R^2 = 1 - \frac{SS_{res}}{SS_{total}} = 1 - \frac{\sum{(c_i-f_i)^2}}{\sum{(c_i-\bar{c})^2}}
 \end{equation} where $SS_{res}$ is the sum of squares of the residuals between the observed counts $c_i$ and the fit counts $f_i$ for each time stamp, and $SS_{total}$ is the sum of squares between $c_i$ and the mean counts $\bar{c}$.
@@ -181,25 +187,21 @@ To account for overfitting that results from the variable number of data points 
 
 \begin{equation}
 \bar{R}^2 = 1 - (1-R^2) \frac{n-1}{n-p-1}
-\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and $n-p-1$ is the degrees of freedom for the fit model. Fits with $\bar{R}^2 > 0.9$ are considered good fits and are used for the rest of this analysis. Figure \ref{fig1}a shows an example of two superposed microbursts that had a fit $\bar{R}^2 = 0.83$ that were excluded from this study. On other hand, Fig. \ref{fig1}b-d show microbursts that were included in this study because the fit $\bar{R}^2 > 0.9$.
+\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and $n-p-1$ is the degrees of freedom for the fit model. Fits with $\bar{R}^2 > 0.9$ are considered good fits and are used for the rest of this analysis. \textcolor{red}{We compared the microburst durations estimated with the prominence and fit methods. We found that with the $\bar{R}^2 > 0.9$ constraint, both methods yielded $85\%$ of microburst widths to within $25\%$.}
 
-Lastly, Fig. \ref{fig1}c,d demonstrate the necessity of the linear fit to account for the changing background. The linear fit accounts for the non-zero mean background counts and the different amplitudes of the edges of the Gaussian. Of the 256,764 detected microbursts, 110,135 had $R^2 > 0.9$ and were used for the remainder of this study.
+Figure \ref{fig1}a shows an example of two superposed microbursts that had a fit $\bar{R}^2 = 0.83$ that were excluded from this study. On other hand, Fig. \ref{fig1}b-d show microbursts that were included in this study because the fit $\bar{R}^2 > 0.9$.
+
+Lastly, Fig. \ref{fig1}c,d demonstrate the necessity of the linear fit to account for the changing background. The linear fit accounts for the non-zero mean background counts and the different amplitudes of the edges of the Gaussian. Of the 256,764 detected microbursts, 110,135 had $R^2 > 0.9$ and are used for the remainder of this study.
 
 \section{Results}\label{results}
-\textcolor{blue}{
-\textbf{Outline}
-\begin{enumerate}
-    \item Show the entire distrubution
-    \item Show the L-MLT dial plots
-    \item Show the marginalized distribution in MLT and L shell.
-    \item Show the distribution with AE
-\end{enumerate}
-}
+The microbursts that had a good fit are used to quantify the distribution of microburst duration (FWHM) for all microbursts, as a function of L and MLT, and as a function of the Auroral Electroject (AE).
+
+Figure \ref{figX} shows the distribution of all microbursts that had a goodness of fit $\bar{R}^2 > 0.9$. This distribution is peaked at 0.1 seconds and rapidly drops off.
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/figX.pdf}
 \caption{The distribution of all microburst full width at full maximum (FWHM).}
-\label{fig2}
+\label{figX}
 \end{figure}
 
 \begin{figure}
