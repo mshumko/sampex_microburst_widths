@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  8 NOV 2020 21:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  9 NOV 2020 07:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -287,15 +287,33 @@ ic Par-ti-cle Ex-plorer to iden-
  []
 
 
-Overfull \hbox (10.43236pt too wide) in paragraph at lines 103--105
-\OT1/cmr/m/n/10 tify rel-a-tivis-tic, $\OML/cmm/m/it/10 > \OT1/cmr/m/n/10 1$ Me
-V, mi-crobursts and we quan-ti-fied their du-ra-tion. We found that 
+Overfull \hbox (21.738pt too wide) in paragraph at lines 103--105
+\OT1/cmr/m/n/10 found the short-est mi-crobursts, with a me-dian du-ra-tion aro
+und 80 mil-lisec-onds, near mid- 
  []
 
 
-Overfull \hbox (3.71016pt too wide) in paragraph at lines 103--105
-\OT1/cmr/m/n/10 the mi-croburst du-ra-tion is short-est near mid-night mag-neti
-c lo-cal times and is longest, 
+Overfull \hbox (21.54358pt too wide) in paragraph at lines 103--105
+\OT1/cmr/m/n/10 night mag-netic lo-cal time. Mi-croburst du-ra-tion in-creases 
+through dawn and to noon mag- 
+ []
+
+
+Overfull \hbox (11.26573pt too wide) in paragraph at lines 103--105
+\OT1/cmr/m/n/10 netic lo-cal time, where the me-dian mi-croburst du-ra-tion rou
+ghly dou-bles to 160 mil-lisec- 
+ []
+
+
+Overfull \hbox (8.9046pt too wide) in paragraph at lines 103--105
+\OT1/cmr/m/n/10 onds. The in-creas-ing mi-croburst du-ra-tion trend in mag-neti
+c lo-cal time is sim-i-lar to the 
+ []
+
+
+Overfull \hbox (2.23792pt too wide) in paragraph at lines 103--105
+\OT1/cmr/m/n/10 whistler mode cho-rus ris-ing tone el-e-ment du-ra-tion, shed-d
+ing light into the mi-croburst 
  []
 
 
@@ -402,16 +420,13 @@ Overfull \hbox (2.79344pt too wide) in paragraph at lines 148--148
 robursts and es-ti-mate 
  []
 
-
+[2]
 Overfull \hbox (7.01563pt too wide) in paragraph at lines 148--148
 []\OT1/cmr/m/n/10 We iden-ti-fied mi-crobursts us-ing the Burst pa-ram-e-ter. M
 en-tion the bias and how 
  []
 
 
-Underfull \vbox (badness 7221) has occurred while \output is active []
-
- [2]
 Overfull \hbox (20.37672pt too wide) in paragraph at lines 148--148
 []\OT1/cmr/m/n/10 Discuss bi-ases to short width, low counts. Douma 2019 showed
  that the mi-croburst 
@@ -633,10 +648,7 @@ Overfull \hbox (1.12674pt too wide) in paragraph at lines 171--172
 e fit model is de-fined as:  
  []
 
-
-Underfull \vbox (badness 5417) has occurred while \output is active []
-
- [3]
+[3]
 Overfull \hbox (24.64417pt too wide) in paragraph at lines 174--175
 \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 A$\OT1/cmr/m/n/10 , $\OML/cmm/m/it/10 t
 []$\OT1/cmr/m/n/10 , and $\OML/cmm/m/it/10 ^^[$ \OT1/cmr/m/n/10 are the Gaus-si
@@ -991,7 +1003,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  3492 strings out of 481239
  50032 string characters out of 5920377
- 299155 words of memory out of 5000000
+ 300155 words of memory out of 5000000
  18692 multiletter control sequences out of 15000+600000
  538541 words of font info for 45 fonts, out of 8000000 for 9000
  1147 hyphenation exceptions out of 8191
@@ -1017,7 +1029,7 @@ blic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt9.pfb>
-Output written on shumko_sampex_microburst_durations_v00.pdf (8 pages, 508494 b
+Output written on shumko_sampex_microburst_durations_v00.pdf (8 pages, 508680 b
 ytes).
 PDF statistics:
  415 PDF objects out of 1000 (max. 8388607)
