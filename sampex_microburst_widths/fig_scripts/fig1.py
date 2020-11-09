@@ -86,9 +86,9 @@ for label_i, ax_i, (row_time, row) in zip(string.ascii_lowercase, ax, plot_df.it
 
     annotate_str = (
                 f'({label_i})\n'
-                f'fwhm = {round(row.fwhm, 2)} [s]\n'
-                f'r2 = {round(row.r2, 2)}\n'
-                #f'adj_r2 = {round(row.adj_r2, 2)}'
+                f'FWHM = {round(row.fwhm, 2)} [s]\n'
+                r'$\bar{{R}}^2$ = {}'.format(round(row.adj_r2, 2))
+                # f'\nadj_r2 = {round(row.adj_r2, 2)}'
                 )
     ax_i.text(0, 1, annotate_str, va='top', ha='left', transform=ax_i.transAxes)
     min_max = [0.9*(count_rate_conversion/yaxis_scale_factor)*hilt_filtered.counts.min(), 
@@ -97,7 +97,7 @@ for label_i, ax_i, (row_time, row) in zip(string.ascii_lowercase, ax, plot_df.it
 
 plt.suptitle('SAMPEX/HILT Microburst Fits')
 if yaxis_scale_factor > 1:
-    ax[0].set_ylabel(f'{yaxis_scale_factor} x counts/s')    
+    ax[0].set_ylabel(r'$x 10^{0}$ [counts/s]'.format(int(np.log10(yaxis_scale_factor))))    
 else:
     ax[0].set_ylabel(f'counts/s')    
 

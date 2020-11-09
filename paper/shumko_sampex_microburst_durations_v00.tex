@@ -153,13 +153,13 @@ To estimate the microburst duration we first identified microbursts and then we 
 We identified microbursts using the burst parameter defined by \citeA{O'Brien2003} and used in numerous other microburst studies with SAMPEX \cite<e.g.>{Douma2017}. Assuming Poisson probability for the observed electron counts, the burst parameter is the number of standard deviations of a foreground signal above the background. It is generally defined as
 \begin{equation}
 bp = \frac{N-A}{\sqrt{A+1}}
-\end{equation} \textcolor{red}{Find a better variable than bp. This is not British Petroleum} where $N$ is the number of foreground electron counts (microburst or otherwise), and $A$ is the centered running average counts representing the background. The $1$ in the denominator prevents a division by 0 error. In \citeA{O'Brien2003}, and in the figures in this study, $N$ was summed over 0.1 seconds and is called $N_{100}$, while $A$ parameter was summed over 0.5 seconds and is called $A_{500}$. Henceforth we will use the subscript for $N$ and $A$ for the time window used for the respective variables.
+\end{equation} \textcolor{red}{Find a better variable than bp. This is not British Petroleum} where $N$ is the number of foreground electron counts (microburst or otherwise), and $A$ is the centered running average counts representing the background. The $1$ in the denominator prevents a division by 0 error. In \citeA{O'Brien2003}, and in the results in this study, $N$ was summed over 0.1 seconds and is called $N_{100}$, while $A$ parameter was summed over 0.5 seconds and is called $A_{500}$. Henceforth we will specify the time window with the subscript for $N$ and $A$. With $A_{500}$ and $N_{100}$, we detected a total of 256,764 microbursts over the 13 year period from 1997 to 2012. Four examples of microbursts are shown in Fig. \ref{fig1} by the solid black curves.
 
 The choice of $A$ determines the sensitivity of the burst parameter to microbursts of various durations (widths). This sensitivity is best illustrated with an example. Given a 1-second wide microburst, if we use $A_{500}$, the centered average background at the microburst time is scewed higher towards the microburst peak. The average is dominated heavily by the microburst counts. On the other hand, if we use $A_{1000}$, the background will not be elevated as much because more true background counts will be included in the average. Therefore, $bp$ will be relatively larger for $A_{1000}$ than $A_{500}$. This sensitivity manifests itself as a bias towards narrower microbursts that we will address later in this study. 
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig1.pdf}
-\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits by the dashed red lines. The fit full width at half maximum (FWHM) and the $r^2$ goodness of fit score is annotated in each panel. In each panel, the major ticks are at every second, while the minor ticks are at every 100 milliseconds. Panel a shows how the $r^2$ score can screen out poor fits. The two superposed microbursts were fitted, but the $r^2$ score is less than the 0.9 threshold and so it was not analyzed in this study. Panels b, c and d show example of fits with $r^2$ values greater than 0.9 so therefore they were included in this analysis. Panels c and d demonstrate the necessity of the linear trend fit to account for the changing background.}
+\caption{Example $>1$ MeV microbursts shown by the black lines, and the fits by the dashed red lines. The fit full width at half maximum (FWHM) and the $r^2$ goodness of fit score is annotated in each panel. Also in each panel, the major ticks are at every second, while the minor ticks are at every 100 milliseconds. Panel a shows how the $r^2$ score can screen out poor fits. The two superposed microbursts were fitted, but the $r^2$ score is less than the 0.9 threshold and so it was not analyzed in this study. Panels b, c and d show example of fits with $r^2$ values greater than 0.9 so therefore they were included in this analysis. Panels c and d demonstrate the necessity of the linear trend fit to account for the changing background.}
 \label{fig1}
 \end{figure}
 
@@ -183,7 +183,7 @@ To account for overfitting that results from the variable number of data points 
 \bar{R}^2 = 1 - (1-R^2) \frac{n-1}{n-p-1}
 \end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and the $n-p-1$ is the degrees of freedom for the fit model.
 
-Using $A_{500}$ and $N_{100}$, we detected a total of 256,764 microbursts over the 13 year period from 1997 to 2012 and 110,135 microbursts had $R^2 > 0.9$.
+ and 110,135 microbursts had $R^2 > 0.9$.
 
 \section{Results}\label{results}
 \textcolor{blue}{

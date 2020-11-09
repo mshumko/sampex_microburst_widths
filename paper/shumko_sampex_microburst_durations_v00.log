@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  8 NOV 2020 16:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  8 NOV 2020 19:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -503,9 +503,9 @@ e de-nom-i-na-tor pre-vents a di-
  []
 
 
-Overfull \hbox (24.02956pt too wide) in paragraph at lines 156--157
-\OT1/cmr/m/n/10 vi-sion by 0 er-ror. In []O'Brien et al.[] (2003), and in the f
-ig-ures in this study, $\OML/cmm/m/it/10 N$ \OT1/cmr/m/n/10 was summed 
+Overfull \hbox (24.0851pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 vi-sion by 0 er-ror. In []O'Brien et al.[] (2003), and in the r
+e-sults in this study, $\OML/cmm/m/it/10 N$ \OT1/cmr/m/n/10 was summed 
  []
 
 
@@ -516,10 +516,23 @@ r 0.5 sec-onds and
  []
 
 
-Overfull \hbox (0.65443pt too wide) in paragraph at lines 156--157
+Overfull \hbox (13.12671pt too wide) in paragraph at lines 156--157
 \OT1/cmr/m/n/10 is called $\OML/cmm/m/it/10 A[]$\OT1/cmr/m/n/10 . Hence-forth w
-e will use the sub-script for $\OML/cmm/m/it/10 N$ \OT1/cmr/m/n/10 and $\OML/cm
-m/m/it/10 A$ \OT1/cmr/m/n/10 for the time win-dow 
+e will spec-ify the time win-dow with the sub-script for $\OML/cmm/m/it/10 N$ \
+OT1/cmr/m/n/10 and 
+ []
+
+
+Overfull \hbox (12.74486pt too wide) in paragraph at lines 156--157
+\OML/cmm/m/it/10 A$\OT1/cmr/m/n/10 . With $\OML/cmm/m/it/10 A[]$ \OT1/cmr/m/n/1
+0 and $\OML/cmm/m/it/10 N[]$\OT1/cmr/m/n/10 , we de-tected a to-tal of 256,764 
+mi-crobursts over the 13 year pe- 
+ []
+
+
+Overfull \hbox (6.12686pt too wide) in paragraph at lines 156--157
+\OT1/cmr/m/n/10 riod from 1997 to 2012. Four ex-am-ples of mi-crobursts are sho
+wn in Fig. 1[] by the solid 
  []
 
 
@@ -581,13 +594,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 Underfull \hbox (badness 10000) in paragraph at lines 162--162
 \OT1/cmr/m/n/9 red lines. The fit full width at half max-i-mum (FWHM) and the $
-\OML/cmm/m/it/9 r[]$ \OT1/cmr/m/n/9 good-ness of fit score is an-
+\OML/cmm/m/it/9 r[]$ \OT1/cmr/m/n/9 good-ness of fit score is an-no-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 162--162
-\OT1/cmr/m/n/9 no-tated in each panel. In each panel, the ma-jor ticks are at e
-v-ery sec-ond, while the mi-nor ticks
+\OT1/cmr/m/n/9 tated in each panel. Also in each panel, the ma-jor ticks are at
+ ev-ery sec-ond, while the mi-nor ticks
  []
 
 
@@ -686,15 +699,8 @@ ta points fit, and $\OML/cmm/m/it/10 p$ \OT1/cmr/m/n/10 is the num-ber of pa-ra
 m-e-ters. In-tu-itively, 
  []
 
-
-Overfull \hbox (7.35593pt too wide) in paragraph at lines 186--187
-[]\OT1/cmr/m/n/10 Using $\OML/cmm/m/it/10 A[]$ \OT1/cmr/m/n/10 and $\OML/cmm/m/
-it/10 N[]$\OT1/cmr/m/n/10 , we de-tected a to-tal of 256,764 mi-crobursts over 
-the 13 year 
- []
-
 [4 <./figures/fig1.pdf>]
-<figures/fig2.pdf, id=91, 722.7pt x 578.16pt>
+<figures/fig2.pdf, id=95, 722.7pt x 578.16pt>
 File: figures/fig2.pdf Graphic file (type pdf)
 <use figures/fig2.pdf>
 Package pdftex.def Info: figures/fig2.pdf  used on input line 200.
@@ -723,7 +729,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 201--201
 ows the dis-tri-bu-tion of the num-ber
  []
 
-<figures/fig3.pdf, id=92, 867.24pt x 433.62pt>
+<figures/fig3.pdf, id=96, 867.24pt x 433.62pt>
 File: figures/fig3.pdf Graphic file (type pdf)
 <use figures/fig3.pdf>
 Package pdftex.def Info: figures/fig3.pdf  used on input line 206.
@@ -734,7 +740,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 207--207
 of the num-ber of mi-crobursts as a func-tion of mi-
  []
 
-<figures/fig4.pdf, id=93, 867.24pt x 361.35pt>
+<figures/fig4.pdf, id=97, 867.24pt x 361.35pt>
 File: figures/fig4.pdf Graphic file (type pdf)
 <use figures/fig4.pdf>
 Package pdftex.def Info: figures/fig4.pdf  used on input line 212.
@@ -937,11 +943,11 @@ blic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt9.pfb>
-Output written on shumko_sampex_microburst_durations_v00.pdf (7 pages, 494585 b
+Output written on shumko_sampex_microburst_durations_v00.pdf (7 pages, 495017 b
 ytes).
 PDF statistics:
- 362 PDF objects out of 1000 (max. 8388607)
- 121 compressed objects within 2 object streams
+ 366 PDF objects out of 1000 (max. 8388607)
+ 125 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
