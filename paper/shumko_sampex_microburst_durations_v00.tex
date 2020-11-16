@@ -76,7 +76,7 @@
 \begin{keypoints}
 \item We identified relativistic microbursts observed by the SAMPEX satellite and quantified their duration
 \item Microburst duration roughly doubles between the midnight and noon magnetic local time regions
-\item Whistler-mode chorus rising tone element \textcolor{red}{duration} has  a similar trend
+\item Whistler-mode chorus rising tone element duration has  a similar trend
 \end{keypoints}
 
 %% ------------------------------------------------------------------------ %%
@@ -173,7 +173,7 @@ The other method that we use to estimate the microburst duration is fitting a Ga
 We assumed a Gaussian superposed with a linear trend fit model. The Gaussian models the shape of the microburst; while the linear trend accounts for the electrons that are either trapped or quasi-trapped in the drift loss cone. The fit model is defined as:
 \begin{equation}
 c(t | A, t_0, \sigma, c_0, c_1) = A e^{-\frac{(t-t_0)^2}{2\sigma^2}} + c_0 + c_1 t
-\end{equation} where $A$, $t_0$, and $\sigma$ are the Gaussian amplitude, center time, and standard deviation; while the $c_0$ and $c_1$ are the background count intercept and slope. The fit was applied over a number of data points determined by the maximum of either: 4x topographic prominence width or 0.5 seconds. The initial parameter guesses for the Gaussian are provided from the topographic prominence and duration estimate. The linear trend initial parameters were the same: $c_0=50$ and $c_1=0$. The optimal fit parameters were found using Python's \url{scipy.curve_fit()} function. We defined the microburst duration as the full width at half maximum (FWHM) of the microburst peak, defined as
+\end{equation} where $A$, $t_0$, and $\sigma$ are the Gaussian amplitude, center time, and standard deviation; while the $c_0$ and $c_1$ are the background count intercept and slope. The fit was applied over a number of data points determined by the maximum of either: 4x topographic prominence width or 0.5 seconds. \textcolor{red}{A challenge to any roburst automated nonlinear regression algorithm is guessing the initial parameters.} The initial parameter guesses for the Gaussian are provided from the topographic prominence and duration estimate. The linear trend initial parameters were the same: \textcolor{red}{$c_0=50$} and $c_1=0$. The optimal fit parameters were found using Python's \url{scipy.curve_fit()} function. We defined the microburst duration as the full width at half maximum (FWHM) of the microburst peak, defined as
 \begin{equation}
 \mathrm{FWHM} = 2\sqrt{2 \ln{2}} \sigma.
 \end{equation}
