@@ -4,7 +4,7 @@ from sampex_microburst_widths.microburst_id import merge_ae
 
 # Identify and fit microbursts
 m = identify_microbursts.Identify_SAMPEX_Microbursts(
-    baseline_width_s=2, foreground_width_s=0.1,
+    baseline_width_s=0.5, foreground_width_s=0.1,
     prominence_rel_height=0.5
     )
 try:
