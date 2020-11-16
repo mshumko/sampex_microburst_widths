@@ -294,7 +294,13 @@ class SAMPEX_Microburst_Widths:
                 width_i = 0.1 
 
             if detrend:
-                p0 = [height_i, t0, width_i, 50, 0]
+                p0 = [
+                    height_i,   # gauss amplitude 
+                    t0,         # gauss center time
+                    width_i,    # 2x gaus std.
+                    self.hilt_data.loc[time_range[0]:time_range[1], 'counts'].median(), # y-intercept
+                    0           # Slope
+                    ]
             else:
                 p0 = [height_i, t0, width_i]
 
