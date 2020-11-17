@@ -7,9 +7,9 @@ config.py
 microburst_catalog_03.csv
 
 # Latex files
-*.aux
-*.blg
-*.fdb*
-*.fls
-*.log
-*.synctex.gz
+/paper/*aux
+/paper/*blg
+/paper/*fdb*
+/paper/*fls
+/paper/*log
+/paper/*synctex.gz
