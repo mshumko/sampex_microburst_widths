@@ -40,7 +40,7 @@ width_percentiles = df['width_s'].quantile(q=quantiles)
 
 fig, ax = plt.subplots()
 ax.hist(df['width_s'], bins=width_bins, color='k', histtype='step', density=True)
-ax.set_title('Distribution of SAMPEX > 1 MeV Microburst Durations')
+ax.set_title('Distribution of > 1 MeV Microburst Duration\nSAMPEX/HILT')
 # ax.set_yscale('log')
 ax.set_ylabel('Probability Density')
 ax.set_xlabel('FWHM [s]')

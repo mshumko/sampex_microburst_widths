@@ -40,7 +40,9 @@ df['fwhm'] = df['fwhm'].abs()
 # Filter by the R^2 value with the microburst FWHM 
 df = df[(df['adj_r2'] > r2_thresh) & (df['fwhm'] < max_width)]
 
-_, ax = plt.subplots(1, len(ae_bins)-1, figsize=(12, 5), sharey=True, sharex=True)
+_, ax = plt.subplots(len(ae_bins)-1, 1, figsize=(5, 8), sharey=True, sharex=True)
+
+ymax = 0
 
 for ax_i, start_ae, end_ae, label_i in zip(ax, ae_bins[:-1], ae_bins[1:], string.ascii_lowercase):
     df_flt = df[(df['AE'] > start_ae) & (df['AE'] < end_ae)]
@@ -48,9 +50,16 @@ for ax_i, start_ae, end_ae, label_i in zip(ax, ae_bins[:-1], ae_bins[1:], string
             label=f'{start_ae} < AE < {end_ae}', color='k', lw=1)
     ax_i.text(0, 0.99, f'({label_i}) {start_ae} < AE [nT] < {end_ae}', va='top', 
             transform=ax_i.transAxes, fontsize=15)
-    ax_i.set_xlabel('Microburst FWHM [s]')
+    ax_i.set_ylabel('Probability density')
 
-ax[0].set_ylabel('Probability density')
-plt.suptitle('Distribution of SAMPEX microburst duration as a function of AE', fontsize=20)
+    # Save the largest ymax value of all the histograms.
+    ylims = ax_i.get_ylim()
+    if ymax < ylims[1]:
+        ymax = ylims[1]
+
+ax[-1].set_xlabel('Microburst FWHM [s]')
+ax[0].set_xlim(0, max_width)
+ax[0].set_ylim(0, 1.1*ymax)
+plt.suptitle('Distribution of >1 MeV microburst\nduration as a function of AE', fontsize=18)
 plt.tight_layout()
 plt.show()

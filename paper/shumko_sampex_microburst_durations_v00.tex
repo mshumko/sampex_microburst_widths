@@ -198,13 +198,19 @@ Lastly, Fig. \ref{fig1}c,d demonstrate the necessity of the linear fit to accoun
 \section{Results}\label{results}
 The well-fit microbursts are used to quantify the distribution of microburst duration (FWHM) for all microbursts, as a function of L and MLT, and as a function of the Auroral Electroject (AE). We begin with the overall microburst distribution.
 
-Figure \ref{figX} shows the distribution of all well-fit microbursts. This distribution is peaked at 0.1 seconds and rapidly drops off.
+Figure \ref{figX} shows the distribution of all well-fit microbursts. This distribution is peaked with the median at 98 ms and quickly drops off. The interquartile range spans about a factor of two in microburst duration, from 67 to 140 ms. 
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/figX.pdf}
 \caption{The distribution of all microburst full width at full maximum (FWHM).}
 \label{figX}
 \end{figure}
+
+Figure \ref{fig2} shows the joint distribution of microburst duration as a function of L and MLT. Figure \ref{fig2}a-c show the 25\%, 50\%, and 75\% percentiles of microbursts in each L-MLT bin. The sparse bins with less than 100 well-fit microbursts are white. For reference, Fig. \ref{fig2}d shows the number of well-fit microbursts observed as a function of L and MLT.
+
+In Fig. \ref{fig2}, the microburst duration trend is almost identical for the different percentiles, but lets focus on the median distribution, Fig. \ref{fig2}b. In MLT, the median microburst duration increases by a factor of two: from 80 ms at midnight to 160 ms at noon. In L-shell, the median microburst duration slightly increases with L shell, most apparent near midnight MLT. To disentangle the L and MLT distribution, Fig. \ref{fig3} shows the marginalized distributions; MLT was marginalized out in Fig. \ref{fig3}a and L-shell was marginalized out in Fig. \ref{fig3}b. Figure \ref{fig3}a shows a slight broadening of the microburst duration at higher L-shells; in contrast to Fig. \ref{fig3}b that clearly shows that the microburst duration increases from midnight to noon MLT.
+
+Lastly, we investigated the dependence of microburst duration as a function of geomagnetic activity. To be consistent with the prior wave and microburst studies, we use the Auroral Electrojet (AE) index to quantify the level of geomagnetic disturbance. We adopt the same three AE intensity levels used in prior studies, such as \citeA{Li2009a}, \citeA{Douma2017}, and \citeA{Meredith2020}: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $300 < \mathrm{AE} < 1000$, in nanotesla units. Figure \ref{fig4} shows the distribution of microburst duration as a function of AE. This distribution is similar across the three AE intensity levels. However, the distribution is more prominently peaked at 0.1 s at the highest intensity level.
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig2.pdf}
@@ -220,8 +226,8 @@ Figure \ref{figX} shows the distribution of all well-fit microbursts. This distr
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig4.pdf}
-\caption{The distribution of the microburst duration (FWHM) for three ranges of the Auroral Electroject: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $300 < \mathrm{AE} < 100$ nT in panels a-c, respectively. The y-axis probability density shares identical limits between the three panels.}
-\label{fig3}
+\caption{The distribution of the microburst duration (FWHM) for three ranges of the Auroral Electroject: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $300 < \mathrm{AE} < 100$ nT in Panels a-c, respectively. The x- and y-axis share identical limits between the three panels.}
+\label{fig4}
 \end{figure}
 
 \section{Discussion and Conclusions}\label{discussion}
