@@ -39,6 +39,75 @@ Douma, E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Li%
+\ \protect \BOthers {.}}{%
+Li%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+Li2009a}
+\APACinsertmetastar {%
+Li2009a}%
+\begin{APACrefauthors}%
+Li, W.%
+, Thorne, R\BPBI M.%
+, Angelopoulos, V.%
+, Bortnik, J.%
+, Cully, C\BPBI M.%
+, Ni, B.%
+\BDBL {}Magnes, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Global distribution of whistler-mode chorus waves
+  observed on the {THEMIS} spacecraft} {Global distribution of whistler-mode
+  chorus waves observed on the {THEMIS} spacecraft}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{36}{9}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2009GL037595}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{L09104}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2009GL037595} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Meredith%
+, Horne%
+, Shen%
+, Li%
+\BCBL {}\ \BBA {} Bortnik%
+}{%
+Meredith%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Meredith2020}
+\APACinsertmetastar {%
+Meredith2020}%
+\begin{APACrefauthors}%
+Meredith, N\BPBI P.%
+, Horne, R\BPBI B.%
+, Shen, X\BHBI C.%
+, Li, W.%
+\BCBL {}\ \BBA {} Bortnik, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Global Model of Whistler Mode Chorus in the
+  Near-Equatorial Region $(|\lambda_m|< 18^\circ)$} {Global model of whistler
+  mode chorus in the near-equatorial region $(|\lambda_m|< 18^\circ)$}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{47}{11}{e2020GL087311}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 O'Brien%
 \ \protect \BOthers {.}}{%
 O'Brien%
@@ -74,6 +143,45 @@ O'Brien, T\BPBI P.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2002JA009784} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Shumko%
+\ \protect \BOthers {.}}{%
+Shumko%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Shumko2020b}
+\APACinsertmetastar {%
+Shumko2020b}%
+\begin{APACrefauthors}%
+Shumko, M.%
+, Johnson, A\BPBI T.%
+, O'Brien, T\BPBI P.%
+, Turner, D\BPBI L.%
+, Greeley, A\BPBI D.%
+, Sample, J\BPBI G.%
+\BDBL {}Halford, A\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Statistical Properties of Electron Curtain Precipitation
+  Estimated with AeroCube-6} {Statistical properties of electron curtain
+  precipitation estimated with aerocube-6}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{n/a}{n/a}{e2020JA028462}.
+\newblock
+\begin{APACrefURL}
+  \url{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2020JA028462}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{e2020JA028462 2020JA028462}
+\newblock
+\begin{APACrefDOI} \doi{https://doi.org/10.1029/2020JA028462} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}

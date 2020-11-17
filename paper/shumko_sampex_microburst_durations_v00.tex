@@ -37,7 +37,7 @@
 
 
 
-\title{Duration of Individual Relativistic Electron Microbursts: A Probe Into Their Scattering Mechanism}
+\title{Duration of Individual Relativistic Electron Microbursts: A Probe Into Their Scattering Mechanism \textcolor{red}{... Better/shorter title?}}
 
 %% ------------------------------------------------------------------------ %%
 %
@@ -75,7 +75,7 @@
 
 \begin{keypoints}
 \item We identified relativistic microbursts observed by the SAMPEX satellite and quantified their duration
-\item Microburst duration roughly doubles between the midnight and noon magnetic local time regions
+\item The microburst duration is shortest at midnight and longest at noon magnetic local times.
 \item Whistler-mode chorus rising tone element duration has  a similar trend
 \end{keypoints}
 
@@ -166,14 +166,14 @@ bp = \frac{N-A}{\sqrt{A+1}}
 \subsection{Microburst Duration}
 We estimated the microburst duration using two methods that yielded similar results: the duration at half of the microburst's topographic prominence and duration from a Gaussian fit.
 
-The topographic prominence is a simple and robust method to estimate the microburst duration used to identify curtains a similar-looking type of precipitation \textcolor{red}{Shumko et al., 2020; curtain stats paper}. It is defined as the duration at half of the microburst topographic prominence: the height of the microburst relative to the maximum of the two minima on either side of the microburst peak. On each side of the microburst peak, the minima are searched for between the microburst and a higher peak on that side. While the topographic prominence method of estimating microburst durations is simple and robust, one of its downsides is its inability to automatically verify that the duration is representative of a single microburst. Therefore, we also fit microbursts with a Gaussian, and used the $R^2$ goodness of fit metric to filter out bad duration estimates.
+The topographic prominence is a simple and robust method to estimate the microburst duration used to identify curtains a similar-looking type of precipitation \cite{Shumko2020b} \textcolor{red}{Fix citation once paper is published}. It is defined as the duration at half of the microburst topographic prominence: the height of the microburst relative to the maximum of the two minima on either side of the microburst peak. On each side of the microburst peak, the minima are searched for between the microburst and a higher peak on that side. While the topographic prominence method of estimating microburst durations is simple and robust, one of its downsides is its inability to automatically verify that the duration is representative of a single microburst. Therefore, we also fit microbursts with a Gaussian, and used the $R^2$ goodness of fit metric to filter out bad duration estimates.
 
-The other method that we use to estimate the microburst duration is fitting a Gaussian shape to microbursts. The advantage of this method is that it allows us to score the fit using a goodness of fit metric. By screening out bad fits, we exclude superposition of multiple microbursts that will unintentionally bias our microburst duration estimate.1
+The other method that we use to estimate the microburst duration is fitting a Gaussian shape to microbursts. The advantage of this method is that it allows us to evaluate the fit using a goodness of fit metric. By screening out bad fits, we exclude superposition of multiple microbursts that will unintentionally bias our microburst duration estimate.
 
 We assumed a Gaussian superposed with a linear trend fit model. The Gaussian models the shape of the microburst; while the linear trend accounts for the electrons that are either trapped or quasi-trapped in the drift loss cone. The fit model is defined as:
 \begin{equation}
 c(t | A, t_0, \sigma, c_0, c_1) = A e^{-\frac{(t-t_0)^2}{2\sigma^2}} + c_0 + c_1 t
-\end{equation} where $A$, $t_0$, and $\sigma$ are the Gaussian amplitude, center time, and standard deviation; while the $c_0$ and $c_1$ are the background count intercept and slope. The fit was applied over a number of data points determined by the maximum of either: 4x topographic prominence width or 0.5 seconds. \textcolor{red}{A challenge to any roburst automated nonlinear regression algorithm is guessing the initial parameters.} The initial parameter guesses for the Gaussian are provided from the topographic prominence and duration estimate. The linear trend initial parameters were the same: \textcolor{red}{$c_0=50$} and $c_1=0$. The optimal fit parameters were found using Python's \url{scipy.curve_fit()} function. We defined the microburst duration as the full width at half maximum (FWHM) of the microburst peak, defined as
+\end{equation} where $A$, $t_0$, and $\sigma$ are the Gaussian amplitude, center time, and standard deviation; while the $c_0$ and $c_1$ are the background count intercept and slope. The fit was applied over a number of data points determined by the maximum of either: 4x topographic prominence width or 0.5 seconds. A challenge to any robust and automated nonlinear regression algorithm is guessing the initial parameters. The initial parameter guesses for the Gaussian are provided by the topographic prominence and topographic duration estimates. The two linear trend initial parameters were: \textcolor{red}{$c_0=50$} and $c_1=0$. The optimal fit parameters were found using scipy's \url{curve_fit()} function in Python. We defined the microburst duration as the full width at half maximum (FWHM) of the microburst peak, defined as
 \begin{equation}
 \mathrm{FWHM} = 2\sqrt{2 \ln{2}} \sigma.
 \end{equation}
@@ -183,28 +183,34 @@ To evaluate the fit, we used the $R^2$ goodness of fit metric. $R^2$ is defined 
 R^2 = 1 - \frac{SS_{res}}{SS_{total}} = 1 - \frac{\sum{(c_i-f_i)^2}}{\sum{(c_i-\bar{c})^2}}
 \end{equation} where $SS_{res}$ is the sum of squares of the residuals between the observed counts $c_i$ and the fit counts $f_i$ for each time stamp, and $SS_{total}$ is the sum of squares between $c_i$ and the mean counts $\bar{c}$.
 
-One interpretation of $R^2$ is: fractionally how much better the model fit explains the variance in the data, compared to a null hypothesis horizontal line fit at $\bar{c}$. When $R^2=1$, the modeled fit perfectly describes the variance in the data, and $R^2$ can be arbitrarily negative for poor fits (a fit can be much worse than the mean).
+One interpretation of $R^2$ is: fractionally how much better the variance in the data is explained by the model fit, compared to the null hypothesis horizontal line at $\bar{c}$. When $R^2=1$, the modeled fit perfectly describes the variance in the data, and $R^2$ can be arbitrarily negative for poor fits (a fit can be much worse than the mean).
 
 To account for overfitting that results from the variable number of data points used for each fit, the adjusted $R^2$, $\bar{R}^2$, was used. It is defined as
 
 \begin{equation}
 \bar{R}^2 = 1 - (1-R^2) \frac{n-1}{n-p-1}
-\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and $n-p-1$ is the degrees of freedom for the fit model. Fits with $\bar{R}^2 > 0.9$ are considered good fits and are used for the rest of this analysis. \textcolor{red}{We compared the microburst durations estimated with the prominence and fit methods. We found that with the $\bar{R}^2 > 0.9$ constraint, both methods yielded $85\%$ of microburst widths to within $25\%$.}
+\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and $n-p-1$ is the degrees of freedom for the fit model. Fits with $\bar{R}^2 > 0.9$ are considered good fits and are used for the rest of this analysis. We compared the microburst duration estimated with the prominence and fit methods. With the $\bar{R}^2 > 0.9$ constraint, we found that for $85\%$ of microbursts, the duration estimated by both methods agreed to within $25\%$.
 
 Figure \ref{fig1}a shows an example of two superposed microbursts that had a fit $\bar{R}^2 = 0.83$ that were excluded from this study. On other hand, Fig. \ref{fig1}b-d show microbursts that were included in this study because the fit $\bar{R}^2 > 0.9$.
 
 Lastly, Fig. \ref{fig1}c,d demonstrate the necessity of the linear fit to account for the changing background. The linear fit accounts for the non-zero mean background counts and the different amplitudes of the edges of the Gaussian. Of the 256,764 detected microbursts, 110,135 had $R^2 > 0.9$ and are used for the remainder of this study.
 
 \section{Results}\label{results}
-The microbursts that had a good fit are used to quantify the distribution of microburst duration (FWHM) for all microbursts, as a function of L and MLT, and as a function of the Auroral Electroject (AE).
+The well-fit microbursts are used to quantify the distribution of microburst duration (FWHM) for all microbursts, as a function of L and MLT, and as a function of the Auroral Electroject (AE). We begin with the overall microburst distribution.
 
-Figure \ref{figX} shows the distribution of all microbursts that had a goodness of fit $\bar{R}^2 > 0.9$. This distribution is peaked at 0.1 seconds and rapidly drops off.
+Figure \ref{figX} shows the distribution of all well-fit microbursts. This distribution is peaked with the median at 98 ms and quickly drops off. The interquartile range spans about a factor of two in microburst duration, from 67 to 140 ms. 
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/figX.pdf}
 \caption{The distribution of all microburst full width at full maximum (FWHM).}
 \label{figX}
 \end{figure}
+
+Figure \ref{fig2} shows the joint distribution of microburst duration as a function of L and MLT. Figure \ref{fig2}a-c show the 25\%, 50\%, and 75\% percentiles of microbursts in each L-MLT bin. The sparse bins with less than 100 well-fit microbursts are white. For reference, Fig. \ref{fig2}d shows the number of well-fit microbursts observed as a function of L and MLT.
+
+In Fig. \ref{fig2}, the microburst duration trend is almost identical for the different percentiles, but lets focus on the median distribution, Fig. \ref{fig2}b. In MLT, the median microburst duration increases by a factor of two: from 80 ms at midnight to 160 ms at noon. In L-shell, the median microburst duration slightly increases with L shell, most apparent near midnight MLT. To disentangle the L and MLT distribution, Fig. \ref{fig3} shows the marginalized distributions; MLT was marginalized out in Fig. \ref{fig3}a and L-shell was marginalized out in Fig. \ref{fig3}b. Figure \ref{fig3}a shows a slight broadening of the microburst duration at higher L-shells; in contrast to Fig. \ref{fig3}b that clearly shows that the microburst duration increases from midnight to noon MLT.
+
+Lastly, we investigated the dependence of microburst duration as a function of geomagnetic activity. To be consistent with the prior wave and microburst studies, we use the Auroral Electrojet (AE) index to quantify the level of geomagnetic disturbance. We adopt the same three AE intensity levels used in prior studies, such as \citeA{Li2009a}, \citeA{Douma2017}, and \citeA{Meredith2020}: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $300 < \mathrm{AE} < 1000$, in nanotesla units. Figure \ref{fig4} shows the distribution of microburst duration as a function of AE. This distribution is similar across the three AE intensity levels. However, the distribution is more prominently peaked at 0.1 s at the highest intensity level.
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig2.pdf}
@@ -220,8 +226,8 @@ Figure \ref{figX} shows the distribution of all microbursts that had a goodness 
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig4.pdf}
-\caption{The distribution of the microburst duration (FWHM) for three ranges of the Auroral Electroject: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $300 < \mathrm{AE} < 100$ nT in panels a-c, respectively. The y-axis probability density shares identical limits between the three panels.}
-\label{fig3}
+\caption{The distribution of the microburst duration (FWHM) for three ranges of the Auroral Electroject: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $300 < \mathrm{AE} < 100$ nT in Panels a-c, respectively. The x- and y-axis share identical limits between the three panels.}
+\label{fig4}
 \end{figure}
 
 \section{Discussion and Conclusions}\label{discussion}
