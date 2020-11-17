@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 from sampex_microburst_widths import config
 
 ### Script parameters ###
-catalog_name = 'microburst_catalog_02.csv'
+catalog_name = 'microburst_catalog_04.csv'
 max_width=0.5
 width_bins=np.linspace(0, max_width, num=20)
 ae_bins = [0, 100, 300, 1000]

@@ -22,10 +22,10 @@ import matplotlib.colors
 
 from sampex_microburst_widths import config
 
-plt.rcParams.update({'font.size': 13})
+plt.rcParams.update({'font.size': 15})
 
 ### Script parameters ###
-catalog_name = 'microburst_catalog_02.csv'
+catalog_name = 'microburst_catalog_04.csv'
 r2_thresh = 0.9
 max_width = 0.25
 width_bins = np.linspace(0, max_width+0.001, num=50)
@@ -53,7 +53,7 @@ _, ax = plt.subplots(1, 2, figsize=(12, 6))
 
 p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
 plt.colorbar(p_L, ax=ax[0], orientation='horizontal', label='Number of microbursts')
-ax[0].set_xlabel('L shell')
+ax[0].set_xlabel('L-shell')
 ax[0].set_ylabel('FWHM [s]')
 
 p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
@@ -64,7 +64,7 @@ ax[1].set_ylabel('FWHM [s]')
 for ax_i, label_i in zip(ax, string.ascii_lowercase):
     annotate_str = f'({label_i})'
     ax_i.text(0, 1, annotate_str, va='top', color='white', weight='bold', 
-                transform=ax_i.transAxes, fontsize=18)
+                transform=ax_i.transAxes, fontsize=20)
 
 plt.suptitle(f'Distribution of SAMPEX microburst durations in L and MLT', fontsize=20)
 

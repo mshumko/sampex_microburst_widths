@@ -29,9 +29,9 @@ from sampex_microburst_widths import config
 from sampex_microburst_widths.stats import dial_plot
 
 plt.rcParams.update({'font.size': 13})
-cmap = 'plasma'
+cmap = 'viridis'
 
-catalog_name = 'microburst_catalog_02.csv'
+catalog_name = 'microburst_catalog_04.csv'
 
 ### Script parameters
 statistics_thresh=100 # Don't calculate stats if less microbursts in the bin.

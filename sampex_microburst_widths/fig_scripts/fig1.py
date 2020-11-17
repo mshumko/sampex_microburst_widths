@@ -22,7 +22,7 @@ plt.rcParams.update({'font.size': 15})
 count_rate_conversion=int(1/20E-3)
 yaxis_scale_factor=10000
 
-catalog_name = 'microburst_catalog_02.csv'
+catalog_name = 'microburst_catalog_04.csv'
 cat = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name), 
                 index_col=0, parse_dates=True)
 cat['t0'] = pd.to_datetime(cat['t0'])

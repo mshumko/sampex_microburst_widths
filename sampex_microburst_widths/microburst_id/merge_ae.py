@@ -140,6 +140,6 @@ class Merge_AE:
         self.catalog.to_csv(self.catalog_path, index_label='dateTime')
 
 if __name__ == "__main__":
-    m = Merge_AE(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_03.csv' ))
+    m = Merge_AE(pathlib.Path(config.PROJECT_DIR, 'data', 'microburst_catalog_04.csv' ))
     m.loop()
     m.save_catalog()
