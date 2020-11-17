@@ -19,5 +19,7 @@ m.save_catalog()
 
 # Merge the AE data
 m = merge_ae.Merge_AE(cat_path)
-m.loop()
-m.save_catalog()
+try:
+    m.loop()
+finally:
+    m.save_catalog()
