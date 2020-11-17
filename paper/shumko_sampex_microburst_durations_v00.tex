@@ -133,26 +133,13 @@ In this study we used the Solar Anomalous and Magnetospheric Particle Explorer t
 In this study we used data taken by the Solar Anomalous Magnetospheric Particle Explorer (SAMPEX) satellite 
 
 \section{Methodology}\label{methodology}
-\textcolor{blue}{
-\textbf{Outline}
-\begin{enumerate}
-    \item The methodology consists of two main steps: identify microbursts and estimate their duration.
-    \item We identified microbursts using the Burst parameter. Mention the bias and how we addressed it.
-    \item Discuss biases to short width, low counts. Douma 2019 showed that the microburst fluxes are roughly uniform in MLT (could this comparison be invalid since Douma also used the burst parameter?)
-    \item Ref Fig 1 microbursts.
-    \item Estimate microburst width using two methods:
-    \item The prominence width method (cite my other paper).
-    \item Gaussian + trend fit. Trend is important to approximate the drifting electrons in the DLC. automating fits is difficult so we helped out: the initial parameter guesses were provided from the prominence method, and the quality of fit checked with the $r^2$ and adj $r^2$. Provide the definition of $r^2$ used here and state the goodness of fit threshold we used.  
-    \item Ref Fig 1 microbursts + fits. Mention the benefit of the linear trend, and screening out of multiple, superposed microbursts, by r2.
-\end{enumerate}
-}
 
 To estimate the microburst duration we first identified microbursts and then we fit them with a Gaussian model with a linear trend to quantify the duration for each microburst.
 
 \subsection{Microburst Identification}\label{microburst_id}
 We identified microbursts using the burst parameter defined by \citeA{O'Brien2003} and used in numerous other microburst studies with SAMPEX \cite<e.g.>{Douma2017}. Assuming Poisson probability for the observed electron counts, the burst parameter is the number of standard deviations of a foreground signal above the background, expressed as
 \begin{equation}
-bp = \frac{N-A}{\sqrt{A+1}}
+n_\sigma = \frac{N-A}{\sqrt{A+1}}
 \end{equation} \textcolor{red}{Find a better variable than bp. This is not British Petroleum} where $N$ is the number of foreground electron counts (microburst or otherwise), and $A$ is the centered running average background counts. The $1$ in the denominator prevents a division by 0 error. In \citeA{O'Brien2003}, and in the results in this study, $N$ was summed over 0.1 seconds and is called $N_{100}$, while $A$ was summed over 0.5 seconds and is called $A_{500}$.  Henceforth we will specify the time window with the subscript for $N$ and $A$. Times when $\mathrm{bp} > 10$ are classified as microburst times, and the peak count rate in each time interval is saved as a microburst to our data set. With $A_{500}$ and $N_{100}$, we detected a total of 256,764 microbursts over the 13 year period from 1997 to 2012. Four examples of microbursts are shown in Fig. \ref{fig1} by the solid black curves.
 
 \textcolor{blue}{Check the argument for clarity} The choice of $A$ determines the sensitivity of the burst parameter to microbursts of various durations (widths). This sensitivity is best illustrated with an example. Given a 1-second wide microburst, if we use $A_{500}$, the centered average background at the microburst time is skewed towards the microburst peak and the microburst's $\mathrm{bp}$ is reduced, potentially below the detection threshold. On the other hand, if we use $A_{1000}$, the centered running background will be relatively less elevated at the microburst time so it has a greater $\mathrm{bp}$ and is more likely to be detected. In other words, $bp$ will be relatively larger for $A_{1000}$ than $A_{500}$. This sensitivity manifests itself as a bias towards detecting narrower microbursts that we will address later in this study. 
