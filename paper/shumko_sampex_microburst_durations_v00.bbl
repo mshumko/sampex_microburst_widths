@@ -76,4 +76,43 @@ O'Brien, T\BPBI P.%
 \begin{APACrefDOI} \doi{10.1029/2002JA009784} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
+\bibitem [\protect \citeauthoryear {%
+Shumko%
+\ \protect \BOthers {.}}{%
+Shumko%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Shumko2020b}
+\APACinsertmetastar {%
+Shumko2020b}%
+\begin{APACrefauthors}%
+Shumko, M.%
+, Johnson, A\BPBI T.%
+, O'Brien, T\BPBI P.%
+, Turner, D\BPBI L.%
+, Greeley, A\BPBI D.%
+, Sample, J\BPBI G.%
+\BDBL {}Halford, A\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Statistical Properties of Electron Curtain Precipitation
+  Estimated with AeroCube-6} {Statistical properties of electron curtain
+  precipitation estimated with aerocube-6}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{n/a}{n/a}{e2020JA028462}.
+\newblock
+\begin{APACrefURL}
+  \url{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2020JA028462}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{e2020JA028462 2020JA028462}
+\newblock
+\begin{APACrefDOI} \doi{https://doi.org/10.1029/2020JA028462} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
 \end{thebibliography}

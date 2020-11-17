@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  16 NOV 2020 12:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.21)  17 NOV 2020 09:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -275,9 +275,9 @@ Overfull \hbox (19.62675pt too wide) in paragraph at lines 77--78
  []
 
 
-Overfull \hbox (1.12685pt too wide) in paragraph at lines 78--79
-[]\OT1/cmr/m/n/10 Microburst du-ra-tion roughly dou-bles be-tween the mid-night
- and noon mag-netic 
+Overfull \hbox (13.23793pt too wide) in paragraph at lines 78--79
+[]\OT1/cmr/m/n/10 The mi-croburst du-ra-tion is short-est at mid-night and long
+est at noon mag-netic lo- 
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
@@ -646,51 +646,57 @@ Overfull \hbox (0.26566pt too wide) in paragraph at lines 169--170
  []
 
 
-Overfull \hbox (20.23808pt too wide) in paragraph at lines 169--170
+Overfull \hbox (24.12698pt too wide) in paragraph at lines 169--170
 \OT1/cmr/m/n/10 croburst du-ra-tion used to iden-tify cur-tains a similar-looki
 ng type of pre-cip-i-ta-tion []Shumko 
  []
 
 
-Overfull \hbox (4.71016pt too wide) in paragraph at lines 169--170
-\OT1/cmr/m/n/10 et al., 2020; cur-tain stats pa-per[]. It is de-fined as the du
--ra-tion at half of the mi-croburst 
+Overfull \hbox (0.5435pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 et al.[], 2020) []Fix ci-ta-tion once pa-per is pub-lished[]. I
+t is de-fined as the du-ra-tion at half 
  []
 
 
-Overfull \hbox (2.82132pt too wide) in paragraph at lines 169--170
-\OT1/cmr/m/n/10 to-po-graphic promi-nence: the height of the mi-croburst rel-a-
-tive to the max-i-mum of the 
+Overfull \hbox (6.82129pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 of the mi-croburst to-po-graphic promi-nence: the height of the
+ mi-croburst rel-a-tive to the 
  []
 
 
-Overfull \hbox (12.71014pt too wide) in paragraph at lines 169--170
-\OT1/cmr/m/n/10 two min-ima on ei-ther side of the mi-croburst peak. On each si
-de of the mi-croburst peak, 
+Overfull \hbox (10.6546pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 max-i-mum of the two min-ima on ei-ther side of the mi-croburst
+ peak. On each side of the 
  []
 
 
-Overfull \hbox (26.29347pt too wide) in paragraph at lines 169--170
-\OT1/cmr/m/n/10 the min-ima are searched for be-tween the mi-croburst and a hig
-her peak on that side. While 
+Overfull \hbox (14.96014pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 mi-croburst peak, the min-ima are searched for be-tween the mi-
+croburst and a higher peak 
  []
 
 
-Overfull \hbox (1.65468pt too wide) in paragraph at lines 169--170
-\OT1/cmr/m/n/10 the to-po-graphic promi-nence method of es-ti-mat-ing mi-crobur
-st du-ra-tions is sim-ple and 
+Overfull \hbox (2.90466pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 on that side. While the to-po-graphic promi-nence method of es-
+ti-mat-ing mi-croburst du- 
  []
 
 
-Overfull \hbox (3.93243pt too wide) in paragraph at lines 169--170
-\OT1/cmr/m/n/10 ro-bust, one of its down-sides is its in-abil-ity to au-to-mat-
-i-cally ver-ify that the du-ra-tion is 
+Overfull \hbox (0.71014pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 ra-tions is sim-ple and ro-bust, one of its down-sides is its i
+n-abil-ity to au-to-mat-i-cally ver- 
  []
 
 
-Overfull \hbox (16.69618pt too wide) in paragraph at lines 169--170
-\OT1/cmr/m/n/10 rep-re-sen-ta-tive of a sin-gle mi-croburst. There-fore, we als
-o fit mi-crobursts with a Gaus-sian, 
+Overfull \hbox (6.98787pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 ify that the du-ra-tion is rep-re-sen-ta-tive of a sin-gle mi-c
+roburst. There-fore, we also fit mi- 
+ []
+
+
+Overfull \hbox (7.29692pt too wide) in paragraph at lines 169--170
+\OT1/cmr/m/n/10 crobursts with a Gaus-sian, and used the $\OML/cmm/m/it/10 R[]$
+ \OT1/cmr/m/n/10 good-ness of fit met-ric to fil-ter out bad du- 
  []
 
 
@@ -700,21 +706,21 @@ Overfull \hbox (22.08508pt too wide) in paragraph at lines 171--172
  []
 
 
-Overfull \hbox (16.54346pt too wide) in paragraph at lines 171--172
+Overfull \hbox (3.40459pt too wide) in paragraph at lines 171--172
 \OT1/cmr/m/n/10 sian shape to mi-crobursts. The ad-van-tage of this method is t
-hat it al-lows us to score the 
+hat it al-lows us to eval-u- 
  []
 
 
-Overfull \hbox (0.18236pt too wide) in paragraph at lines 171--172
-\OT1/cmr/m/n/10 fit us-ing a good-ness of fit met-ric. By screen-ing out bad fi
-ts, we ex-clude su-per-po-si-tion 
+Overfull \hbox (2.62674pt too wide) in paragraph at lines 171--172
+\OT1/cmr/m/n/10 ate the fit us-ing a good-ness of fit met-ric. By screen-ing ou
+t bad fits, we ex-clude su-per- 
  []
 
 
-Overfull \hbox (15.57138pt too wide) in paragraph at lines 171--172
-\OT1/cmr/m/n/10 of mul-ti-ple mi-crobursts that will un-in-ten-tion-ally bias o
-ur mi-croburst du-ra-tion es-ti-mate.1  
+Overfull \hbox (5.84917pt too wide) in paragraph at lines 171--172
+\OT1/cmr/m/n/10 po-si-tion of mul-ti-ple mi-crobursts that will un-in-ten-tion-
+ally bias our mi-croburst du-ra-tion 
  []
 
 
@@ -756,40 +762,43 @@ Overfull \hbox (19.76584pt too wide) in paragraph at lines 176--177
  []
 
 
-Overfull \hbox (4.73792pt too wide) in paragraph at lines 176--177
-\OT1/cmr/m/n/10 width or 0.5 sec-onds. []A chal-lenge to any roburst au-to-mate
-d non-lin-ear re-gres-sion al-go- 
+Overfull \hbox (10.2657pt too wide) in paragraph at lines 176--177
+\OT1/cmr/m/n/10 width or 0.5 sec-onds. A chal-lenge to any ro-bust and au-to-ma
+ted non-lin-ear re-gres-sion al- 
  []
 
 
-Overfull \hbox (9.75177pt too wide) in paragraph at lines 176--177
-\OT1/cmr/m/n/10 rithm is guess-ing the ini-tial pa-ram-e-ters.[] The ini-tial p
-a-ram-e-ter guesses for the Gaus-sian 
+Overfull \hbox (5.80731pt too wide) in paragraph at lines 176--177
+\OT1/cmr/m/n/10 go-rithm is guess-ing the ini-tial pa-ram-e-ters. The ini-tial 
+pa-ram-e-ter guesses for the Gaus- 
  []
 
 
-Overfull \hbox (9.57132pt too wide) in paragraph at lines 176--177
-\OT1/cmr/m/n/10 are pro-vided from the to-po-graphic promi-nence and du-ra-tion
- es-ti-mate. The lin-ear trend 
+Overfull \hbox (3.5158pt too wide) in paragraph at lines 176--177
+\OT1/cmr/m/n/10 sian are pro-vided by the to-po-graphic promi-nence and to-po-g
+raphic du-ra-tion es-ti-mates. 
  []
 
 
-Overfull \hbox (7.25381pt too wide) in paragraph at lines 176--177
-\OT1/cmr/m/n/10 ini-tial pa-ram-e-ters were the same: []$\OML/cmm/m/it/10 c[] \
-OT1/cmr/m/n/10 = 50$[] and $\OML/cmm/m/it/10 c[] \OT1/cmr/m/n/10 = 0$. The op-t
-i-mal fit pa-ram-e-ters were 
+Overfull \hbox (1.2816pt too wide) in paragraph at lines 176--177
+\OT1/cmr/m/n/10 The two lin-ear trend ini-tial pa-ram-e-ters were: []$\OML/cmm/
+m/it/10 c[] \OT1/cmr/m/n/10 = 50$[] and $\OML/cmm/m/it/10 c[] \OT1/cmr/m/n/10 =
+ 0$. The op-ti-mal fit pa- 
  []
 
 
-Overfull \hbox (13.85042pt too wide) in paragraph at lines 176--177
-\OT1/cmr/m/n/10 found us-ing Python's $\OT1/cmtt/m/n/10 scipy [] .curve [] []fi
-t()$ \OT1/cmr/m/n/10 func-tion. We de-fined the mi-croburst du-ra-tion 
+Overfull \hbox (9.90617pt too wide) in paragraph at lines 176--177
+\OT1/cmr/m/n/10 ram-e-ters were found us-ing scipy's $\OT1/cmtt/m/n/10 curve []
+ []fit()$ \OT1/cmr/m/n/10 func-tion in Python. We de-fined the mi- 
  []
 
 
-Underfull \vbox (badness 2970) has occurred while \output is active []
+Overfull \hbox (7.79361pt too wide) in paragraph at lines 176--177
+\OT1/cmr/m/n/10 croburst du-ra-tion as the full width at half max-i-mum (FWHM) 
+of the mi-croburst peak, 
+ []
 
- [4 <./figures/fig1.pdf>]
+[4 <./figures/fig1.pdf>]
 Overfull \hbox (4.28703pt too wide) in paragraph at lines 184--185
 \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 SS[]$ \OT1/cmr/m/n/10 is the sum of squ
 ares of the resid-u-als be-tween the ob-served counts $\OML/cmm/m/it/10 c[]$ \O
@@ -804,15 +813,15 @@ e-tween $\OML/cmm/m/it/10 c[]$ \OT1/cmr/m/n/10 and
  []
 
 
-Overfull \hbox (1.2275pt too wide) in paragraph at lines 186--187
+Overfull \hbox (10.92194pt too wide) in paragraph at lines 186--187
 []\OT1/cmr/m/n/10 One in-ter-pre-ta-tion of $\OML/cmm/m/it/10 R[]$ \OT1/cmr/m/n
-/10 is: frac-tion-ally how much bet-ter the model fit ex-plains 
+/10 is: frac-tion-ally how much bet-ter the vari-ance in the data 
  []
 
 
-Overfull \hbox (0.75993pt too wide) in paragraph at lines 186--187
-\OT1/cmr/m/n/10 the vari-ance in the data, com-pared to a null hy-poth-e-sis ho
-r-i-zon-tal line fit at $[]$. When 
+Overfull \hbox (17.17664pt too wide) in paragraph at lines 186--187
+\OT1/cmr/m/n/10 is ex-plained by the model fit, com-pared to the null hy-poth-e
+-sis hor-i-zon-tal line at $[]$. When 
  []
 
 
@@ -836,16 +845,16 @@ m-e-ters. In-tu-itively,
  []
 
 
-Overfull \hbox (7.98788pt too wide) in paragraph at lines 192--193
-\OT1/cmr/m/n/10 are used for the rest of this anal-y-sis. []We com-pared the mi
--croburst du-ra-tions es-ti-mated 
+Overfull \hbox (4.04344pt too wide) in paragraph at lines 192--193
+\OT1/cmr/m/n/10 are used for the rest of this anal-y-sis. We com-pared the mi-c
+roburst du-ra-tion es-ti-mated 
  []
 
 
-Overfull \hbox (14.94968pt too wide) in paragraph at lines 192--193
-\OT1/cmr/m/n/10 with the promi-nence and fit meth-ods. We found that with the $
-[] \OML/cmm/m/it/10 > \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 9$ con
--straint, both 
+Overfull \hbox (7.19965pt too wide) in paragraph at lines 192--193
+\OT1/cmr/m/n/10 with the promi-nence and fit meth-ods. With the $[] \OML/cmm/m/
+it/10 > \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 9$ con-straint, we f
+ound that for 
  []
 
 
@@ -873,21 +882,21 @@ the 256,764 de-tected mi-crobursts,
  []
 
 
-Overfull \hbox (1.12682pt too wide) in paragraph at lines 199--200
-[]\OT1/cmr/m/n/10 The mi-crobursts that had a good fit are used to quan-tify th
-e dis-tri-bu-tion of mi- 
+Overfull \hbox (7.09898pt too wide) in paragraph at lines 199--200
+[]\OT1/cmr/m/n/10 The well-fit mi-crobursts are used to quan-tify the dis-tri-b
+u-tion of mi-croburst du-ra- 
  []
 
 
-Overfull \hbox (2.65463pt too wide) in paragraph at lines 199--200
-\OT1/cmr/m/n/10 croburst du-ra-tion (FWHM) for all mi-crobursts, as a func-tion
- of L and MLT, and as a 
+Overfull \hbox (10.8491pt too wide) in paragraph at lines 199--200
+\OT1/cmr/m/n/10 tion (FWHM) for all mi-crobursts, as a func-tion of L and MLT, 
+and as a func-tion of the 
  []
 
 
-Overfull \hbox (9.42189pt too wide) in paragraph at lines 201--202
-[]\OT1/cmr/m/n/10 Figure 2[] shows the dis-tri-bu-tion of all mi-crobursts that
- had a good-ness of fit $[] \OML/cmm/m/it/10 > 
+Overfull \hbox (25.40457pt too wide) in paragraph at lines 201--202
+[]\OT1/cmr/m/n/10 Figure 2[] shows the dis-tri-bu-tion of all well-fit mi-crobu
+rsts. This dis-tri-bu-tion is peaked 
  []
 
 <figures/figX.pdf, id=93, 462.52798pt x 346.89601pt>
@@ -1100,6 +1109,37 @@ Underfull \hbox (badness 3029) in paragraph at lines 52--78
 -phys-i-cal Re-search: Space Physics\OT1/cmr/m/n/10 , 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--117
+[]\OT1/cmr/m/n/10 Shumko, M., John-son, A. T., O'Brien, T. P., Turner, D. L., G
+ree-ley, A. D., Sam- 
+ []
+
+
+Underfull \hbox (badness 4981) in paragraph at lines 90--117
+\OT1/cmr/m/n/10 ple, J. G., ... Hal-ford, A. J.  (2020).  Sta-tis-ti-cal prop-e
+r-ties of elec-tron cur- 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--117
+\OT1/cmr/m/n/10 tain pre-cip-i-ta-tion es-ti-mated with aerocube-6.  \OT1/cmr/m
+/it/10 Jour-nal of Geo-phys-i-cal Re- 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--117
+\OT1/cmr/m/it/10 search: Space Physics\OT1/cmr/m/n/10 , \OT1/cmr/m/it/10 n/a\OT
+1/cmr/m/n/10 (n/a), e2020JA028462.  Re-trieved from $\OT1/cmtt/m/n/10 https ://
+ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--117
+\OT1/cmtt/m/n/10 agupubs [] .onlinelibrary [] .wiley [] .com / doi / abs / 10 [
+] .1029 / 2020JA028462$ 
+ []
+
 ) [8 <./figures/fig4.pdf>] (./shumko_sampex_microburst_durations_v00.aux)
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1110,10 +1150,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3492 strings out of 481239
- 50032 string characters out of 5920377
- 301155 words of memory out of 5000000
- 18692 multiletter control sequences out of 15000+600000
+ 3495 strings out of 481239
+ 50074 string characters out of 5920377
+ 301236 words of memory out of 5000000
+ 18695 multiletter control sequences out of 15000+600000
  538541 words of font info for 45 fonts, out of 8000000 for 9000
  1147 hyphenation exceptions out of 8191
  38i,9n,41p,967b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1138,7 +1178,7 @@ blic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt9.pfb>
-Output written on shumko_sampex_microburst_durations_v00.pdf (8 pages, 510111 b
+Output written on shumko_sampex_microburst_durations_v00.pdf (8 pages, 511237 b
 ytes).
 PDF statistics:
  415 PDF objects out of 1000 (max. 8388607)
