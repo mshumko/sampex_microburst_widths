@@ -1,6 +1,36 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Baker%
+\ \protect \BOthers {.}}{%
+Baker%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1993}}%
+}]{%
+Baker1993}
+\APACinsertmetastar {%
+Baker1993}%
+\begin{APACrefauthors}%
+Baker, D\BPBI N.%
+, Mason, G\BPBI M.%
+, Figueroa, O.%
+, Colon, G.%
+, Watzin, J\BPBI G.%
+\BCBL {}\ \BBA {} Aleman, R\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1993}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An overview of the solar anomalous, and magnetospheric
+  particle explorer ({SAMPEX}) mission} {An overview of the solar anomalous,
+  and magnetospheric particle explorer ({SAMPEX}) mission}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{IEEE Transactions on Geoscience and Remote
+  Sensing}{31}{3}{531--541}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Douma%
 , Rodger%
 , Blum%
@@ -36,6 +66,38 @@ Douma, E.%
 \APACrefnote{2017JA024067}
 \newblock
 \begin{APACrefDOI} \doi{10.1002/2017JA024067} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Klecker%
+\ \protect \BOthers {.}}{%
+Klecker%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1993}}%
+}]{%
+Klecker1993}
+\APACinsertmetastar {%
+Klecker1993}%
+\begin{APACrefauthors}%
+Klecker, B.%
+, Hovestadt, D.%
+, Scholer, M.%
+, Arbinger, H.%
+, Ertl, M.%
+, Kastele, H.%
+\BDBL {}others%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1993}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{HILT}: A heavy ion large area proportional counter
+  telescope for solar and anomalous cosmic rays} {{HILT}: A heavy ion large
+  area proportional counter telescope for solar and anomalous cosmic
+  rays}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{IEEE transactions on geoscience and remote
+  sensing}{31}{3}{542--548}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
