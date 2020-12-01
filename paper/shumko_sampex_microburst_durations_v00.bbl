@@ -1,6 +1,38 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Anderson%
+\ \BBA {} Milton%
+}{%
+Anderson%
+\ \BBA {} Milton%
+}{%
+{\protect \APACyear {1964}}%
+}]{%
+Anderson1964}
+\APACinsertmetastar {%
+Anderson1964}%
+\begin{APACrefauthors}%
+Anderson, K\BPBI A.%
+\BCBT {}\ \BBA {} Milton, D\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1964}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Balloon observations of {X} rays in the auroral zone: 3.
+  {H}igh time resolution studies} {Balloon observations of {X} rays in the
+  auroral zone: 3. {H}igh time resolution studies}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research}{69}{21}{4457--4479}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/JZ069i021p04457}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/JZ069i021p04457} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Baker%
 \ \protect \BOthers {.}}{%
 Baker%
@@ -342,6 +374,43 @@ Shumko, M.%
 \APACrefnote{e2020JA028462 2020JA028462}
 \newblock
 \begin{APACrefDOI} \doi{https://doi.org/10.1029/2020JA028462} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Shumko%
+\ \protect \BOthers {.}}{%
+Shumko%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+Shumko2018b}
+\APACinsertmetastar {%
+Shumko2018b}%
+\begin{APACrefauthors}%
+Shumko, M.%
+, Turner, D\BPBI L.%
+, O'Brien, T\BPBI P.%
+, Claudepierre, S\BPBI G.%
+, Sample, J.%
+, Hartley, D\BPBI P.%
+\BDBL {}Mitchell, D\BPBI G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Evidence of Microbursts Observed Near the Equatorial
+  Plane in the Outer Van Allen Radiation Belt} {Evidence of microbursts
+  observed near the equatorial plane in the outer van allen radiation
+  belt}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{45}{16}{8044-8053}.
+\newblock
+\begin{APACrefURL}
+  \url{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2018GL078451}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2018GL078451} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
