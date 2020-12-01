@@ -31,6 +31,37 @@ Baker, D\BPBI N.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Breneman%
+\ \protect \BOthers {.}}{%
+Breneman%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+Breneman2017}
+\APACinsertmetastar {%
+Breneman2017}%
+\begin{APACrefauthors}%
+Breneman, A.%
+, Crew, A.%
+, Sample, J.%
+, Klumpar, D.%
+, Johnson, A.%
+, Agapitov, O.%
+\BDBL {}others%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Observations directly linking relativistic electron
+  microbursts to whistler mode chorus: Van Allen Probes and {FIREBIRD II}}
+  {Observations directly linking relativistic electron microbursts to whistler
+  mode chorus: Van allen probes and {FIREBIRD II}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Douma%
 , Rodger%
 , Blum%
@@ -66,6 +97,37 @@ Douma, E.%
 \APACrefnote{2017JA024067}
 \newblock
 \begin{APACrefDOI} \doi{10.1002/2017JA024067} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Johnson%
+\ \protect \BOthers {.}}{%
+Johnson%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Johnson2020}
+\APACinsertmetastar {%
+Johnson2020}%
+\begin{APACrefauthors}%
+Johnson, A.%
+, Shumko, M.%
+, Griffith, B.%
+, Klumpar, D.%
+, Sample, J.%
+, Springer, L.%
+\BDBL {}others%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The {FIREBIRD-II} {CubeSat} mission: Focused
+  investigations of relativistic electron burst intensity, range, and dynamics}
+  {The {FIREBIRD-II} {CubeSat} mission: Focused investigations of relativistic
+  electron burst intensity, range, and dynamics}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Review of Scientific Instruments}{91}{3}{034503}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -135,6 +197,42 @@ Li, W.%
 \APACrefnote{L09104}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2009GL037595} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Lorentzen%
+, Blake%
+, Inan%
+\BCBL {}\ \BBA {} Bortnik%
+}{%
+Lorentzen%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2001}}%
+}]{%
+Lorentzen2001a}
+\APACinsertmetastar {%
+Lorentzen2001a}%
+\begin{APACrefauthors}%
+Lorentzen, K\BPBI R.%
+, Blake, J\BPBI B.%
+, Inan, U\BPBI S.%
+\BCBL {}\ \BBA {} Bortnik, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2001}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Observations of relativistic electron microbursts in
+  association with {VLF} chorus} {Observations of relativistic electron
+  microbursts in association with {VLF} chorus}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{106}{A4}{6017--6027}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2000JA003018}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2000JA003018} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
