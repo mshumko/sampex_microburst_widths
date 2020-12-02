@@ -100,6 +100,43 @@ Blake, J\BPBI B.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Blum%
+, Li%
+\BCBL {}\ \BBA {} Denton%
+}{%
+Blum%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2015}}%
+}]{%
+Blum2015}
+\APACinsertmetastar {%
+Blum2015}%
+\begin{APACrefauthors}%
+Blum, L.%
+, Li, X.%
+\BCBL {}\ \BBA {} Denton, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Rapid {MeV} electron precipitation as observed by
+  {SAMPEX/HILT} during high-speed stream-driven storms} {Rapid {MeV} electron
+  precipitation as observed by {SAMPEX/HILT} during high-speed stream-driven
+  storms}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{120}{5}{3783--3794}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1002/2014JA020633}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{2014JA020633}
+\newblock
+\begin{APACrefDOI} \doi{10.1002/2014JA020633} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Breneman%
 \ \protect \BOthers {.}}{%
 Breneman%
@@ -128,6 +165,37 @@ Breneman, A.%
   mode chorus: Van allen probes and {FIREBIRD II}}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Geophysical Research Letters}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Datta%
+, Skoug%
+, McCarthy%
+\BCBL {}\ \BBA {} Parks%
+}{%
+Datta%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1997}}%
+}]{%
+Datta1997}
+\APACinsertmetastar {%
+Datta1997}%
+\begin{APACrefauthors}%
+Datta, S.%
+, Skoug, R.%
+, McCarthy, M.%
+\BCBL {}\ \BBA {} Parks, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1997}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Modeling of microburst electron precipitation using
+  pitch angle diffusion theory} {Modeling of microburst electron precipitation
+  using pitch angle diffusion theory}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{102}{A8}{17325--17333}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -166,6 +234,41 @@ Douma, E.%
 \APACrefnote{2017JA024067}
 \newblock
 \begin{APACrefDOI} \doi{10.1002/2017JA024067} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Horne%
+\ \BBA {} Thorne%
+}{%
+Horne%
+\ \BBA {} Thorne%
+}{%
+{\protect \APACyear {2003}}%
+}]{%
+Horne2003a}
+\APACinsertmetastar {%
+Horne2003a}%
+\begin{APACrefauthors}%
+Horne, R\BPBI B.%
+\BCBT {}\ \BBA {} Thorne, R\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2003}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Relativistic electron acceleration and precipitation
+  during resonant interactions with whistler-mode chorus} {Relativistic
+  electron acceleration and precipitation during resonant interactions with
+  whistler-mode chorus}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{30}{10}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2003GL016973}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{1527}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2003GL016973} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -273,9 +376,53 @@ Kurita, S.%
 
 \bibitem [\protect \citeauthoryear {%
 Li%
-\ \protect \BOthers {.}}{%
+, Thorne%
+, Angelopoulos%
+, Bonnell%
+\BCBL {}\ \protect \BOthers {.}}{%
 Li%
-\ \protect \BOthers {.}}{%
+, Thorne%
+, Angelopoulos%
+, Bonnell%
+\BCBL {}\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+Li2009b}
+\APACinsertmetastar {%
+Li2009b}%
+\begin{APACrefauthors}%
+Li, W.%
+, Thorne, R.%
+, Angelopoulos, V.%
+, Bonnell, J.%
+, McFadden, J.%
+, Carlson, C.%
+\BDBL {}Auster, H.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Evaluation of whistler-mode chorus intensification on
+  the nightside during an injection event observed on the {THEMIS} spacecraft}
+  {Evaluation of whistler-mode chorus intensification on the nightside during
+  an injection event observed on the {THEMIS} spacecraft}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{114}{A1}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Li%
+, Thorne%
+, Angelopoulos%
+, Bortnik%
+\BCBL {}\ \protect \BOthers {.}}{%
+Li%
+, Thorne%
+, Angelopoulos%
+, Bortnik%
+\BCBL {}\ \protect \BOthers {.}}{%
 {\protect \APACyear {2009}}%
 }]{%
 Li2009a}
@@ -488,6 +635,70 @@ Shumko, M.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2018GL078451} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Summers%
+}{%
+Summers%
+}{%
+{\protect \APACyear {2005}}%
+}]{%
+Summers2005}
+\APACinsertmetastar {%
+Summers2005}%
+\begin{APACrefauthors}%
+Summers, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quasi-linear diffusion coefficients for field-aligned
+  electromagnetic waves with applications to the magnetosphere} {Quasi-linear
+  diffusion coefficients for field-aligned electromagnetic waves with
+  applications to the magnetosphere}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{110}{A8}{n/a--n/a}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2005JA011159}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{A08213}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2005JA011159} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Thorne%
+}{%
+Thorne%
+}{%
+{\protect \APACyear {2010}}%
+}]{%
+Thorne2010}
+\APACinsertmetastar {%
+Thorne2010}%
+\begin{APACrefauthors}%
+Thorne, R\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2010}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Radiation belt dynamics: The importance of wave-particle
+  interactions} {Radiation belt dynamics: The importance of wave-particle
+  interactions}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{37}{22}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2010GL044990}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{L22107}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2010GL044990} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
