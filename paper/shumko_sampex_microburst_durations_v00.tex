@@ -160,7 +160,7 @@ c(t | A, t_0, \sigma, c_0, c_1) = A e^{-\frac{(t-t_0)^2}{2\sigma^2}} + c_0 + c_1
 To evaluate the fit, we used the $R^2$ goodness of fit metric. $R^2$ is defined as
 \begin{equation}
 R^2 = 1 - \frac{SS_{res}}{SS_{mean}} = 1 - \frac{\sum{(c_i-f_i)^2}}{\sum{(c_i-\bar{c})^2}}
-\end{equation} where $SS_{res}$ is the sum of squares of the residuals between the observed counts $c_i$ and the fit counts $f_i$ for each time stamp, and $SS_{mean}$ is the sum of squares between $c_i$ and the mean counts $\bar{c}$.
+\end{equation} where $SS_{res}$ is the sum of the squared residuals between the observed counts $c_i$ and the fit counts $f_i$ for each time stamp, and $SS_{mean}$ is the sum of the squared residuals between $c_i$ and the mean of the counts, $\bar{c}$.
 
 One interpretation of $R^2$ is: fractionally how much better the variance in the data is explained by the model fit, compared to the null hypothesis horizontal line at $\bar{c}$. $R^2$ values vary from $1$ when the fit perfectly describes the variance in the data, to $-\infty$ for poor fits (a fit can be much worse than the mean null hypothesis).
 
