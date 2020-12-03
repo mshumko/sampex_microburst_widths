@@ -585,17 +585,17 @@ Shumko, M.%
 \APACrefYearMonthDay{2020}{}{}.
 \newblock
 {\BBOQ}\APACrefatitle {Statistical Properties of Electron Curtain Precipitation
-  Estimated with AeroCube-6} {Statistical properties of electron curtain
+  Estimated With AeroCube-6} {Statistical properties of electron curtain
   precipitation estimated with aerocube-6}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Journal of Geophysical Research: Space
-  Physics}{n/a}{n/a}{e2020JA028462}.
+  Physics}{125}{12}{e2020JA028462}.
 \newblock
 \begin{APACrefURL}
   \url{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2020JA028462}
   \end{APACrefURL}
 \newblock
-\APACrefnote{e2020JA028462 2020JA028462}
+\APACrefnote{e2020JA028462 10.1029/2020JA028462}
 \newblock
 \begin{APACrefDOI} \doi{https://doi.org/10.1029/2020JA028462} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
