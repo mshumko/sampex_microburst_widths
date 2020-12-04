@@ -168,6 +168,44 @@ Breneman, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Chen%
+, Breneman%
+, Xia%
+\BCBL {}\ \BBA {} Zhang%
+}{%
+Chen%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Chen2020}
+\APACinsertmetastar {%
+Chen2020}%
+\begin{APACrefauthors}%
+Chen, L.%
+, Breneman, A\BPBI W.%
+, Xia, Z.%
+\BCBL {}\ \BBA {} Zhang, X\BHBI j.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Modeling of Bouncing Electron Microbursts Induced by
+  Ducted Chorus Waves} {Modeling of bouncing electron microbursts induced by
+  ducted chorus waves}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{47}{17}{e2020GL089400}.
+\newblock
+\begin{APACrefURL}
+  \url{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2020GL089400}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{e2020GL089400 10.1029/2020GL089400}
+\newblock
+\begin{APACrefDOI} \doi{https://doi.org/10.1029/2020GL089400} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Datta%
 , Skoug%
 , McCarthy%
@@ -524,6 +562,36 @@ Meredith, N\BPBI P.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Miyoshi%
+\ \protect \BOthers {.}}{%
+Miyoshi%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Miyoshi2020}
+\APACinsertmetastar {%
+Miyoshi2020}%
+\begin{APACrefauthors}%
+Miyoshi, Y.%
+, Saito, S.%
+, Kurita, S.%
+, Asamura, K.%
+, Hosokawa, K.%
+, Sakanoi, T.%
+\BDBL {}others%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Relativistic Electron Microbursts as High Energy Tail of
+  Pulsating Aurora Electrons} {Relativistic electron microbursts as high energy
+  tail of pulsating aurora electrons}.{\BBCQ}
+\newblock
+
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 O'Brien%
 \ \protect \BOthers {.}}{%
 O'Brien%
@@ -563,9 +631,48 @@ O'Brien, T\BPBI P.%
 
 \bibitem [\protect \citeauthoryear {%
 Shumko%
-\ \protect \BOthers {.}}{%
+, Johnson%
+, Sample%
+\BCBL {}\ \protect \BOthers {.}}{%
 Shumko%
-\ \protect \BOthers {.}}{%
+, Johnson%
+, Sample%
+\BCBL {}\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Shumko2020a}
+\APACinsertmetastar {%
+Shumko2020a}%
+\begin{APACrefauthors}%
+Shumko, M.%
+, Johnson, A.%
+, Sample, J.%
+, Griffith, B\BPBI A.%
+, Turner, D\BPBI L.%
+, O'Brien, T\BPBI P.%
+\BDBL {}Claudepierre, S\BPBI G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Electron Microburst Size Distribution Derived with
+  {AeroCube-6}} {Electron microburst size distribution derived with
+  {AeroCube-6}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{}{}{e2019JA027651}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Shumko%
+, Johnson%
+, O'Brien%
+\BCBL {}\ \protect \BOthers {.}}{%
+Shumko%
+, Johnson%
+, O'Brien%
+\BCBL {}\ \protect \BOthers {.}}{%
 {\protect \APACyear {2020}}%
 }]{%
 Shumko2020b}
