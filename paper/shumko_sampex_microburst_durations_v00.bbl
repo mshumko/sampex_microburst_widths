@@ -696,6 +696,37 @@ Saito, S.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Shue%
+\ \protect \BOthers {.}}{%
+Shue%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+Shue2019}
+\APACinsertmetastar {%
+Shue2019}%
+\begin{APACrefauthors}%
+Shue, J\BHBI H.%
+, Nariyuki, Y.%
+, Katoh, Y.%
+, Saito, S.%
+, Kasahara, Y.%
+, Hsieh, Y\BHBI K.%
+\BDBL {}Goto, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A Systematic Study in Characteristics of Lower Band
+  Rising-Tone Chorus Elements} {A systematic study in characteristics of lower
+  band rising-tone chorus elements}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{124}{11}{9003--9016}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Shumko%
 , Johnson%
 , Sample%
@@ -841,6 +872,35 @@ Summers, D.%
 \APACrefnote{A08213}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2005JA011159} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Teng%
+\ \protect \BOthers {.}}{%
+Teng%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+Teng2017}
+\APACinsertmetastar {%
+Teng2017}%
+\begin{APACrefauthors}%
+Teng, S.%
+, Tao, X.%
+, Xie, Y.%
+, Zonca, F.%
+, Chen, L.%
+, Fang, W.%
+\BCBL {}\ \BBA {} Wang, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Analysis of the duration of rising tone chorus elements}
+  {Analysis of the duration of rising tone chorus elements}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{44}{24}{12--074}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
