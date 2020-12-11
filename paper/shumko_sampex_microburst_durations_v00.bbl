@@ -630,6 +630,43 @@ O'Brien, T\BPBI P.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Saito%
+, Miyoshi%
+\BCBL {}\ \BBA {} Seki%
+}{%
+Saito%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2012}}%
+}]{%
+Saito2012}
+\APACinsertmetastar {%
+Saito2012}%
+\begin{APACrefauthors}%
+Saito, S.%
+, Miyoshi, Y.%
+\BCBL {}\ \BBA {} Seki, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Relativistic electron microbursts associated with
+  whistler chorus rising tone elements: GEMSIS-RBW simulations} {Relativistic
+  electron microbursts associated with whistler chorus rising tone elements:
+  Gemsis-rbw simulations}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{117}{A10}{n/a--n/a}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2012JA018020}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{A10206}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2012JA018020} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Shumko%
 , Johnson%
 , Sample%
