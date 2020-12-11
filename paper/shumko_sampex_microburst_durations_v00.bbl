@@ -592,6 +592,35 @@ Miyoshi, Y.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Nakamura%
+\ \protect \BOthers {.}}{%
+Nakamura%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2000}}%
+}]{%
+Nakamura2000}
+\APACinsertmetastar {%
+Nakamura2000}%
+\begin{APACrefauthors}%
+Nakamura, R.%
+, Isowa, M.%
+, Kamide, Y.%
+, Baker, D.%
+, Blake, J.%
+\BCBL {}\ \BBA {} Looper, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2000}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Observations of relativistic electron microbursts in
+  association with {VLF} chorus} {Observations of relativistic electron
+  microbursts in association with {VLF} chorus}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{J. Geophys. Res}{105}{}{15875--15885}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 O'Brien%
 \ \protect \BOthers {.}}{%
 O'Brien%
@@ -815,6 +844,36 @@ Summers, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Th{\'e}bault%
+\ \protect \BOthers {.}}{%
+Th{\'e}bault%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2015}}%
+}]{%
+Thebault2015}
+\APACinsertmetastar {%
+Thebault2015}%
+\begin{APACrefauthors}%
+Th{\'e}bault, E.%
+, Finlay, C\BPBI C.%
+, Beggan, C\BPBI D.%
+, Alken, P.%
+, Aubert, J.%
+, Barrois, O.%
+\BDBL {}others%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {International geomagnetic reference field: the 12th
+  generation} {International geomagnetic reference field: the 12th
+  generation}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Earth, Planets and Space}{67}{1}{79}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Thorne%
 }{%
 Thorne%
@@ -843,6 +902,36 @@ Thorne, R\BPBI M.%
 \APACrefnote{L22107}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2010GL044990} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Trefall%
+, Bjordal%
+, Ullaland%
+\BCBL {}\ \BBA {} Stadsnes%
+}{%
+Trefall%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1966}}%
+}]{%
+Trefall1966}
+\APACinsertmetastar {%
+Trefall1966}%
+\begin{APACrefauthors}%
+Trefall, H.%
+, Bjordal, J.%
+, Ullaland, S.%
+\BCBL {}\ \BBA {} Stadsnes, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1966}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {On the extension of auroral-zone X-ray microbursts} {On
+  the extension of auroral-zone x-ray microbursts}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Atmospheric and Terrestrial
+  Physics}{28}{2}{225--233}.
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
