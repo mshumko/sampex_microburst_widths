@@ -16,6 +16,8 @@ ae_bins: np.ndarray
 r2_thresh: float
     The adjusted R^2 value to filter the fits by. I consider a good fit when 
     r2 > 0.9
+duration_quantiles: list
+    The duration quantiles to calculate in each AE bin. 
 """
 import pathlib
 import string
@@ -32,6 +34,7 @@ max_width=0.5
 width_bins=np.linspace(0, max_width, num=20)
 ae_bins = [0, 100, 300, 1000]
 r2_thresh = 0.9
+duration_quantiles = [.25, .50, .75]
 
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
@@ -46,6 +49,10 @@ ymax = 0
 
 for ax_i, start_ae, end_ae, label_i in zip(ax, ae_bins[:-1], ae_bins[1:], string.ascii_lowercase):
     df_flt = df[(df['AE'] > start_ae) & (df['AE'] < end_ae)]
+
+    # Calculate quantiles
+    width_percentiles = df_flt['width_s'].quantile(q=duration_quantiles)
+
     ax_i.hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
             label=f'{start_ae} < AE < {end_ae}', color='k', lw=1)
     ax_i.text(0, 0.99, f'({label_i}) {start_ae} < AE [nT] < {end_ae}', va='top', 
@@ -56,6 +63,16 @@ for ax_i, start_ae, end_ae, label_i in zip(ax, ae_bins[:-1], ae_bins[1:], string
     ylims = ax_i.get_ylim()
     if ymax < ylims[1]:
         ymax = ylims[1]
+
+    percentile_str = (
+        f"Percentiles [ms]"
+        f"\n25%: {(width_percentiles.loc[0.25]*1000).round().astype(int)}"
+        f"\n50%: {(width_percentiles.loc[0.50]*1000).round().astype(int)}"
+        f"\n75%: {(width_percentiles.loc[0.75]*1000).round().astype(int)}"
+        )
+    ax_i.text(0.7, 0.95, percentile_str, 
+        ha='left', va='top', transform=ax_i.transAxes
+        )
 
 ax[-1].set_xlabel('Microburst FWHM [s]')
 ax[0].set_xlim(0, max_width)
