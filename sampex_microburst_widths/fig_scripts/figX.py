@@ -1,5 +1,5 @@
 """
-Histogram of all microburst widths.
+This script generates a histogram of all microburst widths.
 
 Parameters
 ----------
@@ -45,7 +45,7 @@ ax.set_title('Distribution of > 1 MeV Microburst Duration\nSAMPEX/HILT')
 ax.set_ylabel('Probability Density')
 ax.set_xlabel('FWHM [s]')
 s = (
-    f"Quantiles [ms]:"
+    f"Percentiles [ms]"
     f"\n25%: {(width_percentiles.loc[0.25]*1000).round().astype(int)}"
     f"\n50%: {(width_percentiles.loc[0.50]*1000).round().astype(int)}"
     f"\n75%: {(width_percentiles.loc[0.75]*1000).round().astype(int)}"
