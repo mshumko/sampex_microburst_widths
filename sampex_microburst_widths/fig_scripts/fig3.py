@@ -1,6 +1,6 @@
 """
-This script generates Figure 3: a plot of the marginalized microburst duration 
-as a function of L and MLT.
+This script makes Figure 2: a dial plot of the microburst width as a 
+function of L and MLT
 
 Parameters
 ----------
@@ -11,6 +11,11 @@ r2_thresh: float
 max_width: float
     Maximum microburst width (FWHM) in seconds to histogram. A good default is
     0.25 [seconds]
+percentiles: np.array
+    The distribution percentiles for the FWHM distributions in L-MLT space. 
+    This script implicitly assumes that you supply 3 percentile values, between
+    0 and 100, for the 4 subplots (3 percentiles and 1 microburst occurrence 
+    distribution)
 """
 import pathlib
 import string
@@ -21,52 +26,66 @@ import matplotlib.pyplot as plt
 import matplotlib.colors
 
 from sampex_microburst_widths import config
+from sampex_microburst_widths.stats import dial_plot
 
-plt.rcParams.update({'font.size': 15})
+plt.rcParams.update({'font.size': 13})
+cmap = 'viridis'
 
-### Script parameters ###
 catalog_name = 'microburst_catalog_04.csv'
-r2_thresh = 0.9
-max_width = 0.25
-width_bins = np.linspace(0, max_width+0.001, num=50)
-L_bins = np.linspace(2, 8.1, num=50)
-MLT_bins = np.linspace(0, 24, num=50)
 
-# Load the catalog, drop the NaN values, and filter by the max_width and
-# R^2 values.
+### Script parameters
+statistics_thresh=100 # Don't calculate stats if less microbursts in the bin.
+percentiles = np.array([25, 50, 75])
+r2_thresh = 0.9
+max_width = 0.5
+L_bins = np.linspace(2, 8.1, num=20)
+L_labels = [2,4,6]
+MLT_bins = np.linspace(0, 24, num=40)
+
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
-initial_shape = df.shape[0]
 df = df[df['width_s'] < max_width]
 df['fwhm'] = df['fwhm'].abs()
 df = df[df.adj_r2 > r2_thresh]
-print(f'The {initial_shape} microbursts were filtered down to {df.shape[0]} microbursts.')
 
-# Create a histogram of L-FWHM and MLT-FWHM
-H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm'],
-                        bins=[L_bins, width_bins])
-H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm'],
-                        bins=[MLT_bins, width_bins])
+num_microbursts_H, _, _ = np.histogram2d(df['MLT'], df['L_Shell'],
+                                        bins=[MLT_bins, L_bins])
+H = np.nan*np.zeros(
+    (len(MLT_bins), len(L_bins), len(percentiles))
+                    )
 
-# Make the two plots.
-_, ax = plt.subplots(1, 2, figsize=(12, 6))
+for i, (start_MLT, end_MLT) in enumerate(zip(MLT_bins[:-1], MLT_bins[1:])):
+    for j, (start_L, end_L) in enumerate(zip(L_bins[:-1], L_bins[1:])):
+        df_flt = df.loc[(
+            (df['MLT'] > start_MLT) &  (df['MLT'] < end_MLT) &
+            (df['L_Shell'] > start_L) &  (df['L_Shell'] < end_L)
+            ), 'fwhm']
+        if df_flt.shape[0] >= statistics_thresh:
+            H[i, j, :] = df_flt.quantile(percentiles/100)
 
-p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
-plt.colorbar(p_L, ax=ax[0], orientation='horizontal', label='Number of microbursts')
-ax[0].set_xlabel('L-shell')
-ax[0].set_ylabel('FWHM [s]')
+fig = plt.figure(figsize=(10, 8))
+ax = [plt.subplot(2, 2, i, projection='polar') for i in range(1, 5)]
 
-p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
-plt.colorbar(p_MLT, ax=ax[1], orientation='horizontal', label='Number of microbursts')
-ax[1].set_xlabel('MLT')
-ax[1].set_ylabel('FWHM [s]')
+for i, ax_i in enumerate(ax[:-1]):
+    d = dial_plot.Dial(ax_i, MLT_bins, L_bins, H[:, :, i])
+    d.draw_dial(L_labels=L_labels,
+            mesh_kwargs={'cmap':cmap},
+            colorbar_kwargs={'label':f'microburst duration [s]', 'pad':0.1})
+    annotate_str = f'({string.ascii_lowercase[i]}) {percentiles[i]}th percentile'
+    ax_i.text(-0.2, 1.2, annotate_str, va='top', transform=ax_i.transAxes, 
+            weight='bold', fontsize=15)
 
-for ax_i, label_i in zip(ax, string.ascii_lowercase):
-    annotate_str = f'({label_i})'
-    ax_i.text(0, 1, annotate_str, va='top', color='white', weight='bold', 
-                transform=ax_i.transAxes, fontsize=20)
+d4 = dial_plot.Dial(ax[-1], MLT_bins, L_bins, num_microbursts_H)
+d4.draw_dial(L_labels=L_labels,
+            mesh_kwargs={'norm':matplotlib.colors.LogNorm(), 'cmap':cmap},
+            colorbar_kwargs={'label':'Number of microbursts', 'pad':0.1})
+annotate_str = f'({string.ascii_lowercase[len(ax)-1]}) Microburst occurrence'
+ax[-1].text(-0.2, 1.2, annotate_str, va='top', transform=ax[-1].transAxes, 
+            weight='bold', fontsize=15)
 
-plt.suptitle(f'Distribution of SAMPEX microburst durations in L and MLT', fontsize=20)
+for ax_i in ax:
+    ax_i.set_rlabel_position(235)
+plt.suptitle(f'Distribution of SAMPEX microburst durations in L-MLT', fontsize=20)
 
 plt.tight_layout()
 plt.show()

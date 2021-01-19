@@ -1,23 +1,16 @@
 """
-This script makes Figure 4: a histogram of the microburst durations as a 
-function of AE.
+This script generates Figure 3: a plot of the marginalized microburst duration 
+as a function of L and MLT.
 
-Parameters (modify in script)
------------------------------
+Parameters
+----------
 catalog_name: str
-    The catalog name to load from the sampex_microburst_widths/data/ directory.
-max_width: float
-    The maximum width to consider, 0.5 is a good value.
-width_bins: np.ndarray
-    The microburst width (FWHM) bins to use. A default of 
-    np.linspace(0, max_width, num=20) works well.
-ae_bins: np.ndarray
-    The AE bins. A good default is [0, 100, 300, 1000]
+    The name of the catalog in the config.PROJECT_DIR/data/ directory.
 r2_thresh: float
-    The adjusted R^2 value to filter the fits by. I consider a good fit when 
-    r2 > 0.9
-duration_quantiles: list
-    The duration quantiles to calculate in each AE bin. 
+    The adjusted R^2 threshold for the fits. I chose a default value of 0.9.
+max_width: float
+    Maximum microburst width (FWHM) in seconds to histogram. A good default is
+    0.25 [seconds]
 """
 import pathlib
 import string
@@ -25,58 +18,55 @@ import string
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.colors
 
 from sampex_microburst_widths import config
 
+plt.rcParams.update({'font.size': 15})
+
 ### Script parameters ###
 catalog_name = 'microburst_catalog_04.csv'
-max_width=0.5
-width_bins=np.linspace(0, max_width, num=20)
-ae_bins = [0, 100, 300, 1000]
 r2_thresh = 0.9
-duration_quantiles = [.25, .50, .75]
+max_width = 0.25
+width_bins = np.linspace(0, max_width+0.001, num=50)
+L_bins = np.linspace(2, 8.1, num=50)
+MLT_bins = np.linspace(0, 24, num=50)
 
+# Load the catalog, drop the NaN values, and filter by the max_width and
+# R^2 values.
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
-
+initial_shape = df.shape[0]
+df = df[df['width_s'] < max_width]
 df['fwhm'] = df['fwhm'].abs()
-# Filter by the R^2 value with the microburst FWHM 
-df = df[(df['adj_r2'] > r2_thresh) & (df['fwhm'] < max_width)]
+df = df[df.adj_r2 > r2_thresh]
+print(f'The {initial_shape} microbursts were filtered down to {df.shape[0]} microbursts.')
 
-_, ax = plt.subplots(len(ae_bins)-1, 1, figsize=(5, 8), sharey=True, sharex=True)
+# Create a histogram of L-FWHM and MLT-FWHM
+H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm'],
+                        bins=[L_bins, width_bins])
+H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm'],
+                        bins=[MLT_bins, width_bins])
 
-ymax = 0
+# Make the two plots.
+_, ax = plt.subplots(1, 2, figsize=(12, 6))
 
-for ax_i, start_ae, end_ae, label_i in zip(ax, ae_bins[:-1], ae_bins[1:], string.ascii_lowercase):
-    df_flt = df[(df['AE'] > start_ae) & (df['AE'] < end_ae)]
+p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
+plt.colorbar(p_L, ax=ax[0], orientation='horizontal', label='Number of microbursts')
+ax[0].set_xlabel('L-shell')
+ax[0].set_ylabel('FWHM [s]')
 
-    # Calculate quantiles
-    width_percentiles = df_flt['width_s'].quantile(q=duration_quantiles)
+p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
+plt.colorbar(p_MLT, ax=ax[1], orientation='horizontal', label='Number of microbursts')
+ax[1].set_xlabel('MLT')
+ax[1].set_ylabel('FWHM [s]')
 
-    ax_i.hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
-            label=f'{start_ae} < AE < {end_ae}', color='k', lw=1)
-    ax_i.text(0, 0.99, f'({label_i}) {start_ae} < AE [nT] < {end_ae}', va='top', 
-            transform=ax_i.transAxes, fontsize=15)
-    ax_i.set_ylabel('Probability density')
+for ax_i, label_i in zip(ax, string.ascii_lowercase):
+    annotate_str = f'({label_i})'
+    ax_i.text(0, 1, annotate_str, va='top', color='white', weight='bold', 
+                transform=ax_i.transAxes, fontsize=20)
 
-    # Save the largest ymax value of all the histograms.
-    ylims = ax_i.get_ylim()
-    if ymax < ylims[1]:
-        ymax = ylims[1]
+plt.suptitle(f'Distribution of SAMPEX microburst durations in L and MLT', fontsize=20)
 
-    percentile_str = (
-        f"Percentiles [ms]"
-        f"\n25%: {(width_percentiles.loc[0.25]*1000).round().astype(int)}"
-        f"\n50%: {(width_percentiles.loc[0.50]*1000).round().astype(int)}"
-        f"\n75%: {(width_percentiles.loc[0.75]*1000).round().astype(int)}"
-        )
-    ax_i.text(0.7, 0.95, percentile_str, 
-        ha='left', va='top', transform=ax_i.transAxes
-        )
-
-ax[-1].set_xlabel('Microburst FWHM [s]')
-ax[0].set_xlim(0, max_width)
-ax[0].set_ylim(0, 1.1*ymax)
-plt.suptitle('Distribution of >1 MeV microburst\nduration as a function of AE', fontsize=18)
 plt.tight_layout()
 plt.show()
