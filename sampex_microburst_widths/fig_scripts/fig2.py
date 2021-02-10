@@ -28,7 +28,7 @@ catalog_name = 'microburst_catalog_04.csv'
 r2_thresh = 0.9
 max_width = 0.5
 width_bins = np.linspace(0, max_width+0.001, num=50)
-ae_bins = [0, 100, 300, 1000]
+ae_bins = [0, 100, 300]
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
 # R^2 values.
@@ -60,12 +60,19 @@ ax[0].set_xlim(0, max_width)
 ax[0].set_ylabel('Probability Density')
 ax[0].set_xlabel('FWHM [s]')
 
-# Right panel histogram and statistics
+# Right panel histogram and statistics for the first two categories.
 for start_ae, end_ae in zip(ae_bins[:-1], ae_bins[1:]):
     df_flt = df[(df['AE'] > start_ae) & (df['AE'] < end_ae)]
 
     ax[1].hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
             label=f'{start_ae} < AE [nT] < {end_ae}', lw=2)
+    print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is {df_flt["fwhm"].median()}')
+
+# Last category that is AE > ae_bins[-1]
+df_flt = df[df['AE'] > ae_bins[-1]]
+ax[1].hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
+    label=f'AE [nT] > {ae_bins[-1]}', lw=2)
+print(f'Median microburst width for AE [nT] > {ae_bins[-1]} is {df_flt["fwhm"].median()}')
 
 ax[1].legend(loc='center right', fontsize=12)
 ax[1].set_xlabel('FWHM [s]')
