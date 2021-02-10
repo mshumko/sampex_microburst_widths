@@ -238,6 +238,35 @@ Datta, S.%
 
 \bibitem [\protect \citeauthoryear {%
 Douma%
+\ \protect \BOthers {.}}{%
+Douma%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+Douma2019}
+\APACinsertmetastar {%
+Douma2019}%
+\begin{APACrefauthors}%
+Douma, E.%
+, Rodger, C.%
+, Blum, L.%
+, O'Brien, T.%
+, Clilverd, M.%
+\BCBL {}\ \BBA {} Blake, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Characteristics of relativistic microburst intensity
+  from SAMPEX observations} {Characteristics of relativistic microburst
+  intensity from sampex observations}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space Physics}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Douma%
 , Rodger%
 , Blum%
 \BCBL {}\ \BBA {} Clilverd%
@@ -622,6 +651,41 @@ Nakamura, R.%
 
 \bibitem [\protect \citeauthoryear {%
 O'Brien%
+, Looper%
+\BCBL {}\ \BBA {} Blake%
+}{%
+O'Brien%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2004}}%
+}]{%
+O'Brien2004}
+\APACinsertmetastar {%
+O'Brien2004}%
+\begin{APACrefauthors}%
+O'Brien, T\BPBI P.%
+, Looper, M\BPBI D.%
+\BCBL {}\ \BBA {} Blake, J\BPBI B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantification of relativistic electron microburst
+  losses during the {GEM} storms} {Quantification of relativistic electron
+  microburst losses during the {GEM} storms}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{31}{4}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2003GL018621}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{L04802}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2003GL018621} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+O'Brien%
 \ \protect \BOthers {.}}{%
 O'Brien%
 \ \protect \BOthers {.}}{%
@@ -693,6 +757,35 @@ Saito, S.%
 \APACrefnote{A10206}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2012JA018020} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Sepp{\"a}l{\"a}%
+\ \protect \BOthers {.}}{%
+Sepp{\"a}l{\"a}%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+Seppala2018}
+\APACinsertmetastar {%
+Seppala2018}%
+\begin{APACrefauthors}%
+Sepp{\"a}l{\"a}, A.%
+, Douma, E.%
+, Rodger, C.%
+, Verronen, P.%
+, Clilverd, M\BPBI A.%
+\BCBL {}\ \BBA {} Bortnik, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Relativistic electron microburst events: Modeling the
+  atmospheric impact} {Relativistic electron microburst events: Modeling the
+  atmospheric impact}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Geophysical Research Letters}{45}{2}{1141--1147}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -962,6 +1055,46 @@ Thorne, R\BPBI M.%
 \APACrefnote{L22107}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2010GL044990} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Thorne%
+, O'Brien%
+, Shprits%
+, Summers%
+\BCBL {}\ \BBA {} Horne%
+}{%
+Thorne%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2005}}%
+}]{%
+Thorne2005}
+\APACinsertmetastar {%
+Thorne2005}%
+\begin{APACrefauthors}%
+Thorne, R\BPBI M.%
+, O'Brien, T\BPBI P.%
+, Shprits, Y\BPBI Y.%
+, Summers, D.%
+\BCBL {}\ \BBA {} Horne, R\BPBI B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Timescale for {MeV} electron microburst loss during
+  geomagnetic storms} {Timescale for {MeV} electron microburst loss during
+  geomagnetic storms}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{110}{A9}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2004JA010882}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{A09202}
+\newblock
+\begin{APACrefDOI} \doi{10.1029/2004JA010882} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
