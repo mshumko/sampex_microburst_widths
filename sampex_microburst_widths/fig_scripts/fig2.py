@@ -24,7 +24,7 @@ from sampex_microburst_widths import config
 plt.rcParams.update({'font.size': 13})
 
 ### Script parameters ###
-catalog_name = 'microburst_catalog_04.csv'
+catalog_name = 'microburst_catalog_02.csv'
 r2_thresh = 0.9
 max_width = 0.5
 width_bins = np.linspace(0, max_width+0.001, num=50)
