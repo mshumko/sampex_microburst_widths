@@ -188,21 +188,19 @@ Figure \ref{fig3} shows that the microburst duration trend is almost identical f
 \end{figure}
 
 \section{Discussion and Conclusions}\label{discussion}
-We first addressed the possible burst parameter bias to narrower microbursts. We used the microburst identification algorithm with three background values: $A_{500}$, $A_{1000}$, and $A_{2000}$. As described in section \ref{microburst_id}, a wider centered running average, $A$, will be more sensitive to wider and less prominent microbursts. Therefore this bias manifests itself as a relative excess of longer duration microbursts for a wider $A$. We identified a minor bias. The difference in the median microburst duration, using the microburst lists generated using $A_{500}$ and $A_{2000}$, was 14 ms (corresponding to a 14\% relative difference). Considering this bias and Fig. \ref{fig2}a, we believe that the majority of $>1$ MeV microbursts have a true duration around 100 ms and the $A_{500}$ is adequate to identify these microbursts.
+We first addressed the possible burst parameter bias to narrower microbursts. We used the microburst identification algorithm with three background values: $A_{500}$, $A_{1000}$, and $A_{2000}$. As described in section \ref{microburst_id}, a wider centered running average, $A$, will be more sensitive to wider and less prominent microbursts. Therefore, for wider $A$ this bias manifests itself as a relative excess of longer duration microbursts. We identified a minor bias. The difference in the median microburst duration, using the microburst lists generated using $A_{500}$ and $A_{2000}$, was 14 ms (corresponding to a 14\% relative difference). Considering this bias and the distribution in Fig. \ref{fig2}a, we believe that the majority of $>1$ MeV microbursts have a true duration around 100 ms and the $A_{500}$ is adequate to identify these microbursts.
 
 While the $\approx 100$ ms median microburst duration shown in Fig. \ref{fig2}a is in agreement with prior studies \cite<e.g.>{Anderson1964, Trefall1966, Nakamura2000}, we visually found a subtle and unexplored trend in the literature where the microburst duration is longer at lower energies \cite<e.g.>{Datta1997, Johnson2020, Shumko2020a}. This trend is consistent with recent modeling by \citeA{Chen2020} and \citeA{Miyoshi2020}, but it needs to be fully explored with energy-resolved measurements provided by, for example, FIREBIRD-II.
 
-The microburst duration trend in L-shell is subtle; the 75th percentile of the duration distribution shown in in Fig. \ref{fig3}c near midnight slightly increases at higher L-shells. This is also noticeable in Fig. \ref{fig4}a. In contrast, the duration trend in MLT is significant. The median microburst duration doubles from 80 to 160 ms between midnight and noon MLT. We will now focus to the MLT microburst duration trend.
+The microburst duration trend in L-shell is subtle; the 75th percentile of the duration distribution, shown in in Fig. \ref{fig3}c, slightly increases at higher L-shells near midnight MLT. This is also noticeable in Fig. \ref{fig4}a. In contrast, the duration trend in MLT is significant. The median microburst duration doubles from 80 to 160 ms between midnight and noon MLT. Now we will only focus on the MLT trend.
 
-Chorus rising tone elements are believed to scatter microburst electrons \cite<e.g.>{Breneman2017, Saito2012, Miyoshi2020}, thus we will compare our microburst duration trend to the observed chorus trends in MLT.
+Chorus rising tone elements are believed to scatter microburst electrons \cite<e.g.>{Breneman2017, Saito2012, Miyoshi2020}, thus we will compare the microburst duration trend in local time to the observed chorus trends. Two recent studies by \citeA{Teng2017} and \citeA{Shue2019} quantified the properties of equatorial lower band (0.1-0.5 x electron gyrofrequency) chorus rising tone elements. Both studies found that the rising tone element duration distribution peaks at $\approx 250$ ms around midnight, and it broadens and shifts to $\approx 500$ ms at noon MLT. \textcolor{red}{Out of place because here we're talking about the MLT distribution $\rightarrow$} Furthermore, \cite{Teng2017} found that the rising tone element duration distribution is broad and peaks at $\approx 500$ ms when $AE < 100$ nT and the distribution narrows and shifts to $\approx 250$ ms for $AE > 300$ nT. The chorus rising tone element trend in MLT scales by roughly the same factor of 2 as the microburst duration trends we found in Fig \ref{fig2}b and \ref{fig4}b, but in general the chorus rising tone element duration is roughly 3 times longer than $>1$ MeV microbursts. However the predictions point to a different wave property controlling the microburst duration.
 
-Two recent studies by \citeA{Teng2017} and \citeA{Shue2019} quantified the properties of equatorial lower band (0.1-0.5 of the electro gyrofrequency) chorus rising tone elements. Both studies found that the rising tone element duration distribution peaks at $\approx 250$ ms around midnight MLT. Towards noon, this distribution broadens and the peak shifts to $\approx 500$ ms. Furthermore, \cite{Teng2017} found that the rising tone element duration distribution is broad and peaks at $\approx 500$ ms when $AE < 100$ nT and the distribution narrows and shifts to $\approx 250$ ms for $AE > 300$ nT. Both of these trends in MLT are similar to the microburst duration trends we found in Fig \ref{fig2}b and \ref{fig4}b, however the predictions point to a different wave property controlling the microburst duration.
+Figure 4 in \citeA{Chen2020} shows a test particle simulation result and the authors describe what wave properties bound the microburst duration in time-energy space. Medium energy ($\approx 50-300$ keV) microburst duration is controlled by the rising tone element bandwidth. However, for higher energies the microburst duration is controlled by the wave's lower frequency and the upper magnetic latitude propagation. \textcolor{blue}{Comment that higher latitude chorus scatters higher energy electrons? What about Saito's time of flight model?} While different model parameters may change what wave properties are responsible for scattering $>1$ MeV microburst electrons, it is worth noting that \citeA{Shue2019} found that the rising tone element bandwidth is qualitatively the same between midnight and noon MLT. The theory does not conclusively predict what chorus wave properties control the $> 1$ MeV microburst duration, and only the chorus rising tone duration shows a similar trend in MLT.
 
-Figure 4 in \citeA{Chen2020} shows a test particle model result and describe what wave properties bound the microburst duration in time-energy space. Medium energy (tens of keV to a few hundred keV) microburst duration is controlled by the rising tone element bandwidth. However, for higher energies the microburst duration is controlled by the wave's lower frequency and the upper magnetic latitude propagation. Different model parameters may change what wave properties are responsible for scattering $>1$ MeV microburst electrons, however \citeA{Shue2019} found that the rising tone element bandwidth is qualitatively the same between midnight and noon MLT. Between the chorus bandwidth and duration, the chorus rising tone element duration observations show a similar trend. Yet the theory does not conclusively predict what chorus wave properties control the $> 1$ MeV microburst duration. This question is left for future studies.
+\textcolor{blue}{Check my arguments for clarity.} High latitude chorus waves, found at $\approx 10-25$ degrees magnetic latitude off of the equator, can also play at important role at scattering microburst electrons \cite{Lorentzen2001a}. \citeA{Li2009a} found that the majority of high latitude chorus waves are constrained to 6-12 MLT. Thus, it is tempting to conclude that the longer duration microbursts can be attributed to the low and high latitude chorus waves. However, because low latitude chorus waves are also observed at 0-12 MLT \cite{Li2009a}, the resulting microburst duration distribution would reflect their superposition in the 6-12 MLT region. If low and high latitude chorus waves scattered microbursts with different durations, Fig. \ref{fig4}b would show the durations broaden or bifurcate from midnight to noon MLT. Because Fig. \ref{fig4}b shows the microburst duration only shift to longer durations, high vs low latitude chorus waves are an unlikely explanation for the microburst duration trend in MLT.
 
-\textcolor{blue}{Check my arguments for clarity.} High latitude chorus waves, found at $\approx 10-25$ degrees magnetic latitude off of the equator, can also play at important role at scattering microburst electrons \cite{Lorentzen2001a}. \citeA{Li2009a} found that the majority of high latitude chorus waves are constrained to 6-12 MLT. Thus, it is tempting to conclude that the longer duration microbursts can be attributed to the low and high latitude chorus waves. However, because low latitude chorus waves are observed at 0-12 MLT \cite{Li2009a}, the resulting microburst duration distribution would reflect their superposition in the 6-12 MLT. If the two types of chorus waves scattered microbursts with different durations, Fig. \ref{fig4}b would show the durations broaden or bifurcate from midnight to noon MLT. Because Fig. \ref{fig4}b only shows the microburst duration shifting to longer durations, high vs low latitude chorus waves are an unlikely explanation for the microburst duration trend in MLT.
-
-In summary, we found that the $>1$ MeV microburst duration distribution is peaked at 100 ms, with 75\% of microbursts narrower than 140 ms. We found no significant trend in the microburst duration as a function of L-shell, but we did find a strong trend as a function of MLT---the median microburst duration roughly doubles from 80 ms at midnight, to 160 ms at noon MLT. We found that the microburst duration trend in MLT to be similar to the trend in the rising tone element duration. However, contrary to the theoretically expected dependence of micriburst duration on chorus bandwidth, \citeA{Shue2019} did not find an incerase in the chorus rising tone bandwith between midnight and noon MLT.
+In summary, we found that the $>1$ MeV microburst duration distribution is peaked at 100 ms, with 75\% of microbursts narrower than 140 ms. We found no significant trend in the microburst duration as a function of L-shell, but we did find a strong trend as a function of MLT---the median microburst duration roughly doubles from 80 ms at midnight, to 160 ms at noon MLT. We found that the microburst duration trend in MLT scales similarly to the rising tone element duration, but the duration of rising tone elements is longer. Nonetheless, at this time modeling is not conclusive: the rising tone element duration is not predicted to control $>1$ MeV microburst duration, but it predicts the bandwidth and/or the upper latitude of propagation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Optional Appendix goes here
@@ -257,151 +255,4 @@ The analysis software is archived at \textcolor{red}{\url{https://github.com/msh
 % DO NOT use other cite commands (e.g., \citet, \citep, \citeyear, \nocite, \citealp, etc.).
 %
 
-
-
 \end{document}
-
-
-
-More Information and Advice:
-
-%% ------------------------------------------------------------------------ %%
-%
-%  SECTION HEADS
-%
-%% ------------------------------------------------------------------------ %%
-
-% Capitalize the first letter of each word (except for
-% prepositions, conjunctions, and articles that are
-% three or fewer letters).
-
-% AGU follows standard outline style; therefore, there cannot be a section 1 without
-% a section 2, or a section 2.3.1 without a section 2.3.2.
-% Please make sure your section numbers are balanced.
-% ---------------
-% Level 1 head
-%
-% Use the \section{} command to identify level 1 heads;
-% type the appropriate head wording between the curly
-% brackets, as shown below.
-%
-%An example:
-%\section{Level 1 Head: Introduction}
-%
-% ---------------
-% Level 2 head
-%
-% Use the \subsection{} command to identify level 2 heads.
-%An example:
-%\subsection{Level 2 Head}
-%
-% ---------------
-% Level 3 head
-%
-% Use the \subsubsection{} command to identify level 3 heads
-%An example:
-%\subsubsection{Level 3 Head}
-%
-%---------------
-% Level 4 head
-%
-% Use the \subsubsubsection{} command to identify level 3 heads
-% An example:
-%\subsubsubsection{Level 4 Head} An example.
-%
-%% ------------------------------------------------------------------------ %%
-%
-%  IN-TEXT LISTS
-%
-%% ------------------------------------------------------------------------ %%
-%
-% Do not use bulleted lists; enumerated lists are okay.
-% \begin{enumerate}
-% \item
-% \item
-% \item
-% \end{enumerate}
-%
-%% ------------------------------------------------------------------------ %%
-%
-%  EQUATIONS
-%
-%% ------------------------------------------------------------------------ %%
-
-% Single-line equations are centered.
-% Equation arrays will appear left-aligned.
-
-Math coded inside display math mode \[ ...\]
- will not be numbered, e.g.,:
- \[ x^2=y^2 + z^2\]
-
- Math coded inside \begin{equation} and \end{equation} will
- be automatically numbered, e.g.,:
- \begin{equation}
- x^2=y^2 + z^2
- \end{equation}
-
-
-% To create multiline equations, use the
-% \begin{eqnarray} and \end{eqnarray} environment
-% as demonstrated below.
-\begin{eqnarray}
-  x_{1} & = & (x - x_{0}) \cos \Theta \nonumber \\
-        && + (y - y_{0}) \sin \Theta  \nonumber \\
-  y_{1} & = & -(x - x_{0}) \sin \Theta \nonumber \\
-        && + (y - y_{0}) \cos \Theta.
-\end{eqnarray}
-
-%If you don't want an equation number, use the star form:
-%\begin{eqnarray*}...\end{eqnarray*}
-
-% Break each line at a sign of operation
-% (+, -, etc.) if possible, with the sign of operation
-% on the new line.
-
-% Indent second and subsequent lines to align with
-% the first character following the equal sign on the
-% first line.
-
-% Use an \hspace{} command to insert horizontal space
-% into your equation if necessary. Place an appropriate
-% unit of measure between the curly braces, e.g.
-% \hspace{1in}; you may have to experiment to achieve
-% the correct amount of space.
-
-
-%% ------------------------------------------------------------------------ %%
-%
-%  EQUATION NUMBERING: COUNTER
-%
-%% ------------------------------------------------------------------------ %%
-
-% You may change equation numbering by resetting
-% the equation counter or by explicitly numbering
-% an equation.
-
-% To explicitly number an equation, type \eqnum{}
-% (with the desired number between the brackets)
-% after the \begin{equation} or \begin{eqnarray}
-% command.  The \eqnum{} command will affect only
-% the equation it appears with; LaTeX will number
-% any equations appearing later in the manuscript
-% according to the equation counter.
-%
-
-% If you have a multiline equation that needs only
-% one equation number, use a \nonumber command in
-% front of the double backslashes (\\) as shown in
-% the multiline equation above.
-
-% If you are using line numbers, remember to surround
-% equations with \begin{linenomath*}...\end{linenomath*}
-
-%  To add line numbers to lines in equations:
-%  \begin{linenomath*}
-%  \begin{equation}
-%  \end{equation}
-%  \end{linenomath*}
-
-
-
