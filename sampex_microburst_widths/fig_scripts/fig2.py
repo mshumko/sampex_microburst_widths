@@ -66,13 +66,15 @@ for start_ae, end_ae in zip(ae_bins[:-1], ae_bins[1:]):
 
     ax[1].hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
             label=f'{start_ae} < AE [nT] < {end_ae}', lw=2)
-    print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is {df_flt["fwhm"].median()}')
+    print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is '
+          f'{round(df_flt["fwhm"].median(), 2)} s | N = {df_flt.shape[0]}')
 
 # Last category that is AE > ae_bins[-1]
 df_flt = df[df['AE'] > ae_bins[-1]]
 ax[1].hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
     label=f'AE [nT] > {ae_bins[-1]}', lw=2)
-print(f'Median microburst width for AE [nT] > {ae_bins[-1]} is {df_flt["fwhm"].median()}')
+print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is '
+          f'{round(df_flt["fwhm"].median(), 2)} s | N = {df_flt.shape[0]}')
 
 ax[1].legend(loc='center right', fontsize=12)
 ax[1].set_xlabel('FWHM [s]')
