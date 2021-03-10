@@ -206,6 +206,45 @@ Chen, L.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Crew%
+\ \protect \BOthers {.}}{%
+Crew%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+Crew2016}
+\APACinsertmetastar {%
+Crew2016}%
+\begin{APACrefauthors}%
+Crew, A\BPBI B.%
+, Spence, H\BPBI E.%
+, Blake, J\BPBI B.%
+, Klumpar, D\BPBI M.%
+, Larsen, B\BPBI A.%
+, O'Brien, T\BPBI P.%
+\BDBL {}Widholm, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {First multipoint in situ observations of electron
+  microbursts: Initial results from the {NSF} {FIREBIRD II} mission} {First
+  multipoint in situ observations of electron microbursts: Initial results from
+  the {NSF} {FIREBIRD II} mission}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{121}{6}{5272--5283}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1002/2016JA022485}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{2016JA022485}
+\newblock
+\begin{APACrefDOI} \doi{10.1002/2016JA022485} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Datta%
 , Skoug%
 , McCarthy%
