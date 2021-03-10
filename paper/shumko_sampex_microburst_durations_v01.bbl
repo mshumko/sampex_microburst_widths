@@ -343,6 +343,37 @@ Douma, E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Douma%
+\ \protect \BOthers {.}}{%
+Douma%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+Douma2018}
+\APACinsertmetastar {%
+Douma2018}%
+\begin{APACrefauthors}%
+Douma, E.%
+, Rodger, C\BPBI J.%
+, Clilverd, M\BPBI A.%
+, Hendry, A\BPBI T.%
+, Engebretson, M\BPBI J.%
+\BCBL {}\ \BBA {} Lessard, M\BPBI R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Comparison of relativistic microburst activity seen by
+  SAMPEX with ground-based wave measurements at Halley, Antarctica} {Comparison
+  of relativistic microburst activity seen by sampex with ground-based wave
+  measurements at halley, antarctica}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{123}{2}{1279--1294}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Horne%
 \ \BBA {} Thorne%
 }{%
@@ -759,6 +790,66 @@ O'Brien, T\BPBI P.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2002JA009784} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Omura%
+\ \BBA {} Zhao%
+}{%
+Omura%
+\ \BBA {} Zhao%
+}{%
+{\protect \APACyear {2013}}%
+}]{%
+Omura2013}
+\APACinsertmetastar {%
+Omura2013}%
+\begin{APACrefauthors}%
+Omura, Y.%
+\BCBT {}\ \BBA {} Zhao, Q.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Relativistic electron microbursts due to nonlinear pitch
+  angle scattering by EMIC triggered emissions} {Relativistic electron
+  microbursts due to nonlinear pitch angle scattering by emic triggered
+  emissions}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{118}{8}{5008--5020}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Ripoll%
+\ \protect \BOthers {.}}{%
+Ripoll%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+Ripoll2020}
+\APACinsertmetastar {%
+Ripoll2020}%
+\begin{APACrefauthors}%
+Ripoll, J\BHBI F.%
+, Claudepierre, S.%
+, Ukhorskiy, A.%
+, Colpitts, C.%
+, Li, X.%
+, Fennell, J.%
+\BCBL {}\ \BBA {} Crabtree, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Particle dynamics in the Earth's radiation belts: Review
+  of current research and open questions} {Particle dynamics in the earth's
+  radiation belts: Review of current research and open questions}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{125}{5}{e2019JA026735}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
