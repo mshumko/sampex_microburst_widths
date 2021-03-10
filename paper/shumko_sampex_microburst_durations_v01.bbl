@@ -860,48 +860,9 @@ Shue, J\BHBI H.%
 
 \bibitem [\protect \citeauthoryear {%
 Shumko%
-, Johnson%
-, Sample%
-\BCBL {}\ \protect \BOthers {.}}{%
+\ \protect \BOthers {.}}{%
 Shumko%
-, Johnson%
-, Sample%
-\BCBL {}\ \protect \BOthers {.}}{%
-{\protect \APACyear {2020}}%
-}]{%
-Shumko2020a}
-\APACinsertmetastar {%
-Shumko2020a}%
-\begin{APACrefauthors}%
-Shumko, M.%
-, Johnson, A.%
-, Sample, J.%
-, Griffith, B\BPBI A.%
-, Turner, D\BPBI L.%
-, O'Brien, T\BPBI P.%
-\BDBL {}Claudepierre, S\BPBI G.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2020}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Electron Microburst Size Distribution Derived with
-  {AeroCube-6}} {Electron microburst size distribution derived with
-  {AeroCube-6}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Journal of Geophysical Research: Space
-  Physics}{}{}{e2019JA027651}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Shumko%
-, Johnson%
-, O'Brien%
-\BCBL {}\ \protect \BOthers {.}}{%
-Shumko%
-, Johnson%
-, O'Brien%
-\BCBL {}\ \protect \BOthers {.}}{%
+\ \protect \BOthers {.}}{%
 {\protect \APACyear {2020}}%
 }]{%
 Shumko2020b}
@@ -1134,36 +1095,6 @@ Thorne, R\BPBI M.%
 \APACrefnote{A09202}
 \newblock
 \begin{APACrefDOI} \doi{10.1029/2004JA010882} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Trefall%
-, Bjordal%
-, Ullaland%
-\BCBL {}\ \BBA {} Stadsnes%
-}{%
-Trefall%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {1966}}%
-}]{%
-Trefall1966}
-\APACinsertmetastar {%
-Trefall1966}%
-\begin{APACrefauthors}%
-Trefall, H.%
-, Bjordal, J.%
-, Ullaland, S.%
-\BCBL {}\ \BBA {} Stadsnes, J.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1966}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {On the extension of auroral-zone X-ray microbursts} {On
-  the extension of auroral-zone x-ray microbursts}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Journal of Atmospheric and Terrestrial
-  Physics}{28}{2}{225--233}.
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
