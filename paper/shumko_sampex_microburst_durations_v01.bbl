@@ -691,35 +691,6 @@ Miyoshi, Y.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Nakamura%
-\ \protect \BOthers {.}}{%
-Nakamura%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2000}}%
-}]{%
-Nakamura2000}
-\APACinsertmetastar {%
-Nakamura2000}%
-\begin{APACrefauthors}%
-Nakamura, R.%
-, Isowa, M.%
-, Kamide, Y.%
-, Baker, D.%
-, Blake, J.%
-\BCBL {}\ \BBA {} Looper, M.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2000}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Observations of relativistic electron microbursts in
-  association with {VLF} chorus} {Observations of relativistic electron
-  microbursts in association with {VLF} chorus}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{J. Geophys. Res}{105}{}{15875--15885}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 O'Brien%
 , Looper%
 \BCBL {}\ \BBA {} Blake%
