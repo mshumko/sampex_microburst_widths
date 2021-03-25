@@ -29,6 +29,7 @@ r2_thresh = 0.9
 max_width_ms = 500
 width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 ae_bins = [0, 100, 300]
+width_key = 'width_s'
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
 # R^2 values.
@@ -41,12 +42,12 @@ df['fwhm'] = df['fwhm'].abs()
 df = df[df.adj_r2 > r2_thresh]
 
 quantiles = [.25, .50, .75]
-width_percentiles = df['width_s'].quantile(q=quantiles)
+width_percentiles = df[width_key].quantile(q=quantiles)
 
 fig, ax = plt.subplots(1, 2, sharex=True, sharey=True, figsize=(10, 5))
 
 # Left panel histogram and statistics.
-ax[0].hist(df['width_s'], bins=width_bins, color='k', histtype='step', density=True)
+ax[0].hist(df[width_key], bins=width_bins, color='k', histtype='step', density=True)
 s = (
     f"Percentiles [ms]"
     f"\n25%: {(width_percentiles.loc[0.25]).round().astype(int)}"
@@ -66,17 +67,17 @@ ax[0].set_xlabel('FWHM [ms]')
 for start_ae, end_ae in zip(ae_bins[:-1], ae_bins[1:]):
     df_flt = df[(df['AE'] > start_ae) & (df['AE'] < end_ae)]
 
-    ax[1].hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
+    ax[1].hist(df_flt[width_key], bins=width_bins, histtype='step', density=True,
             label=f'{start_ae} < AE [nT] < {end_ae}', lw=2)
     print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is '
           f'{round(df_flt["fwhm"].median(), 2)} s | N = {df_flt.shape[0]}')
 
 # Last category that is AE > ae_bins[-1]
 df_flt = df[df['AE'] > ae_bins[-1]]
-ax[1].hist(df_flt['fwhm'], bins=width_bins, histtype='step', density=True,
+ax[1].hist(df_flt[width_key], bins=width_bins, histtype='step', density=True,
     label=f'AE [nT] > {ae_bins[-1]}', lw=2)
 print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is '
-          f'{round(df_flt["fwhm"].median(), 2)} s | N = {df_flt.shape[0]}')
+          f'{round(df_flt[width_key].median(), 2)} s | N = {df_flt.shape[0]}')
 
 ax[1].legend(loc='center right', fontsize=12)
 ax[1].set_xlabel('FWHM [ms]')
