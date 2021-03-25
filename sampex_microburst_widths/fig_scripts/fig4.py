@@ -36,18 +36,18 @@ MLT_bins = np.linspace(0, 24, num=50)
 # R^2 values.
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
-df['width_s'] *= 1000 # Convert seconds to ms.
-df['fwhm'] *= 1000
+df['width_ms'] = 1000*df['width_s'] # Convert seconds to ms.
+df['fwhm_ms'] = 1000*df['fwhm']
 initial_shape = df.shape[0]
-df = df[df['width_s'] < max_width_ms]
-df['fwhm'] = df['fwhm'].abs()
+df = df[df['width_ms'] < max_width_ms]
+df['fwhm_ms'] = df['fwhm_ms'].abs()
 df = df[df.adj_r2 > r2_thresh]
 print(f'The {initial_shape} microbursts were filtered down to {df.shape[0]} microbursts.')
 
 # Create a histogram of L-FWHM and MLT-FWHM
-H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm'],
+H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm_ms'],
                         bins=[L_bins, width_bins])
-H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm'],
+H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm_ms'],
                         bins=[MLT_bins, width_bins])
 
 # Make the two plots.

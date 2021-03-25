@@ -29,16 +29,16 @@ r2_thresh = 0.9
 max_width_ms = 500
 width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 ae_bins = [0, 100, 300]
-width_key = 'width_s'
+width_key = 'fwhm_ms'
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
 # R^2 values.
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
-df['width_s'] *= 1000 # Convert seconds to ms.
-df['fwhm'] *= 1000
-df = df[df['width_s'] < max_width_ms]
-df['fwhm'] = df['fwhm'].abs()
+df['width_ms'] = 1000*df['width_s'] # Convert seconds to ms.
+df['fwhm_ms'] = 1000*df['fwhm']
+df = df[df['width_ms'] < max_width_ms]
+df['fwhm_ms'] = df['fwhm_ms'].abs()
 df = df[df.adj_r2 > r2_thresh]
 
 quantiles = [.25, .50, .75]
