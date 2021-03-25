@@ -26,15 +26,17 @@ plt.rcParams.update({'font.size': 13})
 ### Script parameters ###
 catalog_name = 'microburst_catalog_02.csv'
 r2_thresh = 0.9
-max_width = 0.5
-width_bins = np.linspace(0, max_width+0.001, num=50)
+max_width_ms = 500
+width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 ae_bins = [0, 100, 300]
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
 # R^2 values.
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
-df = df[df['width_s'] < max_width]
+df['width_s'] *= 1000 # Convert seconds to ms.
+df['fwhm'] *= 1000
+df = df[df['width_s'] < max_width_ms]
 df['fwhm'] = df['fwhm'].abs()
 df = df[df.adj_r2 > r2_thresh]
 
@@ -47,18 +49,18 @@ fig, ax = plt.subplots(1, 2, sharex=True, sharey=True, figsize=(10, 5))
 ax[0].hist(df['width_s'], bins=width_bins, color='k', histtype='step', density=True)
 s = (
     f"Percentiles [ms]"
-    f"\n25%: {(width_percentiles.loc[0.25]*1000).round().astype(int)}"
-    f"\n50%: {(width_percentiles.loc[0.50]*1000).round().astype(int)}"
-    f"\n75%: {(width_percentiles.loc[0.75]*1000).round().astype(int)}"
+    f"\n25%: {(width_percentiles.loc[0.25]).round().astype(int)}"
+    f"\n50%: {(width_percentiles.loc[0.50]).round().astype(int)}"
+    f"\n75%: {(width_percentiles.loc[0.75]).round().astype(int)}"
 )
-ax[0].text(0.65, 0.6, s, 
+ax[0].text(0.64, 0.9, s, 
         ha='left', va='top', transform=ax[0].transAxes
         )
 plt.suptitle('Distribution of > 1 MeV Microburst Duration\nSAMPEX/HILT')
 # Left panel tweaks
-ax[0].set_xlim(0, max_width)
+ax[0].set_xlim(0, max_width_ms)
 ax[0].set_ylabel('Probability Density')
-ax[0].set_xlabel('FWHM [s]')
+ax[0].set_xlabel('FWHM [ms]')
 
 # Right panel histogram and statistics for the first two categories.
 for start_ae, end_ae in zip(ae_bins[:-1], ae_bins[1:]):
@@ -77,7 +79,7 @@ print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is '
           f'{round(df_flt["fwhm"].median(), 2)} s | N = {df_flt.shape[0]}')
 
 ax[1].legend(loc='center right', fontsize=12)
-ax[1].set_xlabel('FWHM [s]')
+ax[1].set_xlabel('FWHM [ms]')
 
 # Subplot labels
 # for a, label in zip(ax, string.ascii_lowercase):

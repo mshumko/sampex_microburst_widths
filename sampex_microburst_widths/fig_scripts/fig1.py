@@ -86,7 +86,7 @@ for label_i, ax_i, (row_time, row) in zip(string.ascii_lowercase, ax, plot_df.it
 
     annotate_str = (
                 f'({label_i})\n'
-                f'FWHM = {round(row.fwhm, 2)} [s]\n'
+                f'FWHM = {round(row.fwhm*1000)} [ms]\n'
                 r'$\bar{{R}}^2$ = {}'.format(round(row.adj_r2, 2))
                 # f'\nadj_r2 = {round(row.adj_r2, 2)}'
                 )

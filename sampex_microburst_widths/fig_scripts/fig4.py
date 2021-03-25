@@ -8,9 +8,9 @@ catalog_name: str
     The name of the catalog in the config.PROJECT_DIR/data/ directory.
 r2_thresh: float
     The adjusted R^2 threshold for the fits. I chose a default value of 0.9.
-max_width: float
-    Maximum microburst width (FWHM) in seconds to histogram. A good default is
-    0.25 [seconds]
+max_width_ms: float
+    Maximum microburst width (FWHM) in milliseconds to histogram. A good default is
+    250 ms.
 """
 import pathlib
 import string
@@ -27,8 +27,8 @@ plt.rcParams.update({'font.size': 15})
 ### Script parameters ###
 catalog_name = 'microburst_catalog_04.csv'
 r2_thresh = 0.9
-max_width = 0.25
-width_bins = np.linspace(0, max_width+0.001, num=50)
+max_width_ms = 250
+width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 L_bins = np.linspace(2, 8.1, num=50)
 MLT_bins = np.linspace(0, 24, num=50)
 
@@ -36,8 +36,10 @@ MLT_bins = np.linspace(0, 24, num=50)
 # R^2 values.
 df = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name))
 df.dropna(inplace=True)
+df['width_s'] *= 1000 # Convert seconds to ms.
+df['fwhm'] *= 1000
 initial_shape = df.shape[0]
-df = df[df['width_s'] < max_width]
+df = df[df['width_s'] < max_width_ms]
 df['fwhm'] = df['fwhm'].abs()
 df = df[df.adj_r2 > r2_thresh]
 print(f'The {initial_shape} microbursts were filtered down to {df.shape[0]} microbursts.')
@@ -54,12 +56,12 @@ _, ax = plt.subplots(1, 2, figsize=(12, 6))
 p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
 plt.colorbar(p_L, ax=ax[0], orientation='horizontal', label='Number of microbursts')
 ax[0].set_xlabel('L-shell')
-ax[0].set_ylabel('FWHM [s]')
+ax[0].set_ylabel('FWHM [ms]')
 
 p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
 plt.colorbar(p_MLT, ax=ax[1], orientation='horizontal', label='Number of microbursts')
 ax[1].set_xlabel('MLT')
-ax[1].set_ylabel('FWHM [s]')
+ax[1].set_ylabel('FWHM [ms]')
 
 for ax_i, label_i in zip(ax, string.ascii_lowercase):
     annotate_str = f'({label_i})'
