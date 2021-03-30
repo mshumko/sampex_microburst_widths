@@ -35,7 +35,8 @@ def main():
         ax.set_title('SAMPEX-HILT | >1 MeV Microburst Widths')
         # ax.set_yscale('log')
         ax.set_xlabel('Width [s]')
-        print(f'For the catalog with A_{background_width}, the median duration is {df["width_s"].median()}')
+        print(f'For the catalog with A_{background_width}, the median '
+              f'duration is {1000*df["width_s"].median()} ms')
 
     plt.legend()
 main()
