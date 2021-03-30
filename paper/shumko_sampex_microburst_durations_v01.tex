@@ -57,7 +57,7 @@
 \begin{keypoints}
 \item We identified relativistic microbursts observed by the SAMPEX satellite and quantified their duration
 \item The microburst duration interquartile range is 70-140 ms and shows trends in AE, L-shell, and MLT
-\item Microburst durations are shortest at midnight and longest at noon MLT, showing a similar trend to chorus element durations.
+\item In MLT, microburst durations are shortest at midnight and longest at noon---a similar trend to chorus element durations.
 \end{keypoints}
 
 %% ------------------------------------------------------------------------ %%
@@ -153,11 +153,11 @@ Figure \ref{fig1}a shows an example of two superposed microbursts that had a fit
 Lastly, Fig. \ref{fig1}c,d demonstrate the necessity of the linear fit to account for the changing background. The linear fit accounts for the non-zero mean background counts and the different amplitudes of the edges of the Gaussian. Of the 256,764 detected microbursts, 109,231 had $\bar{R}^2 > 0.9$ and are used for the remainder of this study.
 
 \section{Results}\label{results}
-We used the well-fit microbursts to quantify the distribution of microburst duration (FWHM) for all microbursts, as a function of the Auroral Electroject, and as a function of L and MLT. We begin with the overall microburst distribution.
+We used the well-fit microbursts to quantify the distribution of microburst duration (FWHM) as a function of the Auroral Electrojet index, L-shell and MLT. We begin with the overall microburst distribution.
 
 Figure \ref{fig2}a shows the distribution of all well-fit microbursts. This distribution is peaked with the median at 96 ms and quickly drops off. The interquartile range spans about a factor of two in microburst duration, from 65 to 139 ms. \textcolor{blue}{A new sanity check!} As a check, we quantified the variation in the percentiles, annotated in Fig. \ref{fig2}a, under varying $\bar{R}^2$ criteria. We found that the percentile variation is minor---the median discrepancy between $\bar{R}^2 > 0.5$ and $\bar{R}^2 > 0.9$ thresholds is $4$ ms.
 
-We then investigated the dependence of microburst duration as a function of geomagnetic activity. To be consistent with the prior wave and microburst studies, we use the AE index to quantify the level of geomagnetic disturbance. We adopt the same three AE intensity levels used in prior studies, such as \citeA{Li2009a}, \citeA{Douma2017}, and \citeA{Meredith2020}: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $\mathrm{AE} > 300$, in units of nanotesla. Figure \ref{fig2}b shows the distribution of microburst duration for the three AE categories. The distributions are qualitatively similar, but gradually narrowing and shifting to shorter durations with increasing AE. The median microburst duration decreases from 127 ms for $0 < \mathrm{AE} < 100$ to 93 ms for $ \mathrm{AE} > 300$.
+We then investigated the dependence of microburst duration as a function of geomagnetic activity. To be consistent with the prior wave and microburst studies, we use the AE index to quantify the level of geomagnetic disturbance. We adopt the same three AE intensity levels used in prior studies, such as \citeA{Li2009a}, \citeA{Douma2017}, and \citeA{Meredith2020}: $\mathrm{AE} < 100$, $100 < \mathrm{AE} < 300$, and $\mathrm{AE} > 300$, in units of nanotesla. Figure \ref{fig2}b shows the distribution of microburst duration for the three AE categories. The distributions are qualitatively similar, gradually narrowing and shifting to shorter durations with increasing AE. The median microburst duration decreases from 127 ms for $0 < \mathrm{AE} < 100$ to 93 ms for $ \mathrm{AE} > 300$.
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig2.pdf}
@@ -165,7 +165,7 @@ We then investigated the dependence of microburst duration as a function of geom
 \label{fig2}
 \end{figure}
 
-Lastly, Figs. \ref{fig3} and \ref{fig4} show the microburst duration as a function of L and MLT. Figure \ref{fig3}a-c shows the joint distributions, split up into the 25th, 50th, and 75th percentiles; while Fig. \ref{fig4} shows the marginalized distributions as a function of L or MLT.
+Lastly, Figs. \ref{fig3} and \ref{fig4} show the microburst duration as a function of L and MLT. Figure \ref{fig3}a-c shows the joint distributions, split up into the 25th, 50th, and 75th percentiles; Figure \ref{fig4} shows the marginalized distributions as a function of L or MLT.
 
 Figure \ref{fig3} shows that the microburst duration trend is nearly identical for the different percentiles, and thus for simplicity we focus on the median distribution in Fig. \ref{fig3}b. In MLT, the median microburst duration increases by roughly a factor of two: from 80 ms at midnight to 160 ms at noon. In L-shell, the median microburst duration faintly increases with L-shell, and is most apparent near midnight MLT.
 
@@ -184,6 +184,13 @@ To disentangle the L and MLT distributions, Fig. \ref{fig4} shows the marginaliz
 \end{figure}
 
 \section{Discussion and Conclusions}\label{discussion}
+
+We first discuss a possibility that the burst parameter is less sensitive to microbursts with longer durations. Recall from Section \ref{microburst_id} that $A$ is the centered running average counts around the foreground $N$, and the burst parameter is $n_\sigma \sim N - A$. Now consider the following hypothesized scenario. Given a microburst with a 500 ms duration with the burst parameter centered on the peak, $A_{500}$ completely overlaps with the microburst and is therefore the mean microburst counts. Thus, $n_\sigma$ is proportional to the difference between the mean and the maximum microburst amplitude. However, if we used $A_{1000}$, the mean background counts no longer overlap with just the microburst, but rather the microburst and the surrounding background. $A_{1000}$ is lower than $A_{500}$ and therefore the burst parameter is more sensitive to a wider background value.
+
+To test this possible bias, we ran the detection algorithm with three $A$ values.
+
+In the end, we found a negligible increase in the median microburst size, so we can more confidently conclude that microburst duration is around 100 ms.
+
 We first discuss the burst parameter, introduced in Section \ref{microburst_id}, and address a possible bias to narrower microbursts. The choice of the centered running average, $A$, determines the sensitivity of the burst parameter to microbursts of various durations: a longer $A$ results in a burst parameter that is more sensitive to longer-duration microbursts that have the same prominence (and likewise more sensitive to less prominent microbursts with the same duration). The sensitivity is increased because a longer $A$ is less influenced by the enhanced microburst counts, leading to an increased $N-A$. Therefore, we investigated wether a longer $A$ skews the duration distributions to higher durations.
 
 We used the burst parameter with three background values: $A_{500}$, $A_{1000}$, and $A_{2000}$. The maximum difference in the median microburst duration using the three data sets was 14 ms (a 14\% relative difference). Therefore, considering this bias and the distribution in Fig. \ref{fig2}a, the evidence supports that the majority of $>1$ MeV microbursts have a true duration around 100 ms and the $A_{500}$ is adequate to identify these microbursts.
