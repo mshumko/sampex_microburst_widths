@@ -24,11 +24,11 @@ from sampex_microburst_widths import config
 plt.rcParams.update({'font.size': 13})
 
 ### Script parameters ###
-catalog_name = 'microburst_catalog_02.csv'
+catalog_name = 'microburst_catalog_04.csv'
 r2_thresh = 0.9
 max_width_ms = 500
 width_bins = np.linspace(0, max_width_ms+0.001, num=50)
-ae_bins = [0, 100, 300]
+ae_bins = [100, 300]
 width_key = 'fwhm_ms'
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
@@ -63,7 +63,15 @@ ax[0].set_xlim(0, max_width_ms)
 ax[0].set_ylabel('Probability Density')
 ax[0].set_xlabel('FWHM [ms]')
 
-# Right panel histogram and statistics for the first two categories.
+# Right Panel 
+# 1 AE < ae_bins[0]
+df_flt = df[df['AE'] < ae_bins[0]]
+ax[1].hist(df_flt[width_key], bins=width_bins, histtype='step', density=True,
+    label=f'AE [nT] < {ae_bins[0]}', lw=2)
+print(f'Median microburst width for AE [nT] < {ae_bins[0]} is '
+          f'{round(df_flt[width_key].median())} ms | N = {df_flt.shape[0]}')
+
+# 2. Bracketed AE. 
 for start_ae, end_ae in zip(ae_bins[:-1], ae_bins[1:]):
     df_flt = df[(df['AE'] > start_ae) & (df['AE'] < end_ae)]
 
@@ -72,11 +80,11 @@ for start_ae, end_ae in zip(ae_bins[:-1], ae_bins[1:]):
     print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is '
           f'{round(df_flt[width_key].median())} ms | N = {df_flt.shape[0]}')
 
-# Last category that is AE > ae_bins[-1]
+# 3. AE > ae_bins[-1]
 df_flt = df[df['AE'] > ae_bins[-1]]
 ax[1].hist(df_flt[width_key], bins=width_bins, histtype='step', density=True,
     label=f'AE [nT] > {ae_bins[-1]}', lw=2)
-print(f'Median microburst width for {start_ae} < AE [nT] < {end_ae} is '
+print(f'Median microburst width for AE [nT] > {ae_bins[-1]} is '
           f'{round(df_flt[width_key].median())} ms | N = {df_flt.shape[0]}')
 
 ax[1].legend(loc='center right', fontsize=12)
