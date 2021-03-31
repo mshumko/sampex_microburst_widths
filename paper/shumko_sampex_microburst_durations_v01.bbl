@@ -374,6 +374,46 @@ Douma, E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Duderstadt%
+\ \protect \BOthers {.}}{%
+Duderstadt%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2021}}%
+}]{%
+Duderstadt2021}
+\APACinsertmetastar {%
+Duderstadt2021}%
+\begin{APACrefauthors}%
+Duderstadt, K\BPBI A.%
+, Huang, C\BHBI L.%
+, Spence, H\BPBI E.%
+, Smith, S.%
+, Blake, J\BPBI B.%
+, Crew, A\BPBI B.%
+\BDBL {}Vitt, F\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Estimating the Impacts of Radiation Belt Electrons on
+  Atmospheric Chemistry using FIREBIRD II and Van Allen Probes Observations}
+  {Estimating the impacts of radiation belt electrons on atmospheric chemistry
+  using firebird ii and van allen probes observations}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research:
+  Atmospheres}{n/a}{n/a}{e2020JD033098}.
+\newblock
+\begin{APACrefURL}
+  \url{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2020JD033098}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{e2020JD033098 2020JD033098}
+\newblock
+\begin{APACrefDOI} \doi{https://doi.org/10.1029/2020JD033098} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Horne%
 \ \BBA {} Thorne%
 }{%
