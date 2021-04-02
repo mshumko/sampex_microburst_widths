@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pdftotext "$1" - | sed -n "/Abstract/,/References/p" | wc -w
+pdftotext "$1" - | sed -n "/Introduction/,/References/p" | wc -w
