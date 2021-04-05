@@ -1139,4 +1139,33 @@ Thorne, R\BPBI M.%
 \begin{APACrefDOI} \doi{10.1029/2004JA010882} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
+\bibitem [\protect \citeauthoryear {%
+Winckler%
+, Bhavsar%
+\BCBL {}\ \BBA {} Anderson%
+}{%
+Winckler%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1962}}%
+}]{%
+Winckler1962}
+\APACinsertmetastar {%
+Winckler1962}%
+\begin{APACrefauthors}%
+Winckler, J.%
+, Bhavsar, P.%
+\BCBL {}\ \BBA {} Anderson, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1962}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A study of the precipitation of energetic electrons from
+  the geomagnetic field during magnetic storms} {A study of the precipitation
+  of energetic electrons from the geomagnetic field during magnetic
+  storms}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research}{67}{10}{3717--3736}.
+\PrintBackRefs{\CurrentBib}
+
 \end{thebibliography}
