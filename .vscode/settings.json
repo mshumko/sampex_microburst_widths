@@ -1,4 +1,5 @@
 {
     "latex-workshop.message.badbox.show":false,
-    "latex-workshop.latex.autoBuild.run":"onSave",
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "python.pythonPath": "env/bin/python",
 }

@@ -1,7 +1,7 @@
 """
-This script makes Figure 1: N examples of microbursts and their fits.
+This script makes Figure 1: 4 examples of microbursts and their fits.
 
-The microbursts can be randomly chosen or specified with a list of
+The microbursts can randomly choose N microbursts or plot with a list of
 datetime strings.
 """
 import pathlib
@@ -17,6 +17,7 @@ from sampex_microburst_widths import config
 from sampex_microburst_widths.microburst_id.identify_microbursts import SAMPEX_Microburst_Widths
 from sampex_microburst_widths.misc import load_hilt_data
 
+
 plt.rcParams.update({'font.size': 15})
 
 count_rate_conversion=int(1/20E-3)
@@ -28,27 +29,25 @@ cat = pd.read_csv(pathlib.Path(config.PROJECT_DIR, 'data', catalog_name),
 cat['t0'] = pd.to_datetime(cat['t0'])
 
 random=False
+
 times = pd.to_datetime([
-    # '1999-11-08 02:45:30.320000',
     '1997-11-09 19:57:09.720000',
     '2000-10-29 10:45:22.100000',
-    # '2001-05-09 04:03:30.100000',
     '2003-06-28 17:25:07.320000',
     '2012-06-12 02:29:50.980000'
-    # '2005-08-31 19:23:00.020000'
     ]).sort_values()
 
 plot_width_s = 3
 plot_half_width = pd.Timedelta(seconds=plot_width_s/2)
 
 if random:
-    n = 5
-    plot_df = cat.sample(n=n, replace=False).sort_index()
+    N = 5
+    plot_df = cat.sample(n=N, replace=False).sort_index()
 else:
-    n = len(times)
+    N = len(times)
     plot_df = cat.loc[times, :]
 
-fig, ax = plt.subplots(1, n, figsize=(12, 4))
+fig, ax = plt.subplots(1, N, figsize=(12, 4))
 
 for label_i, ax_i, (row_time, row) in zip(string.ascii_lowercase, ax, plot_df.iterrows()):
     print(label_i, row_time)
