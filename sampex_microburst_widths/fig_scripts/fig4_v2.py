@@ -34,7 +34,7 @@ max_width_ms = 250
 width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 L_bins = np.linspace(2, 8.1, num=50)
 MLT_bins = np.linspace(0, 24, num=50)
-mlt_regions = np.array([[22, 2], [9, 13]])  # For the L-shell distributions
+mlt_regions = np.array([[22, 2], [3, 6]])  # For the L-shell distributions
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
 # R^2 values.
