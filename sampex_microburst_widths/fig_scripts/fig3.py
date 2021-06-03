@@ -35,7 +35,7 @@ catalog_name = 'microburst_catalog_04.csv'
 
 ### Script parameters
 statistics_thresh=100 # Don't calculate stats if less microbursts in the bin.
-percentiles = np.array([25, 50, 75])
+percentiles = np.array([50])
 r2_thresh = 0.9
 max_width_ms = 500
 L_bins = np.linspace(2, 8.1, num=20)
@@ -65,8 +65,8 @@ for i, (start_MLT, end_MLT) in enumerate(zip(MLT_bins[:-1], MLT_bins[1:])):
         if df_flt.shape[0] >= statistics_thresh:
             H[i, j, :] = df_flt.quantile(percentiles/100)
 
-fig = plt.figure(figsize=(10, 8))
-ax = [plt.subplot(2, 2, i, projection='polar') for i in range(1, 5)]
+fig = plt.figure(figsize=(9, 4))
+ax = [plt.subplot(1, 2, i, projection='polar') for i in range(1, 3)]
 
 for i, ax_i in enumerate(ax[:-1]):
     d = dial_plot.Dial(ax_i, MLT_bins, L_bins, H[:, :, i])
