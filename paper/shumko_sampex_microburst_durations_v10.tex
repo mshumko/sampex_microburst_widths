@@ -85,10 +85,10 @@ The HILT instrument consisted of a large rectangular chamber with the aperture o
 
 \section{Methodology}\label{methodology}
 
-We first identified microbursts. We then fit every microburst time series to a model, consisting of a Gaussian superposed with a straight line, to quantify the duration for each microburst.
+\remove{We first identified microbursts. We then fit every microburst time series to a model, consisting of a Gaussian superposed with a straight line, to quantify the duration for each microburst.}
 
 \subsection{Microburst Identification}\label{microburst_id}
-We identified microbursts using the burst parameter defined by \citeA{O'Brien2003}, also used in numerous other SAMPEX microburst studies \cite<e.g.>{Douma2017}. Assuming Poisson probability for the observed electron counts, the burst parameter is the number of standard deviations of a foreground signal above the background, expressed as
+In the first step, we identified microbursts using the burst parameter defined by \citeA{O'Brien2003}, also used in numerous other SAMPEX microburst studies \cite<e.g.>{Douma2017}. Assuming Poisson probability for the observed electron counts, the burst parameter is the number of standard deviations of a foreground signal above the background, expressed as
 \begin{equation}
 n_\sigma = \frac{N-A}{\sqrt{A+1}}
 \end{equation} where $N$ is the number of foreground electron counts, and $A$ is the centered running average background counts. The $1$ in the denominator prevents a division by 0 error. In \citeA{O'Brien2003}, and in the results in this study, $N$ was summed over 100 ms and is called $N_{100}$, while $A$ was summed over 500 ms and is likewise called $A_{500}$.  Henceforth, we specify the time windows with subscripts for $N$ and $A$. Times when $n_\sigma > 10$ are classified as burst times, and the peak time in each continuous burst time interval is saved to the microburst data set. With $A_{500}$ and $N_{100}$, we detected a total of 256,764 microbursts over the 15 year period from 1997 to 2012. Four examples of microbursts are shown in Fig. \ref{fig1} by the solid black curves.
@@ -100,7 +100,7 @@ n_\sigma = \frac{N-A}{\sqrt{A+1}}
 \end{figure}
 
 \subsection{Microburst Duration Quantification}
-We estimated the microburst duration using two methods that yielded similar results: the duration at half of the microburst's topographic prominence and the full width at half maximum (FWHM) from a fit.
+In the second step, we estimated the microburst duration using two methods that yielded similar results: the duration at half of the microburst's topographic prominence and the full width at half maximum (FWHM) from a fit.
 
 The topographic prominence is a simple and robust method to estimate the microburst duration previously used to identify curtains, a similar-looking type of precipitation \cite{Shumko2020b}. It is defined as the duration at half of the microburst's topographic prominence: the height of the microburst relative to the maximum of the two minima on either side of the microburst peak. On each side of the microburst peak, the minima are searched for between the microburst and a higher peak on that side. While the topographic prominence method of estimating microburst durations is simple and robust, one of its downsides is its inability to automatically verify that the duration is representative of a single microburst. Therefore, we also fit microbursts with a Gaussian, and used the $R^2$ goodness of fit metric to exclude bad duration estimates such as a superposition of multiple microbursts—one potential source of bias.
 
