@@ -1,5 +1,5 @@
 """
-This script generates Figure 3: a plot of the marginalized microburst duration 
+This script generates Figure 4: a plot of the marginalized microburst duration 
 as a function of L and MLT.
 
 Parameters
