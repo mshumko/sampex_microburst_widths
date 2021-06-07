@@ -33,8 +33,9 @@ r2_thresh = 0.9
 max_width_ms = 250
 width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 L_bins = np.linspace(2, 8.1, num=50)
+L_bins_line_plot = np.linspace(2, 8.1, num=10)
 MLT_bins = np.linspace(0, 24, num=50)
-mlt_regions = np.array([[22, 2], [3, 6]])  # For the L-shell distributions
+mlt_regions = np.array([[22, 2], [9, 13]])  # For the L-shell distributions
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
 # R^2 values.
@@ -55,49 +56,53 @@ H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm_ms'],
                         bins=[MLT_bins, width_bins])
 
 # Create a histogram of L-FWHM for the two mlt_regions
-H_L_regions = np.nan*np.zeros((2, *H_L.shape))
+H_MLT_regions = np.nan*np.zeros((2, L_bins_line_plot.shape[0]-1))
 for i, mlt_region in enumerate(mlt_regions):
     if mlt_region[0] > mlt_region[1]:  # Presumably the region crosses over 0 MLT.
         df_flt = df[(df['MLT'] > mlt_region[0]) | (df['MLT'] < mlt_region[1])]
     else:
         df_flt = df[(df['MLT'] > mlt_region[0]) & (df['MLT'] < mlt_region[1])]
-    H_L_regions[i, :, :], _, _ = np.histogram2d(df_flt['L_Shell'], df_flt['fwhm_ms'],
-                                bins=[L_bins, width_bins])
-
+    
+    for j, (L_lower, L_upper) in enumerate(zip(L_bins_line_plot[:-1], L_bins_line_plot[1:])):
+        df_flt2 = df_flt[(df_flt['L_Shell'] >= L_lower) & (df_flt['L_Shell'] <= L_upper)]
+        H_MLT_regions[i, j] = np.nanmedian(df_flt2['fwhm_ms'])
 
 # Make the FWHM-L and FWHM-MLT plots.
-_, ax = plt.subplots(2, 2, figsize=(8, 6))
+_, ax = plt.subplots(1, 2, figsize=(12, 6))
 
-p_L = ax[0, 0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
+p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
 # plt.colorbar(p_L, ax=ax[0, 0], orientation='horizontal', label='Number of microbursts')
-ax[0, 0].set_xlabel('L-shell')
-ax[0, 0].set_ylabel('FWHM [ms]')
+ax[0].set_xlabel('L-shell')
+ax[0].set_ylabel('FWHM [ms]')
 
-p_MLT = ax[0, 1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
+p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
 # plt.colorbar(p_MLT, ax=ax[0, 1], orientation='horizontal', label='Number of microbursts')
-ax[0, 1].set_xlabel('MLT')
-ax[0, 1].set_ylabel('FWHM [ms]')
+ax[1].set_xlabel('MLT')
+ax[1].set_ylabel('FWHM [ms]')
 
-# Make the FWHM-L plot for the two MLT regions.
-for i, H_L_region in enumerate(H_L_regions):
-    p_L = ax[1, i].pcolormesh(L_bins, width_bins, H_L_region.T, vmin=0, vmax=20)
-    # plt.colorbar(p_L, ax=ax[1, i], orientation='horizontal', label='Number of microbursts')
-    ax[1, i].set_xlabel('L-shell')
-    ax[1, i].set_ylabel('FWHM [ms]')
+# Make the FWHM-L curves for the two MLT regions.
+# for i, H_L_region in enumerate(H_L_regions):
+#     p_L = ax[1, i].pcolormesh(L_bins, width_bins, H_L_region.T, vmin=0, vmax=20)
+#     # plt.colorbar(p_L, ax=ax[1, i], orientation='horizontal', label='Number of microbursts')
+#     ax[1, i].set_xlabel('L-shell')
+#     ax[1, i].set_ylabel('FWHM [ms]')
+linestyles = ['k--', 'k:']
+for mlt_region, H, ls in zip(mlt_regions, H_MLT_regions, linestyles):
+    ax[0].plot(L_bins_line_plot[1:], H, ls, 
+                label=f'{mlt_region[0]}-{mlt_region[1]}')
+ax[0].legend(loc=1, title='MLT regions:')
+
 
 subplot_text = [
-    f'(a) All microbursts', 
+    f'(a)', 
     f'(b)',
-    f'(c) {mlt_regions[0, 0]} < MLT < {mlt_regions[0, 1]}', 
-    f'(d) {mlt_regions[1, 0]} < MLT < {mlt_regions[1, 1]}'
+    # f'(c) {mlt_regions[0, 0]} < MLT < {mlt_regions[0, 1]}', 
+    # f'(d) {mlt_regions[1, 0]} < MLT < {mlt_regions[1, 1]}'
                 ]
-i=0
-for ax_row in ax:
-    for ax_i in ax_row:
-        # annotate_str = f'({string.ascii_lowercase[i]})'
-        ax_i.text(0, 1, subplot_text[i], va='top', color='white', weight='bold', 
-                    transform=ax_i.transAxes, fontsize=20)
-        i+=1
+
+for i, ax_i in enumerate(ax):
+    ax_i.text(0, 1, subplot_text[i], va='top', color='white', weight='bold', 
+                transform=ax_i.transAxes, fontsize=20)
 
 plt.suptitle(f'Distribution of SAMPEX microburst durations in L and MLT', fontsize=20)
 
