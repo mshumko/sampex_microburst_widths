@@ -33,7 +33,7 @@ r2_thresh = 0.9
 max_width_ms = 250
 width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 L_bins = np.linspace(2, 8.1, num=50)
-L_bins_line_plot = np.linspace(2, 8.1, num=10)
+L_bins_line_plot = np.linspace(2, 8.1, num=20)
 MLT_bins = np.linspace(0, 24, num=50)
 mlt_regions = np.array([[22, 2], [9, 13]])  # For the L-shell distributions
 
@@ -65,7 +65,8 @@ for i, mlt_region in enumerate(mlt_regions):
     
     for j, (L_lower, L_upper) in enumerate(zip(L_bins_line_plot[:-1], L_bins_line_plot[1:])):
         df_flt2 = df_flt[(df_flt['L_Shell'] >= L_lower) & (df_flt['L_Shell'] <= L_upper)]
-        H_MLT_regions[i, j] = np.nanmedian(df_flt2['fwhm_ms'])
+        if df_flt2.shape[0] > 100:
+            H_MLT_regions[i, j] = np.nanmedian(df_flt2['fwhm_ms'])
 
 # Make the FWHM-L and FWHM-MLT plots.
 _, ax = plt.subplots(1, 2, figsize=(12, 6))
@@ -78,7 +79,7 @@ p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
 ax[1].set_xlabel('MLT')
 ax[1].set_ylabel('FWHM [ms]')
 
-linestyles = ['w--', 'w:']
+linestyles = ['w', 'w--']
 for mlt_region, H, ls in zip(mlt_regions, H_MLT_regions, linestyles):
     ax[0].plot(L_bins_line_plot[1:], H, ls, 
                 label=f'{mlt_region[0]}-{mlt_region[1]}')
