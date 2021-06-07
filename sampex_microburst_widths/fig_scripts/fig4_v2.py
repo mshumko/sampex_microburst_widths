@@ -71,21 +71,13 @@ for i, mlt_region in enumerate(mlt_regions):
 _, ax = plt.subplots(1, 2, figsize=(12, 6))
 
 p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
-# plt.colorbar(p_L, ax=ax[0, 0], orientation='horizontal', label='Number of microbursts')
 ax[0].set_xlabel('L-shell')
 ax[0].set_ylabel('FWHM [ms]')
 
 p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
-# plt.colorbar(p_MLT, ax=ax[0, 1], orientation='horizontal', label='Number of microbursts')
 ax[1].set_xlabel('MLT')
 ax[1].set_ylabel('FWHM [ms]')
 
-# Make the FWHM-L curves for the two MLT regions.
-# for i, H_L_region in enumerate(H_L_regions):
-#     p_L = ax[1, i].pcolormesh(L_bins, width_bins, H_L_region.T, vmin=0, vmax=20)
-#     # plt.colorbar(p_L, ax=ax[1, i], orientation='horizontal', label='Number of microbursts')
-#     ax[1, i].set_xlabel('L-shell')
-#     ax[1, i].set_ylabel('FWHM [ms]')
 linestyles = ['k--', 'k:']
 for mlt_region, H, ls in zip(mlt_regions, H_MLT_regions, linestyles):
     ax[0].plot(L_bins_line_plot[1:], H, ls, 
@@ -93,12 +85,7 @@ for mlt_region, H, ls in zip(mlt_regions, H_MLT_regions, linestyles):
 ax[0].legend(loc=1, title='MLT regions:')
 
 
-subplot_text = [
-    f'(a)', 
-    f'(b)',
-    # f'(c) {mlt_regions[0, 0]} < MLT < {mlt_regions[0, 1]}', 
-    # f'(d) {mlt_regions[1, 0]} < MLT < {mlt_regions[1, 1]}'
-                ]
+subplot_text = [f'(a)', f'(b)',]
 
 for i, ax_i in enumerate(ax):
     ax_i.text(0, 1, subplot_text[i], va='top', color='white', weight='bold', 
