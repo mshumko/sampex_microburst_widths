@@ -100,9 +100,9 @@ n_\sigma = \frac{N-A}{\sqrt{A+1}}
 \end{figure}
 
 \subsection{Microburst Duration Quantification}
-In the second step, we estimated the microburst duration using two methods that yielded similar results: the duration at half of the microburst's topographic prominence and the full width at half maximum (FWHM) from a fit.
+In the second step, we estimated the microburst duration using two methods, detailed below, that yielded similar results: the duration at half of the microburst's topographic prominence and the full width at half maximum (FWHM) from a Gaussian fit.
 
-The topographic prominence is a simple and robust method to estimate the microburst duration previously used to identify curtains, a similar-looking type of precipitation \cite{Shumko2020b}. It is defined as the duration at half of the microburst's topographic prominence: the height of the microburst relative to the maximum of the two minima on either side of the microburst peak. On each side of the microburst peak, the minima are searched for between the microburst and a higher peak on that side. While the topographic prominence method of estimating microburst durations is simple and robust, a downside is its inability to automatically verify that the estimated duration is of a single microburst and not a superposition of multiple microbursts (Fig. \ref{fig1}a \add{is an example of two superposed microbursts)}. \remove{Therefore, we also fit microbursts with a Gaussian, and used the R2 goodness of fit metric to exclude bad duration estimates such as a superposition of multiple microbursts one potential source of bias.}
+The topographic prominence is a simple and robust method to estimate the microburst duration previously used to identify curtains, a similar-looking type of precipitation \cite{Shumko2020b}. \add{Using this technique, we define microburst duration to be} the duration at half of the microburst's topographic prominence: the height of the microburst relative to the maximum of the two minima on either side of the microburst peak. On each side of the microburst peak, the minima are searched for between the microburst and a higher peak on that side. While the topographic prominence method of estimating microburst durations is simple and robust, a downside is its inability to automatically verify that the estimated duration is of a single microburst and not a superposition of multiple microbursts (Fig. \ref{fig1}a \add{is an example of two superposed microbursts)}. \remove{Therefore, we also fit microbursts with a Gaussian, and used the R2 goodness of fit metric to exclude bad duration estimates such as a superposition of multiple microbursts one potential source of bias.}
 
 \add{To overcome this downside, we fit the microburst time series and used the $R^2$ goodness of fit metric to verify the fit.} We assumed a fit model consisting of a Gaussian superposed with a straight line \add{for the background counts at and around the microburst.} The Gaussian models the shape of the microburst and the linear trend models the background electrons that are either trapped or quasi-trapped in the drift loss cone. This model is defined as
 \begin{equation}
@@ -117,18 +117,18 @@ To evaluate the fit, we used the $R^2$ goodness of fit metric. $R^2$ is defined 
 R^2 = 1 - \frac{SS_{res}}{SS_{mean}} = 1 - \frac{\sum{(c_i-f_i)^2}}{\sum{(c_i-\bar{c})^2}}
 \end{equation} where $SS_{res}$ is the sum of the squared residuals between the observed counts $c_i$ and the fit counts $f_i$ for each time step, and likewise $SS_{mean}$ is the sum of the squared residuals between $c_i$ and the mean of the counts, $\bar{c}$.
 
-One interpretation of $R^2$ is fractionally how much better the variance in the data is explained by the model fit, compared to the null hypothesis horizontal line at $\bar{c}$. $R^2$ varies from $1$ for a perfect fit, to $-\infty$ for poor fits (a fit can be much worse than the mean null hypothesis).
+One interpretation of $R^2$ is fractionally how much better the variance in the data is explained by the model fit, compared to the null hypothesis horizontal line at $\bar{c}$. $R^2$ varies from $1$ for a \remove{perfect} fit \add{that perfectly describes the data}, to $-\infty$ for poor fits (a fit can be much worse than the mean null hypothesis).
 
 To account for overfitting, we used the adjusted $R^2$, $\bar{R}^2$, defined as
 
 \begin{equation}
 \bar{R}^2 = 1 - (1-R^2) \frac{n-1}{n-p-1}
-\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and $n-p-1$ is the degrees of freedom for the fit model. Fits with $\bar{R}^2 > 0.9$ are considered good and are analyzed. As a check, we compared the microburst duration estimated with the prominence and fit methods. We first chose an agreement criterion between the two methods as a duration within 25\%; together with the $\bar{R}^2 > 0.9$ constraint, $85\%$ of microbursts satisfied this criterion.
+\end{equation} where $n$ is the number of data points fit, and $p$ is the number of parameters. Intuitively, $n-1$ is the number of degrees of freedom for the null hypothesis, and $n-p-1$ is the degrees of freedom for the fit model. Fits with $\bar{R}^2 > 0.9$ are considered good and are analyzed. As a check, we compared the microburst duration estimated with the prominence and fit methods. We first chose an agreement criterion between the two methods as a duration within 25\%; together with the $\bar{R}^2 > 0.9$ constraint, $85\%$ of microbursts satisfied \change{this criterion}{these criteria}.
 
 Figure \ref{fig1}a shows an example of two superposed microbursts that had a fit $\bar{R}^2 = 0.83$ that were excluded from this study. On other hand, microbursts in Fig. \ref{fig1}b-d had $\bar{R}^2 > 0.9$ and were included in the following analysis. Lastly, Fig. \ref{fig1}c and d demonstrate the necessity of the linear fit to account for the changing background. The linear fit accounts for the non-zero mean background counts and the uneven amplitudes at the edges of the Gaussian. Of the 256,764 detected microbursts, 109,231 have $\bar{R}^2 > 0.9$ and are used for the remainder of this study.
 
 \section{Results}\label{results}
-We used the well-fit microbursts to quantify the distribution of microburst duration (FWHM). We then investigated trends in the duration distirbution as a function of the Auroral Electrojet index, L-shell and MLT. We begin with the overall microburst distribution.
+We used the well-fit microbursts to quantify the distribution of microburst duration (FWHM). We then investigated trends in the duration distribution as a function of the Auroral Electrojet index, L-shell and MLT. We begin with the overall microburst distribution.
 
 Figure \ref{fig2}a shows the distribution of all well-fit microbursts. This distribution is strongly peaked with 97 ms median duration. The interquartile range spans about a factor of two in microburst duration, from 66 to 142 ms.
 
@@ -144,7 +144,7 @@ Lastly, Figs. \ref{fig3} and \ref{fig4} show the microburst duration as a functi
 
 Figure \ref{fig3} shows that the microburst duration trend is nearly identical for the different percentiles, and thus for simplicity we focus on the median distribution in Fig. \ref{fig3}b. In MLT, the median microburst duration increases by roughly a factor of two: from 80 ms at midnight to 160 ms at noon. In L-shell, the median microburst duration slightly increases with L-shell, most apparent near midnight MLT.
 
-To disentangle the L and MLT distributions, Fig. \ref{fig4} shows the marginalized distributions; MLT was marginalized out in Fig. \ref{fig4}a and L-shell was marginalized out in Fig. \ref{fig4}b. Figure \ref{fig4}a shows a slight broadening of the microburst duration at higher L-shells---in contrast to Fig. \ref{fig4}b, that clearly shows the microburst duration increase from midnight to noon MLT.
+To disentangle the L and MLT distributions, Fig. \ref{fig4} shows the marginalized distributions; MLT was marginalized out \add{(summed over)} in Fig. \ref{fig4}a and L-shell was marginalized out in Fig. \ref{fig4}b. Figure \ref{fig4}a shows a slight broadening of the microburst duration at higher L-shells---in contrast to Fig. \ref{fig4}b, that clearly shows the microburst duration increase from midnight to noon MLT.
 
 \begin{figure}
 \noindent\includegraphics[width=\textwidth]{figures/fig3.pdf}
