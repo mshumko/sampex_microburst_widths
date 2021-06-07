@@ -78,7 +78,7 @@ p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
 ax[1].set_xlabel('MLT')
 ax[1].set_ylabel('FWHM [ms]')
 
-linestyles = ['k--', 'k:']
+linestyles = ['w--', 'w:']
 for mlt_region, H, ls in zip(mlt_regions, H_MLT_regions, linestyles):
     ax[0].plot(L_bins_line_plot[1:], H, ls, 
                 label=f'{mlt_region[0]}-{mlt_region[1]}')
