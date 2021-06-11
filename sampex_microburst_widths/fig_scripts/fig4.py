@@ -44,6 +44,17 @@ df['fwhm_ms'] = df['fwhm_ms'].abs()
 df = df[df.adj_r2 > r2_thresh]
 print(f'The {initial_shape} microbursts were filtered down to {df.shape[0]} microbursts.')
 
+mean_width_L = np.nan*np.zeros(L_bins.shape[0]-1)
+for i, (L_lower, L_upper) in enumerate(zip(L_bins[:-1], L_bins[1:])):
+    df_flt = df[(df['L_Shell'] > L_lower) & 
+                        (df['L_Shell'] <= L_upper)]
+                        
+    if df_flt.shape[0]>100: 
+        mean_width_L[i] = df_flt["fwhm_ms"].median()
+
+# plt.plot(L_bins[:-1], mean_width_L)
+# plt.show()
+
 # Create a histogram of L-FWHM and MLT-FWHM
 H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm_ms'],
                         bins=[L_bins, width_bins])
@@ -54,6 +65,7 @@ H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm_ms'],
 _, ax = plt.subplots(1, 2, figsize=(12, 6))
 
 p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
+ax[0].plot(L_bins[:-1], mean_width_L, c='w', ls='--')
 plt.colorbar(p_L, ax=ax[0], orientation='horizontal', label='Number of microbursts')
 ax[0].set_xlabel('L-shell')
 ax[0].set_ylabel('FWHM [ms]')
