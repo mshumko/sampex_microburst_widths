@@ -31,6 +31,8 @@ max_width_ms = 250
 width_bins = np.linspace(0, max_width_ms+0.001, num=50)
 L_bins = np.linspace(2, 8.1, num=50)
 MLT_bins = np.linspace(0, 24, num=50)
+dL = L_bins[1] - L_bins[0]
+dMLT = MLT_bins[1] - MLT_bins[0]
 
 # Load the catalog, drop the NaN values, and filter by the max_width and
 # R^2 values.
@@ -44,16 +46,22 @@ df['fwhm_ms'] = df['fwhm_ms'].abs()
 df = df[df.adj_r2 > r2_thresh]
 print(f'The {initial_shape} microbursts were filtered down to {df.shape[0]} microbursts.')
 
-mean_width_L = np.nan*np.zeros(L_bins.shape[0]-1)
+median_width_L = np.nan*np.zeros(L_bins.shape[0]-1)
+median_width_MLT = np.nan*np.zeros(MLT_bins.shape[0]-1)
+
 for i, (L_lower, L_upper) in enumerate(zip(L_bins[:-1], L_bins[1:])):
     df_flt = df[(df['L_Shell'] > L_lower) & 
-                        (df['L_Shell'] <= L_upper)]
+                (df['L_Shell'] <= L_upper)]
                         
-    if df_flt.shape[0]>100: 
-        mean_width_L[i] = df_flt["fwhm_ms"].median()
+    if df_flt.shape[0]>500: 
+        median_width_L[i] = df_flt["fwhm_ms"].median()
 
-# plt.plot(L_bins[:-1], mean_width_L)
-# plt.show()
+for i, (MLT_lower, MLT_upper) in enumerate(zip(MLT_bins[:-1], MLT_bins[1:])):
+    df_flt = df[(df['MLT'] > MLT_lower) & 
+                (df['MLT'] <= MLT_upper)]
+                        
+    if df_flt.shape[0]>500: 
+        median_width_MLT[i] = df_flt["fwhm_ms"].median()
 
 # Create a histogram of L-FWHM and MLT-FWHM
 H_L, _, _ = np.histogram2d(df['L_Shell'], df['fwhm_ms'],
@@ -65,12 +73,13 @@ H_MLT, _, _ = np.histogram2d(df['MLT'], df['fwhm_ms'],
 _, ax = plt.subplots(1, 2, figsize=(12, 6))
 
 p_L = ax[0].pcolormesh(L_bins, width_bins, H_L.T, vmin=0)
-ax[0].plot(L_bins[:-1], mean_width_L, c='w', ls='--')
+ax[0].plot(L_bins[:-1] + dL/2, median_width_L, c='w')
 plt.colorbar(p_L, ax=ax[0], orientation='horizontal', label='Number of microbursts')
 ax[0].set_xlabel('L-shell')
 ax[0].set_ylabel('FWHM [ms]')
 
 p_MLT = ax[1].pcolormesh(MLT_bins, width_bins, H_MLT.T, vmin=0)
+ax[1].plot(MLT_bins[:-1] + dMLT/2, median_width_MLT, c='w')
 plt.colorbar(p_MLT, ax=ax[1], orientation='horizontal', label='Number of microbursts')
 ax[1].set_xlabel('MLT')
 ax[1].set_ylabel('FWHM [ms]')
