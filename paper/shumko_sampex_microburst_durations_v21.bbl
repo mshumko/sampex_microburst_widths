@@ -1,6 +1,37 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Agapitov%
+\ \protect \BOthers {.}}{%
+Agapitov%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+Agapitov2018b}
+\APACinsertmetastar {%
+Agapitov2018b}%
+\begin{APACrefauthors}%
+Agapitov, O.%
+, Mourenas, D.%
+, Artemyev, A.%
+, Mozer, F.%
+, Hospodarsky, G.%
+, Bonnell, J.%
+\BCBL {}\ \BBA {} Krasnoselskikh, V.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Synthetic empirical chorus wave model from combined Van
+  Allen Probes and Cluster statistics} {Synthetic empirical chorus wave model
+  from combined van allen probes and cluster statistics}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Geophysical Research: Space
+  Physics}{123}{1}{297--314}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Anderson%
 \ \BBA {} Milton%
 }{%
@@ -522,15 +553,9 @@ Kurita, S.%
 
 \bibitem [\protect \citeauthoryear {%
 Li%
-, Thorne%
-, Angelopoulos%
-, Bonnell%
-\BCBL {}\ \protect \BOthers {.}}{%
+\ \protect \BOthers {.}}{%
 Li%
-, Thorne%
-, Angelopoulos%
-, Bonnell%
-\BCBL {}\ \protect \BOthers {.}}{%
+\ \protect \BOthers {.}}{%
 {\protect \APACyear {2009}}%
 }]{%
 Li2009b}
@@ -556,49 +581,6 @@ Li, W.%
 \newblock
 \APACjournalVolNumPages{Journal of Geophysical Research: Space
   Physics}{114}{A1}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Li%
-, Thorne%
-, Angelopoulos%
-, Bortnik%
-\BCBL {}\ \protect \BOthers {.}}{%
-Li%
-, Thorne%
-, Angelopoulos%
-, Bortnik%
-\BCBL {}\ \protect \BOthers {.}}{%
-{\protect \APACyear {2009}}%
-}]{%
-Li2009a}
-\APACinsertmetastar {%
-Li2009a}%
-\begin{APACrefauthors}%
-Li, W.%
-, Thorne, R\BPBI M.%
-, Angelopoulos, V.%
-, Bortnik, J.%
-, Cully, C\BPBI M.%
-, Ni, B.%
-\BDBL {}Magnes, W.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2009}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Global distribution of whistler-mode chorus waves
-  observed on the {THEMIS} spacecraft} {Global distribution of whistler-mode
-  chorus waves observed on the {THEMIS} spacecraft}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Geophysical Research Letters}{36}{9}{}.
-\newblock
-\begin{APACrefURL} \url{http://dx.doi.org/10.1029/2009GL037595}
-  \end{APACrefURL}
-\newblock
-\APACrefnote{L09104}
-\newblock
-\begin{APACrefDOI} \doi{10.1029/2009GL037595} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
