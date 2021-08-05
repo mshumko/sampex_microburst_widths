@@ -1,7 +1,7 @@
 %% To submit your paper:
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL archive/shumko_sampex_microburst_durations_v20.tex   Mon Jul 26 10:41:26 2021
-%DIF ADD shumko_sampex_microburst_durations_v22.tex           Tue Aug  3 17:16:52 2021
+%DIF DEL archive/shumko_sampex_microburst_durations_v20.tex   Mon Jul 26 16:36:27 2021
+%DIF ADD shumko_sampex_microburst_durations_v30.tex           Thu Aug  5 15:55:46 2021
 \documentclass[draft]{agujournal2019}
 \usepackage{url} %this package should fix any errors with URLs in refs.
 \usepackage{lineno}
@@ -35,6 +35,8 @@
 \providecommand{\DIFaddend}{} %DIF PREAMBLE
 \providecommand{\DIFdelbegin}{} %DIF PREAMBLE
 \providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
 %DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
 \providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
 \providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
@@ -42,6 +44,22 @@
 \providecommand{\DIFaddendFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
@@ -197,9 +215,9 @@ While different model parameters may change what wave properties are theoretical
 
 Lastly, high latitude chorus waves, \DIFdelbegin \DIFdel{found }\DIFdelend \DIFaddbegin \DIFadd{observed }\DIFaddend at $|\lambda| \approx 10^\circ-25^\circ$ magnetic \DIFdelbegin \DIFdel{latitude off of the equator}\DIFdelend \DIFaddbegin \DIFadd{latitudes}\DIFaddend , can also play at important role at scattering microburst electrons \cite{Lorentzen2001a}. \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \citeA{Li2009a} }\hspace{0pt}%DIFAUXCMD
-found that the majority of high latitude chorus waves are constrained to 6-12 MLT . Thus, it is tempting to conclude that the microburst duration trend in MLT could be attributed to some difference in how low and high latitude chorus waves scatter MeV electrons. However, because low latitude chorus waves are also observed at 0-12 MLT, the resulting microburst duration distribution would reflect the }\DIFdelend \DIFaddbegin \DIFadd{Figure 9 in \mbox{%DIFAUXCMD
+found that the majority of high latitude chorus waves are constrained to 6-12 MLT. Thus, it is tempting to conclude that the microburst duration trend in MLT could be attributed to some difference in how low and high latitude chorus waves scatter MeV electrons. However, because low latitude chorus waves are also observed at 0-12 MLT , the resulting microburst duration distribution would reflect }\DIFdelend \DIFaddbegin \DIFadd{Figure 9 in \mbox{%DIFAUXCMD
 \citeA{Agapitov2018b} }\hspace{0pt}%DIFAUXCMD
-shows the }\DIFaddend chorus \DIFdelbegin \DIFdel{wave superposition in }\DIFdelend \DIFaddbegin \DIFadd{occurrence and root-mean-square wave amplitude as a function of $\lambda$ and wave normal angle in three MLT bins. In two of their MLT bins that are relevant here: 21-3 and 4-12 hours, }\DIFaddend the \DIFdelbegin \DIFdel{6-12 MLT region. If low and high latitude chorus waves scattered microbursts with different durations, Fig. \ref{fig4}b would show the microburst durations broaden or bifurcate from midnight to noon MLT. Because Fig. \ref{fig4}b shows the entire microburst duration distributionshifting to longer durations, high vs low latitude chorus waves are an unlikely explanation for the microburst duration trend in MLT}\DIFdelend \DIFaddbegin \DIFadd{occurrence probability is largely independent of $|\lambda|$. But this is not the case for the chorus wave amplitude; it is mostly confined to $|\lambda| < 7^\circ$ in 21-3 MLT and $|\lambda| > 5^\circ$ in 4-12 MLT. The chorus amplitude-MLT-$|\lambda|$ distribution, together with the time-of-flight effect, is another persuasive mechanism for differing microburst durations that is also worth further consideration}\DIFaddend . 
+shows the chorus occurrence and root-mean-square wave amplitude as a function of $\lambda$ and wave normal angle in three MLT bins. In two of their MLT bins that are relevant here: 21-3 and 4-12 hours, the occurrence probability is largely independent of $|\lambda|$. But this is not the case for }\DIFaddend the chorus wave \DIFdelbegin \DIFdel{superposition in the 6-12 MLT region. If low and high latitude chorus waves scattered microbursts with different durations, Fig. \ref{fig4}b would show the microburst durations broaden or bifurcate from midnight to noon MLT. Because Fig. \ref{fig4}b shows the entire microburst duration distributionshifting to longer durations, high vs low latitude chorus waves are an unlikely explanation for the microburst duration trend in MLT}\DIFdelend \DIFaddbegin \DIFadd{amplitude; it is mostly confined to $|\lambda| < 7^\circ$ in 21-3 MLT and $|\lambda| > 5^\circ$ in 4-12 MLT. The chorus amplitude-MLT-$|\lambda|$ distribution, together with the time-of-flight effect, is another persuasive mechanism for differing microburst durations that is also worth further consideration}\DIFaddend . 
 
 In summary, we found that the relativistic microburst duration distribution is peaked at 100 ms, with 75\% of microbursts narrower than 140 ms. We discovered a strong trend in microburst duration as a function of MLT---the median microburst duration roughly doubling from \DIFdelbegin \DIFdel{80 ms at }\DIFdelend \DIFaddbegin \DIFadd{75 ms near }\DIFaddend midnight, to \DIFdelbegin \DIFdel{160 ms at }\DIFdelend \DIFaddbegin \DIFadd{140 ms near }\DIFaddend noon. Prior work also shows that chorus rising tone element durations double in MLT \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
 \cite{Shue2019,Teng2017}}\hspace{0pt}%DIFAUXCMD
@@ -224,7 +242,7 @@ In summary, we found that the relativistic microburst duration distribution is p
 We are thankful for the engineers and scientists who made the SAMPEX mission possible. M. Shumko acknowledges the support provided by the NASA Postdoctoral Program at the NASA’s Goddard Space Flight Center, administered by Universities Space Research Association under contract with NASA; L.W.Blum acknowledges the Heliophysics Innovation Fund program at NASA’s Goddard Space Flight Center; and A.B. Crew acknowledges funding provided by the National Science Foundation, award 1602607. The SAMPEX HILT and attitude data are \DIFdelbegin \DIFdel{located at }\DIFdelend \DIFaddbegin \DIFadd{only available at the following FTP link }\DIFaddend \url{http://www.srl.caltech.edu/sampex/DataCenter/data.html}\DIFaddbegin \DIFadd{, }\DIFaddend and the minute cadence Auroral Electrojet data is \DIFdelbegin \DIFdel{located }\DIFdelend \DIFaddbegin \DIFadd{available }\DIFaddend at \url{ftp://ftp.ngdc.noaa.gov/STP/GEOMAGNETIC_DATA/INDICES/AURORAL_ELECTROJET/ONE_MINUTE/}.
 This analysis software is available at: \url{https://github.com/mshumko/sampex_microburst_widths}, and is archived on Zenodo \DIFdelbegin %DIFDELCMD < \url{https://doi.org/10.5281/zenodo.4687987}
 %DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \url{https://doi.org/10.5281/zenodo.4961209}
+\DIFdelend \DIFaddbegin \url{https://doi.org/10.5281/zenodo.5165064}
 \DIFaddend 
 
 
