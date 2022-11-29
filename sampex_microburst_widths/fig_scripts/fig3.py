@@ -34,7 +34,7 @@ cmap = 'viridis'
 catalog_name = 'microburst_catalog_04.csv'
 
 ### Script parameters
-statistics_thresh=100 # Don't calculate stats if less microbursts in the bin.
+statistics_thresh=30 # Don't calculate stats if less microbursts in the bin.
 percentiles = np.array([50])
 r2_thresh = 0.9
 max_width_ms = 500
@@ -53,7 +53,7 @@ df = df[df.adj_r2 > r2_thresh]
 num_microbursts_H, _, _ = np.histogram2d(df['MLT'], df['L_Shell'],
                                         bins=[MLT_bins, L_bins])
 H = np.nan*np.zeros(
-    (len(MLT_bins), len(L_bins), len(percentiles))
+    (len(MLT_bins)-1, len(L_bins)-1, len(percentiles))
                     )
 
 for i, (start_MLT, end_MLT) in enumerate(zip(MLT_bins[:-1], MLT_bins[1:])):
@@ -69,15 +69,15 @@ fig = plt.figure(figsize=(9, 4))
 ax = [plt.subplot(1, 2, i, projection='polar') for i in range(1, 3)]
 
 for i, ax_i in enumerate(ax[:-1]):
-    d = dial_plot.Dial(ax_i, MLT_bins, L_bins, H[:, :, i])
+    d = dial_plot.Dial(ax_i, MLT_bins, L_bins, H[:, :, i].T)
     d.draw_dial(L_labels=L_labels,
-            mesh_kwargs={'cmap':cmap},
+            mesh_kwargs={'cmap':cmap, 'norm':matplotlib.colors.Normalize(60, 150)},
             colorbar_kwargs={'label':f'microburst duration [ms]', 'pad':0.1})
     annotate_str = f'({string.ascii_lowercase[i]}) {percentiles[i]}th percentile'
     ax_i.text(-0.2, 1.2, annotate_str, va='top', transform=ax_i.transAxes, 
             weight='bold', fontsize=15)
 
-d4 = dial_plot.Dial(ax[-1], MLT_bins, L_bins, num_microbursts_H)
+d4 = dial_plot.Dial(ax[-1], MLT_bins, L_bins, num_microbursts_H.T)
 d4.draw_dial(L_labels=L_labels,
             mesh_kwargs={'norm':matplotlib.colors.LogNorm(), 'cmap':cmap},
             colorbar_kwargs={'label':'Number of microbursts', 'pad':0.1})
