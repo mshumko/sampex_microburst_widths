@@ -10,8 +10,8 @@ git clone https://github.com/mshumko/sampex_microburst_widths
 cd sampex_microburst_widths
 python3 -m venv env
 source env/bin/activate
-pip3 install -r requirements.txt
-python3 -m sampex_microburst_widths init # and answer the promps.
+python3 -m pip install -r requirements.txt # or python3 -m pip install -e .
+python3 -m sampex_microburst_widths init # to answer the prompts and configure paths
 ```
 
 I developed and tested this code with Python 3.9.0 (tags/v3.9.0:9cf6752276e, Nov  2 2020, 09:08:52)
