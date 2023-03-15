@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from sampex_microburst_widths import config
 
 catalog_name = 'microburst_catalog_04.csv'
-mlt_range = [6, 12]
+mlt_range = [16, 22]
 good_r2_thresh = 0.9
 bad_r2_thresh = 0.5
 

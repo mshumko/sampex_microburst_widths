@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 from sampex_microburst_widths import config
 
 catalog_name = 'microburst_catalog_04.csv'
-mlt_range = [6, 12]
+mlt_range = [16, 22]
 good_r2_thresh = 0.9
 bad_r2_thresh = 0.5
 plot_width_s = 5
-save_path = pathlib.Path(config.PROJECT_DIR.parent, 'plots', 'validation')
+save_dir = pathlib.Path(config.PROJECT_DIR.parent, 'plots', 'validation')
 
 catalog_path = pathlib.Path(config.PROJECT_DIR, 'data', catalog_name)
 catalog = pd.read_csv(catalog_path, index_col=0, parse_dates=True)
@@ -33,6 +33,11 @@ print(f'{good_fit_catalog.shape[0]} microbursts in {mlt_range=} and with adj_R^2
 print(f'{bad_fit_catalog.shape[0]} microbursts in {mlt_range=} and with adj_R^2<{bad_r2_thresh}')
 
 current_date = pd.Timestamp.min
+_save_dir = save_dir / 'good'
+if not _save_dir.exists():
+    _save_dir.mkdir(parents=True)
+    print(f'Made {_save_dir} directory')
+
 for time, row in good_fit_catalog.iterrows():
     print(f'Processing SAMPEX microburst at {time=}')
     if time.date() != current_date:
@@ -53,5 +58,5 @@ for time, row in good_fit_catalog.iterrows():
     ax.text(0.70, 0.98, annotate_str, 
            ha='left', va='top', transform=ax.transAxes)
 
-    save_name = f'{time: %F_%T}_sampex_microburst_good_fit.png'
-    plt.savefig(save_path/'good'/save_name)
+    save_name = f'{time:%Y%m%d_%H%M%S}_sampex_microburst_good_fit.png'
+    plt.savefig(_save_dir/save_name)
