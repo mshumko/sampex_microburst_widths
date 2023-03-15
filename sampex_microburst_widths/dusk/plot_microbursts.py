@@ -54,7 +54,7 @@ for time, row in good_fit_catalog.iterrows():
 
     fig, ax = plt.subplots()
     ax.plot(hilt_flt.index, hilt_flt['counts'], 'k')
-    annotate_str = f'FWHM = {row["fwhm_ms"]} [ms]\n$R^{{2}} = {{{row["adj_r2"]}}}$'
+    annotate_str = f'FWHM = {round(row["fwhm_ms"])} [ms]\n$R^{{2}} = {{{round(row["adj_r2"], 2)}}}$'
     ax.text(0.70, 0.98, annotate_str, 
            ha='left', va='top', transform=ax.transAxes)
 
