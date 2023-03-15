@@ -8,55 +8,122 @@ import pandas as pd
 import numpy as np
 import sampex
 import matplotlib.pyplot as plt
+import matplotlib.dates
+from matplotlib.ticker import FuncFormatter
 
 from sampex_microburst_widths import config
 
-catalog_name = 'microburst_catalog_04.csv'
-mlt_range = [16, 22]
-good_r2_thresh = 0.9
-bad_r2_thresh = 0.5
-plot_width_s = 5
-save_dir = pathlib.Path(config.PROJECT_DIR.parent, 'plots', 'validation')
+class Plot_Microbursts:
+    def __init__(self, catalog_name, mlt_range, plot_width_s=5, x_labels=None, r2_bounds=(0.9, 1)) -> None:
+        """
+        Plot >1 MeV microbursts observed by SAMPEX HILT.
 
-catalog_path = pathlib.Path(config.PROJECT_DIR, 'data', catalog_name)
-catalog = pd.read_csv(catalog_path, index_col=0, parse_dates=True)
-catalog['width_ms'] = 1000*catalog['width_s'] # Convert seconds to ms.
-catalog['fwhm_ms'] = 1000*catalog['fwhm']
-catalog['fwhm_ms'] = catalog['fwhm_ms'].abs()
+        Parameters
+        ----------
+        catalog_name: str
+        
+        mlt_range:tuple
+        
+        plot_width_s:float
+        
+        x_labels:dict
+        
+        r2_bounds:tuple
 
-catalog = catalog.loc[((catalog['MLT'] > mlt_range[0]) & (catalog['MLT'] <= mlt_range[1])), :]
-print(f'{catalog.shape[0]} microbursts in {mlt_range=}')
+        """
+        self.catalog_name = catalog_name
+        self.mlt_range = mlt_range
+        self.plot_width_s = plot_width_s
+        if x_labels is None:
+            self.x_labels = {"L": "L_Shell", "MLT": "MLT", "Geo Lat": "GEO_Lat", "Geo Lon": "GEO_Long"}
+        else:
+            self.x_labels = x_labels
+        self.r2_bounds = r2_bounds
+        self.plot_save_dir = pathlib.Path(config.PROJECT_DIR.parent, 'plots', 'validation')
+        if not self.plot_save_dir.exists():
+            self.plot_save_dir.mkdir(parents=True)
+            print(f'Made {self.plot_save_dir} directory')
+        self._load_catalog()
+        return
+    
+    def loop(self):
+        """
+        Make plots.
+        """
+        current_date = pd.Timestamp.min
+        fig, ax = plt.subplots(figsize=(7, 7))
+        fig.subplots_adjust(hspace=0.1, wspace=0.01, top=0.93, bottom=0.15, left=0.13, right=0.95)
 
-good_fit_catalog = catalog.loc[catalog['adj_r2'] > good_r2_thresh, :]
-bad_fit_catalog = catalog.loc[catalog['adj_r2'] < bad_r2_thresh, :]
-print(f'{good_fit_catalog.shape[0]} microbursts in {mlt_range=} and with adj_R^2>{good_r2_thresh}')
-print(f'{bad_fit_catalog.shape[0]} microbursts in {mlt_range=} and with adj_R^2<{bad_r2_thresh}')
+        for time, row in self.catalog.iterrows():
+            print(f'Processing SAMPEX microburst at {time=}')
+            if time.date() != current_date:
+                print(f'Loading {time.date()}')
+                _hilt = sampex.HILT(time).load()
+                _att = sampex.Attitude(time).load()
+                self.hilt = pd.merge_asof(_hilt, _att, left_index=True, right_index=True,
+                                    tolerance=pd.Timedelta(seconds=3), direction='nearest')
+                current_date = time.date()
 
-current_date = pd.Timestamp.min
-_save_dir = save_dir / 'good'
-if not _save_dir.exists():
-    _save_dir.mkdir(parents=True)
-    print(f'Made {_save_dir} directory')
+            plot_time_range = (time-pd.Timedelta(seconds=self.plot_width_s/2), 
+                        time+pd.Timedelta(seconds=self.plot_width_s/2))
+            hilt_flt = self.hilt.loc[plot_time_range[0]:plot_time_range[1], :]
 
-for time, row in good_fit_catalog.iterrows():
-    print(f'Processing SAMPEX microburst at {time=}')
-    if time.date() != current_date:
-        print(f'Loading {time.date()}')
-        _hilt = sampex.HILT(time).load()
-        _att = sampex.Attitude(time).load()
-        hilt = pd.merge_asof(_hilt, _att, left_index=True, right_index=True,
-                               tolerance=pd.Timedelta(seconds=3), direction='nearest')
-        current_date = time.date()
+            ax.step(hilt_flt.index, hilt_flt['counts'], c='k', where="post")
+            ax.axvline(time, c='k', ls='--')
+            annotate_str = f'FWHM = {round(row["fwhm_ms"])} [ms]\n$R^{{2}} = {{{round(row["adj_r2"], 2)}}}$'
+            ax.text(0.70, 0.98, annotate_str, 
+                ha='left', va='top', transform=ax.transAxes)
+            ax.set(title=f'SAMPEX-HILT | >1 MeV Microburst Validation\n{time:%F %T}', ylabel='Counts/20 ms')
+            ax.xaxis.set_major_formatter(FuncFormatter(self.format_fn))
+            ax.set_xlabel("\n".join(["Time"] + list(self.x_labels.keys())))
+            ax.xaxis.set_label_coords(-0.1, -0.02)
 
-    plot_time_range = (time-pd.Timedelta(seconds=plot_width_s/2), 
-                  time+pd.Timedelta(seconds=plot_width_s/2))
-    hilt_flt = hilt.loc[plot_time_range[0]:plot_time_range[1], :]
+            save_name = f'{time:%Y%m%d_%H%M%S}_sampex_microburst.png'
+            plt.savefig(self.plot_save_dir/save_name)
+            ax.clear()
+        return
+    
+    def _load_catalog(self):
+        catalog_path = pathlib.Path(config.PROJECT_DIR, 'data', self.catalog_name)
+        self.catalog = pd.read_csv(catalog_path, index_col=0, parse_dates=True)
+        self.catalog['width_ms'] = 1000*self.catalog['width_s'] # Convert seconds to ms.
+        self.catalog['fwhm_ms'] = 1000*self.catalog['fwhm']
+        self.catalog['fwhm_ms'] = self.catalog['fwhm_ms'].abs()
 
-    fig, ax = plt.subplots()
-    ax.plot(hilt_flt.index, hilt_flt['counts'], 'k')
-    annotate_str = f'FWHM = {round(row["fwhm_ms"])} [ms]\n$R^{{2}} = {{{round(row["adj_r2"], 2)}}}$'
-    ax.text(0.70, 0.98, annotate_str, 
-           ha='left', va='top', transform=ax.transAxes)
+        self.catalog = self.catalog.loc[
+            ((self.catalog['MLT'] > self.mlt_range[0]) & 
+             (self.catalog['MLT'] <= self.mlt_range[1])), :
+             ]
+        print(f'{self.catalog.shape[0]} microbursts in {self.mlt_range=}')
 
-    save_name = f'{time:%Y%m%d_%H%M%S}_sampex_microburst_good_fit.png'
-    plt.savefig(_save_dir/save_name)
+        self.catalog = self.catalog.loc[
+            ((self.catalog['adj_r2'] > self.r2_bounds[0]) &
+             (self.catalog['adj_r2'] < self.r2_bounds[1])), :
+            ]
+        print(f'{self.catalog.shape[0]} microbursts in {self.mlt_range=} and with {self.r2_bounds=}')
+        return
+    
+    def format_fn(self, tick_val, tick_pos):
+        """
+        The tick magic happens here. pyplot gives it a tick time, and this function 
+        returns the closest label to that time. Read docs for FuncFormatter().
+        """
+        # Find the nearest time within 6 seconds (the cadence of the SAMPEX attitude files)
+        tick_time = matplotlib.dates.num2date(tick_val).replace(tzinfo=None)
+        i_min_time = np.argmin(np.abs(self.hilt.index - tick_time))
+        if np.abs(self.hilt.index[i_min_time] - tick_time).total_seconds() > 6:
+            raise ValueError(f"Nearest timestamp to tick_time is more than 6 seconds away")
+        pd_index = self.hilt.index[i_min_time]
+        # Cast np.array as strings so that it can insert the time string.
+        values = self.hilt.loc[pd_index, self.x_labels.values()].to_numpy().round(2).astype(str)
+        values = np.insert(values, 0, pd_index.strftime("%T"))
+        label = "\n".join(values)
+        return label
+
+if __name__ == '__main__':
+    catalog_name = 'microburst_catalog_04.csv'
+    mlt_range = [16, 22]
+    plot_width_s = 5
+
+    plotter = Plot_Microbursts(catalog_name, mlt_range, plot_width_s, r2_bounds=(0.9, 1.0))
+    plotter.loop()
