@@ -48,10 +48,10 @@ for time, row in good_fit_catalog.iterrows():
     hilt_flt = hilt.loc[plot_time_range[0]:plot_time_range[1], :]
 
     fig, ax = plt.subplots()
-    ax[0].plot(hilt_flt.index, hilt_flt['counts'], 'k')
+    ax.plot(hilt_flt.index, hilt_flt['counts'], 'k')
     annotate_str = f'FWHM = {row["fwhm_ms"]} [ms]\n$R^{{2}} = {{{row["adj_r2"]}}}$'
-    ax[0].text(0.70, 0.98, annotate_str, 
-           ha='left', va='top', transform=ax[0].transAxes)
+    ax.text(0.70, 0.98, annotate_str, 
+           ha='left', va='top', transform=ax.transAxes)
 
-    save_name = f'{time: %F %T}_sampex_microburst_good_fit.png'
+    save_name = f'{time: %F_%T}_sampex_microburst_good_fit.png'
     plt.savefig(save_path/'good'/save_name)
