@@ -51,7 +51,7 @@ class Plot_Microbursts:
         Make plots.
         """
         current_date = pd.Timestamp.min
-        fig, ax = plt.subplots(figsize=(7, 7))
+        fig, ax = plt.subplots(figsize=(7, 6))
         fig.subplots_adjust(hspace=0.1, wspace=0.01, top=0.93, bottom=0.15, left=0.13, right=0.95)
 
         for time, row in self.catalog.iterrows():
@@ -75,10 +75,15 @@ class Plot_Microbursts:
                 ha='left', va='top', transform=ax.transAxes)
             ax.set(title=f'SAMPEX-HILT | >1 MeV Microburst Validation\n{time:%F %T}', ylabel='Counts/20 ms')
             ax.xaxis.set_major_formatter(FuncFormatter(self.format_fn))
+            ax.xaxis.set_minor_locator(matplotlib.dates.SecondLocator())
             ax.set_xlabel("\n".join(["Time"] + list(self.x_labels.keys())))
             ax.xaxis.set_label_coords(-0.1, -0.02)
 
-            save_name = f'{time:%Y%m%d_%H%M%S}_sampex_microburst.png'
+            save_name =(
+                f'{time:%Y%m%d_%H%M%S}_sampex_microburst_'
+                f'r2_{int(10*row["adj_r2"])}_fwhm_{int(row["fwhm_ms"])}_'
+                f'mlt_{int(row["MLT"])}_l_{int(row["L_Shell"])}.png'
+                )
             plt.savefig(self.plot_save_dir/save_name)
             ax.clear()
         return
@@ -123,7 +128,7 @@ class Plot_Microbursts:
 if __name__ == '__main__':
     catalog_name = 'microburst_catalog_04.csv'
     mlt_range = [16, 22]
-    plot_width_s = 5
+    plot_width_s = 10
 
     plotter = Plot_Microbursts(catalog_name, mlt_range, plot_width_s, r2_bounds=(0.9, 1.0))
     plotter.loop()
