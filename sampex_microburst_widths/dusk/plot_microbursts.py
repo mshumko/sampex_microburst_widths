@@ -2,7 +2,7 @@
 Plot >1 MeV microburst durations in the dusk MLT range.
 """
 import pathlib
-# from datetime import date, datetime
+from datetime import date, datetime
 
 import pandas as pd
 import numpy as np
@@ -14,22 +14,33 @@ from matplotlib.ticker import FuncFormatter
 from sampex_microburst_widths import config
 
 class Plot_Microbursts:
-    def __init__(self, catalog_name, mlt_range, plot_width_s=5, x_labels=None, r2_bounds=(0.9, 1)) -> None:
+    def __init__(self, catalog_name:str, mlt_range:tuple=(0,24), plot_width_s:float=5, 
+                 x_labels:dict=None, r2_bounds:tuple=(0.9, 1)) -> None:
         """
         Plot >1 MeV microbursts observed by SAMPEX HILT.
 
         Parameters
         ----------
         catalog_name: str
-        
+            The name of the catalog to load from the config.PROJECT_DIR/data directory.
         mlt_range:tuple
-        
+            A tuple of len 2, specifying the min and max MLT values to plot.
         plot_width_s:float
-        
+            The plot width in seconds.
         x_labels:dict
-        
+            The x-axis labels to include from the SAMPEX attitude files. The keys & values must
+            be the strings. The key is the string that is plotted, while the corresponding value 
+            must correspond to columns in the SAMPEX attitude data.  
         r2_bounds:tuple
+            A tuple of len 2 to specifying the R^2 goodness of fit microbursts to plot.
 
+        Methods
+        -------
+        loop()
+            The main method to loop over the microburst catalog and plot all microbursts that meet 
+            the r2_bounds and mlt_range.
+        plot()
+            Plot one event
         """
         self.catalog_name = catalog_name
         self.mlt_range = mlt_range
@@ -48,7 +59,8 @@ class Plot_Microbursts:
     
     def loop(self):
         """
-        Make plots.
+        The main method to loop over the microburst catalog and plot all microbursts that meet 
+        the r2_bounds and mlt_range.
         """
         self.current_date = pd.Timestamp.min
         fig, ax = plt.subplots(figsize=(7, 6))
@@ -64,7 +76,7 @@ class Plot_Microbursts:
                                     tolerance=pd.Timedelta(seconds=3), direction='nearest')
                 self.current_date = time.date()
 
-            self._plot_microburst(ax, time, fit_info_dict=row)
+            self._plot_interval(time, ax, fit_info_dict=row)
 
             save_name =(
                 f'{time:%Y%m%d_%H%M%S}_sampex_microburst_'
@@ -75,7 +87,22 @@ class Plot_Microbursts:
             ax.clear()
         return
     
-    def plot(self, time, ax=None):
+    def plot(self, time:datetime, ax:plt.Axes=None) -> plt.Axes:
+        """
+        Plot an interval of SAMPEX-HILT data.
+
+        Parameters
+        ----------
+        time: datetime
+            The center time to plot. The plot range is time +/- plot_width_s/2.
+        ax: plt.Axes
+            The optional subplot object to plot on.
+
+        Returns
+        -------
+        plt.Axes
+            The modified subplot.
+        """
         if ax is None:
             fig, ax = plt.subplots()
         
@@ -87,22 +114,37 @@ class Plot_Microbursts:
                                 tolerance=pd.Timedelta(seconds=3), direction='nearest')
             self.current_date = time.date()
 
-        self._plot_interval(ax, time)
-        return
+        ax = self._plot_interval(time, ax)
+        return ax
     
-    def _plot_interval(self, ax, time, fit_info_dict=None):
+    def _plot_interval(self, time:datetime, ax:plt.Axes, fit_info:dict=None):
         """
-        Plots one microburst.
+        Plots an interval of HILT data.
+
+        Parameters
+        ----------
+        time: datetime
+            The center time to plot. The plot range is time +/- plot_width_s/2.
+        ax: plt.Axes
+            The optional subplot object to plot on.
+        fit_info: dict
+            Specifies the FWHM and adj_R^2 fit parameters to annotate in the upper-right
+            corner.
+
+        Returns
+        -------
+        plt.Axes
+            The modified subplot.
         """
         plot_time_range = (time-pd.Timedelta(seconds=self.plot_width_s/2), 
                         time+pd.Timedelta(seconds=self.plot_width_s/2))
         hilt_flt = self.hilt.loc[plot_time_range[0]:plot_time_range[1], :]
 
         ax.step(hilt_flt.index, hilt_flt['counts'], c='k', where="post")
-        if fit_info_dict is not None:
+        if fit_info is not None:
             ax.axvline(time, c='k', ls='--')
-            annotate_str = (f'FWHM = {round(fit_info_dict["fwhm_ms"])} [ms]\n'
-                            f'$R^{{2}} = {{{round(fit_info_dict["adj_r2"], 2)}}}$')
+            annotate_str = (f'FWHM = {round(fit_info["fwhm_ms"])} [ms]\n'
+                            f'$R^{{2}} = {{{round(fit_info["adj_r2"], 2)}}}$')
             ax.text(0.70, 0.98, annotate_str, 
                     ha='left', va='top', transform=ax.transAxes)
         ax.set(title=f'SAMPEX-HILT | >1 MeV Microburst Validation\n{time:%F %T}', ylabel='Counts/20 ms')
@@ -110,9 +152,13 @@ class Plot_Microbursts:
         ax.xaxis.set_minor_locator(matplotlib.dates.SecondLocator())
         ax.set_xlabel("\n".join(["Time"] + list(self.x_labels.keys())))
         ax.xaxis.set_label_coords(-0.1, -0.02)
-        return
+        return ax
     
     def _load_catalog(self):
+        """
+        Load a microburst catalog, convert the FWHM to milliseconds, filter by self.mlt_range,
+        and filter by self.r2_bounds.
+        """
         catalog_path = pathlib.Path(config.PROJECT_DIR, 'data', self.catalog_name)
         self.catalog = pd.read_csv(catalog_path, index_col=0, parse_dates=True)
         self.catalog['width_ms'] = 1000*self.catalog['width_s'] # Convert seconds to ms.

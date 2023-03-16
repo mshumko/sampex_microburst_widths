@@ -7,6 +7,7 @@ config.py
 microburst_catalog_03.csv
 paper/feedback/
 /plots/validation/
+*.zip
 
 # Latex files
 /paper/*aux
