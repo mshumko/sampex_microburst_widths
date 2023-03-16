@@ -88,6 +88,12 @@ class Plot_Microbursts:
             ax.clear()
         return
     
+    def plot(self, time, ax=None):
+        if ax is None:
+            fig, ax = plt.subplots()
+        
+        return
+    
     def _load_catalog(self):
         catalog_path = pathlib.Path(config.PROJECT_DIR, 'data', self.catalog_name)
         self.catalog = pd.read_csv(catalog_path, index_col=0, parse_dates=True)
@@ -130,5 +136,5 @@ if __name__ == '__main__':
     mlt_range = [16, 22]
     plot_width_s = 10
 
-    plotter = Plot_Microbursts(catalog_name, mlt_range, plot_width_s, r2_bounds=(0.9, 1.0))
+    plotter = Plot_Microbursts(catalog_name, mlt_range, plot_width_s, r2_bounds=(-1000, .5))
     plotter.loop()
