@@ -30,16 +30,32 @@ catalog['fwhm_ms'] = catalog['fwhm_ms'].abs()
 good_fit_catalog = catalog.loc[catalog['adj_r2'] > good_r2_thresh, :]
 bad_fit_catalog = catalog.loc[catalog['adj_r2'] < bad_r2_thresh, :]
 
-fig = plt.figure(figsize=(7, 4))
+fig = plt.figure(figsize=(10, 4.5))
 ax = [plt.subplot(1, 2, i, projection='polar') for i in range(1, 3)]
 
-good_H, _, _ = np.histogram2d(good_fit_catalog.loc[:, ['MLT', 'L_Shell']], MLT_bins, L_bins)
+good_H, _, _ = np.histogram2d(
+    good_fit_catalog.loc[:, 'MLT'].to_numpy(), 
+    good_fit_catalog.loc[:, 'L_Shell'].to_numpy(),
+    bins=(MLT_bins, L_bins))
 d = dial_plot.Dial(ax[0], MLT_bins, L_bins, good_H.T)
 d.draw_dial(L_labels=L_labels,
-        mesh_kwargs={'cmap':cmap, 'norm':matplotlib.colors.Normalize(60, 150)},
-        colorbar_kwargs={'label':f'microburst duration [ms]', 'pad':0.1})
+        mesh_kwargs={'cmap':cmap, 'norm':matplotlib.colors.LogNorm()},
+        colorbar_kwargs={'label':f'number of microbursts', 'pad':0.1})
 annotate_str = f'({string.ascii_lowercase[0]}) adJ_R^2 > {good_r2_thresh}'
-ax[0].text(-0.2, 1.2, annotate_str, va='top', transform=ax[0].transAxes, 
-        weight='bold', fontsize=15)
+ax[0].text(-0.2, 1.2, annotate_str, va='top', transform=ax[0].transAxes, fontsize=15)
 
+bad_H, _, _ = np.histogram2d(
+    bad_fit_catalog.loc[:, 'MLT'].to_numpy(), 
+    bad_fit_catalog.loc[:, 'L_Shell'].to_numpy(),
+    bins=(MLT_bins, L_bins))
+d = dial_plot.Dial(ax[1], MLT_bins, L_bins, bad_H.T)
+d.draw_dial(L_labels=L_labels,
+        mesh_kwargs={'cmap':cmap, 'norm':matplotlib.colors.LogNorm()},
+        colorbar_kwargs={'label':f'number of microbursts', 'pad':0.1})
+annotate_str = f'({string.ascii_lowercase[1]}) adJ_R^2 < {bad_r2_thresh}'
+ax[1].text(-0.2, 1.2, annotate_str, va='top', transform=ax[1].transAxes, fontsize=15)
+
+plt.suptitle('SAMPEX >1 MeV microbursts | Distribution of Good vs. Bad Fits', 
+             weight='bold', fontsize=15)
+plt.tight_layout(rect=(0, 0.01, 1, 0.95))
 plt.show()
