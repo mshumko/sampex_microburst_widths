@@ -50,34 +50,21 @@ class Plot_Microbursts:
         """
         Make plots.
         """
-        current_date = pd.Timestamp.min
+        self.current_date = pd.Timestamp.min
         fig, ax = plt.subplots(figsize=(7, 6))
         fig.subplots_adjust(hspace=0.1, wspace=0.01, top=0.93, bottom=0.15, left=0.13, right=0.95)
 
         for time, row in self.catalog.iterrows():
             print(f'Processing SAMPEX microburst at {time=}')
-            if time.date() != current_date:
+            if time.date() != self.current_date:
                 print(f'Loading {time.date()}')
                 _hilt = sampex.HILT(time).load()
                 _att = sampex.Attitude(time).load()
                 self.hilt = pd.merge_asof(_hilt, _att, left_index=True, right_index=True,
                                     tolerance=pd.Timedelta(seconds=3), direction='nearest')
-                current_date = time.date()
+                self.current_date = time.date()
 
-            plot_time_range = (time-pd.Timedelta(seconds=self.plot_width_s/2), 
-                        time+pd.Timedelta(seconds=self.plot_width_s/2))
-            hilt_flt = self.hilt.loc[plot_time_range[0]:plot_time_range[1], :]
-
-            ax.step(hilt_flt.index, hilt_flt['counts'], c='k', where="post")
-            ax.axvline(time, c='k', ls='--')
-            annotate_str = f'FWHM = {round(row["fwhm_ms"])} [ms]\n$R^{{2}} = {{{round(row["adj_r2"], 2)}}}$'
-            ax.text(0.70, 0.98, annotate_str, 
-                ha='left', va='top', transform=ax.transAxes)
-            ax.set(title=f'SAMPEX-HILT | >1 MeV Microburst Validation\n{time:%F %T}', ylabel='Counts/20 ms')
-            ax.xaxis.set_major_formatter(FuncFormatter(self.format_fn))
-            ax.xaxis.set_minor_locator(matplotlib.dates.SecondLocator())
-            ax.set_xlabel("\n".join(["Time"] + list(self.x_labels.keys())))
-            ax.xaxis.set_label_coords(-0.1, -0.02)
+            self._plot_microburst(ax, time, fit_info_dict=row)
 
             save_name =(
                 f'{time:%Y%m%d_%H%M%S}_sampex_microburst_'
@@ -92,6 +79,37 @@ class Plot_Microbursts:
         if ax is None:
             fig, ax = plt.subplots()
         
+        if time.date() != self.current_date:
+            print(f'Loading {time.date()}')
+            _hilt = sampex.HILT(time).load()
+            _att = sampex.Attitude(time).load()
+            self.hilt = pd.merge_asof(_hilt, _att, left_index=True, right_index=True,
+                                tolerance=pd.Timedelta(seconds=3), direction='nearest')
+            self.current_date = time.date()
+
+        self._plot_interval(ax, time)
+        return
+    
+    def _plot_interval(self, ax, time, fit_info_dict=None):
+        """
+        Plots one microburst.
+        """
+        plot_time_range = (time-pd.Timedelta(seconds=self.plot_width_s/2), 
+                        time+pd.Timedelta(seconds=self.plot_width_s/2))
+        hilt_flt = self.hilt.loc[plot_time_range[0]:plot_time_range[1], :]
+
+        ax.step(hilt_flt.index, hilt_flt['counts'], c='k', where="post")
+        ax.axvline(time, c='k', ls='--')
+        if fit_info_dict is not None:
+            annotate_str = (f'FWHM = {round(fit_info_dict["fwhm_ms"])} [ms]\n'
+                            f'$R^{{2}} = {{{round(fit_info_dict["adj_r2"], 2)}}}$')
+            ax.text(0.70, 0.98, annotate_str, 
+                    ha='left', va='top', transform=ax.transAxes)
+        ax.set(title=f'SAMPEX-HILT | >1 MeV Microburst Validation\n{time:%F %T}', ylabel='Counts/20 ms')
+        ax.xaxis.set_major_formatter(FuncFormatter(self.format_fn))
+        ax.xaxis.set_minor_locator(matplotlib.dates.SecondLocator())
+        ax.set_xlabel("\n".join(["Time"] + list(self.x_labels.keys())))
+        ax.xaxis.set_label_coords(-0.1, -0.02)
         return
     
     def _load_catalog(self):
