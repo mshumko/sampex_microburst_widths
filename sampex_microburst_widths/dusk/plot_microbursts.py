@@ -99,8 +99,8 @@ class Plot_Microbursts:
         hilt_flt = self.hilt.loc[plot_time_range[0]:plot_time_range[1], :]
 
         ax.step(hilt_flt.index, hilt_flt['counts'], c='k', where="post")
-        ax.axvline(time, c='k', ls='--')
         if fit_info_dict is not None:
+            ax.axvline(time, c='k', ls='--')
             annotate_str = (f'FWHM = {round(fit_info_dict["fwhm_ms"])} [ms]\n'
                             f'$R^{{2}} = {{{round(fit_info_dict["adj_r2"], 2)}}}$')
             ax.text(0.70, 0.98, annotate_str, 
