@@ -106,6 +106,11 @@ class Plot_Microbursts:
         if ax is None:
             fig, ax = plt.subplots(figsize=(7, 6))
             fig.subplots_adjust(hspace=0.1, wspace=0.01, top=0.93, bottom=0.15, left=0.13, right=0.95)
+
+        # Only for the interactive mode.
+        ax.format_coord = lambda x, y: "{}, {}".format(
+            matplotlib.dates.num2date(x).replace(tzinfo=None).isoformat(), round(y)
+        )
         
         if (not hasattr(self, 'current_date')) or (time.date() != self.current_date):
             print(f'Loading {time.date()}')
@@ -199,7 +204,7 @@ class Plot_Microbursts:
 if __name__ == '__main__':
     catalog_name = 'microburst_catalog_04.csv'
     mlt_range = [16, 22]
-    plot_width_s = 10
+    plot_width_s = 120
 
     plotter = Plot_Microbursts(catalog_name, mlt_range, plot_width_s, r2_bounds=(-1000, .5))
     # plotter.loop()
