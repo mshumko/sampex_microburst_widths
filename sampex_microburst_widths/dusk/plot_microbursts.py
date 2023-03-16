@@ -104,9 +104,10 @@ class Plot_Microbursts:
             The modified subplot.
         """
         if ax is None:
-            fig, ax = plt.subplots()
+            fig, ax = plt.subplots(figsize=(7, 6))
+            fig.subplots_adjust(hspace=0.1, wspace=0.01, top=0.93, bottom=0.15, left=0.13, right=0.95)
         
-        if time.date() != self.current_date:
+        if (not hasattr(self, 'current_date')) or (time.date() != self.current_date):
             print(f'Loading {time.date()}')
             _hilt = sampex.HILT(time).load()
             _att = sampex.Attitude(time).load()
@@ -148,7 +149,7 @@ class Plot_Microbursts:
             ax.text(0.70, 0.98, annotate_str, 
                     ha='left', va='top', transform=ax.transAxes)
         ax.set(title=f'SAMPEX-HILT | >1 MeV Microburst Validation\n{time:%F %T}', ylabel='Counts/20 ms')
-        ax.xaxis.set_major_formatter(FuncFormatter(self.format_fn))
+        ax.xaxis.set_major_formatter(FuncFormatter(self._format_fn))
         ax.xaxis.set_minor_locator(matplotlib.dates.SecondLocator())
         ax.set_xlabel("\n".join(["Time"] + list(self.x_labels.keys())))
         ax.xaxis.set_label_coords(-0.1, -0.02)
@@ -178,7 +179,7 @@ class Plot_Microbursts:
         print(f'{self.catalog.shape[0]} microbursts in {self.mlt_range=} and with {self.r2_bounds=}')
         return
     
-    def format_fn(self, tick_val, tick_pos):
+    def _format_fn(self, tick_val, tick_pos):
         """
         The tick magic happens here. pyplot gives it a tick time, and this function 
         returns the closest label to that time. Read docs for FuncFormatter().
@@ -191,7 +192,7 @@ class Plot_Microbursts:
         pd_index = self.hilt.index[i_min_time]
         # Cast np.array as strings so that it can insert the time string.
         values = self.hilt.loc[pd_index, self.x_labels.values()].to_numpy().round(2).astype(str)
-        values = np.insert(values, 0, pd_index.strftime("%T"))
+        values = np.insert(values, 0, pd_index.strftime('%T.%f')[:-5])
         label = "\n".join(values)
         return label
 
@@ -201,4 +202,6 @@ if __name__ == '__main__':
     plot_width_s = 10
 
     plotter = Plot_Microbursts(catalog_name, mlt_range, plot_width_s, r2_bounds=(-1000, .5))
-    plotter.loop()
+    # plotter.loop()
+    plotter.plot(datetime(1999, 9, 16, 11, 34, 7))
+    plt.show()
