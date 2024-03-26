@@ -7,8 +7,12 @@ m = identify_microbursts.Identify_SAMPEX_Microbursts(
     baseline_width_s=0.5, foreground_width_s=0.1,
     prominence_rel_height=0.5
     )
-m.loop(debug=False)
-cat_path = m.save_catalog()
+try:
+    m.loop(debug=False)
+except (Exception, KeyboardInterrupt, SystemExit) as err:
+    print(err)
+finally:
+    cat_path = m.save_catalog()
 
 # Merge the Attitude data
 m = merge_attitude.Merge_Attitude(cat_path)
