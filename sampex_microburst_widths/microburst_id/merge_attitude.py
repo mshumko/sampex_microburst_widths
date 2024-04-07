@@ -36,11 +36,9 @@ class Merge_Attitude:
                 print(f'Loading attitude file for {unique_date}')
                 try:
                     self.attitude = sampex.Attitude(unique_date).load()
-                except ValueError as err:
+                except FileNotFoundError as err:
                     # The last day doesn't have attitude data so skip it.
-                    if str(err) == 'A matched file not found for year=2012, doy=311':
-                        print(err)
-                        continue
+                    continue
             self.merged = pd.merge_asof(catalog_copy, self.attitude, left_index=True, 
                                 right_index=True, tolerance=pd.Timedelta(seconds=10),
                                 direction='nearest')
