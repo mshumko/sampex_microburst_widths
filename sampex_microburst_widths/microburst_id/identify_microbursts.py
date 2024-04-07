@@ -142,7 +142,7 @@ class Identify_SAMPEX_Microbursts:
         hilt_df = pd.DataFrame(data={'counts':counts}, index=self.hilt_obj['time'])
         gaus = SAMPEX_Microburst_Widths(hilt_df, self.stb.peak_idt)
         gaus.calc_prominence_widths(self.prominence_rel_height)
-        fit_df = gaus.calc_gaus_widths(debug=debug)
+        # fit_df = gaus.calc_gaus_widths(debug=debug)
 
         # Save to a DataFrame
         df = pd.DataFrame(
@@ -157,9 +157,9 @@ class Identify_SAMPEX_Microbursts:
                 },
             index=self.stb.peak_idt
             )
-        merged_df = pd.concat([df, fit_df], axis=1)  # Add the fit parameters columns
+        # df = pd.concat([df, fit_df], axis=1)  # Add the fit parameters columns
         # Add to other detections and reindex to 0...n
-        self.detections = pd.concat((self.detections, merged_df), ignore_index=True)
+        self.detections = pd.concat((self.detections, df), ignore_index=True)
         return
 
     def remove_detections_near_time_gaps(self):
