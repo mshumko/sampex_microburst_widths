@@ -9,6 +9,8 @@ m = identify_microbursts.Identify_SAMPEX_Microbursts(
     )
 try:
     m.loop(debug=False)
+except (Exception, KeyboardInterrupt, SystemExit) as err:
+    print(err)
 finally:
     cat_path = m.save_catalog()
 

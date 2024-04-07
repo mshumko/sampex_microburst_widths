@@ -11,16 +11,17 @@ import progressbar
 import scipy.optimize
 import scipy.signal
 import sklearn.metrics
+import sampex
 
 from sampex_microburst_widths import config
-from sampex_microburst_widths.misc import load_hilt_data
 from sampex_microburst_widths.microburst_id import signal_to_background
 
 class Identify_SAMPEX_Microbursts:
     def __init__(self, baseline_width_s=0.500, foreground_width_s=0.1,
                 threshold=10, spin_file_name='spin_times.csv', 
                 prominence_rel_height=0.5):
-        self.hilt_dir = pathlib.Path(config.SAMPEX_DIR, 'hilt', 'State4')
+        self.state = 4
+        self.hilt_dir = pathlib.Path(config.SAMPEX_DIR, 'hilt', f'State{self.state}')
         self.spin_file_name = spin_file_name
         self.baseline_width_s = baseline_width_s
         self.foreground_width_s = foreground_width_s
@@ -39,7 +40,7 @@ class Identify_SAMPEX_Microbursts:
         """
         self.get_file_names()
         self.load_spin_times()
-        self.microburst_times = pd.DataFrame(data=np.zeros((0, 2)), 
+        self.detections = pd.DataFrame(data=np.zeros((0, 2)), 
                                             columns=['dateTime', 'burst_param'])
 
         for hilt_file in progressbar.progressbar(self.hilt_files, redirect_stdout=True):
@@ -50,16 +51,15 @@ class Identify_SAMPEX_Microbursts:
             if self.date_during_spin(date) or (date.year == 1996):
                 continue
 
-            # Load the data
-            try:
-                self.hilt_obj = load_hilt_data.Load_SAMPEX_HILT(date)
-            except RuntimeError as err:
-                if str(err) == "The SAMPEX HITL data is not in order.":
+            with warnings.catch_warnings(record=True) as w:
+                self.hilt_obj = sampex.HILT(date)
+                self.hilt_obj.load()
+
+                if (
+                    (len(w) > 0) and 
+                    ('The SAMPEX HILT data is not in order' in str(w[0].message))
+                    ):
                     continue
-                else:
-                    raise
-            # Resolve the 20 ms data
-            self.hilt_obj.resolve_counts_state4()
 
             # Use the hilt data to id microbursts  
             try:
@@ -116,10 +116,21 @@ class Identify_SAMPEX_Microbursts:
 
     def id_microbursts(self, debug=False):
         """ Use SignalToBackground class to identify microbursts """
+        if self.state == 4:
+            cadence = 20E-3
+            counts = self.hilt_obj['counts']
+        elif self.state == 1:
+            cadence = 100E-3
+            counts = (
+                self.hilt_obj[f"SSD1"] + self.hilt_obj[f"SSD2"] + 
+                self.hilt_obj[f"SSD3"] + self.hilt_obj[f"SSD4"]
+                )
         self.stb = signal_to_background.SignalToBackground(
-                                    self.hilt_obj.counts, 20E-3, 
-                                    self.baseline_width_s,
-                                    foreground_width_s=self.foreground_width_s)
+            counts, 
+            cadence, 
+            self.baseline_width_s,
+            foreground_width_s=self.foreground_width_s
+            )
         self.stb.significance()
         self.stb.find_microburst_peaks(std_thresh=self.threshold)
 
@@ -128,31 +139,34 @@ class Identify_SAMPEX_Microbursts:
 
         # Calculate the microburst widths using the prominence method and
         # the Gaussian fit.
-        gaus = SAMPEX_Microburst_Widths(self.hilt_obj.hilt_resolved, self.stb.peak_idt)
+        hilt_df = pd.DataFrame(data={'counts':counts}, index=self.hilt_obj['time'])
+        gaus = SAMPEX_Microburst_Widths(hilt_df, self.stb.peak_idt)
         gaus.calc_prominence_widths(self.prominence_rel_height)
-        fit_df = gaus.calc_gaus_widths(debug=debug)
+        # fit_df = gaus.calc_gaus_widths(debug=debug)
 
         # Save to a DataFrame
         df = pd.DataFrame(
             data={
-                'dateTime':self.hilt_obj.hilt_resolved.iloc[self.stb.peak_idt, :].index,
+                'dateTime':self.hilt_obj['time'][self.stb.peak_idt],
                 'width_s':gaus.prom_widths_s,
                 'width_height':gaus.width_height,
+                'peak_counts_s':counts[self.stb.peak_idt]/cadence,
                 'left_peak_base':gaus.left_peak_base,
                 'right_peak_base':gaus.right_peak_base,
                 'burst_param':np.round(self.stb.n_std.values[self.stb.peak_idt].flatten(), 1)
                 },
             index=self.stb.peak_idt
             )
-        merged_df = pd.concat([df, fit_df], axis=1)
-        self.microburst_times = self.microburst_times.append(merged_df)
+        # df = pd.concat([df, fit_df], axis=1)  # Add the fit parameters columns
+        # Add to other detections and reindex to 0...n
+        self.detections = pd.concat((self.detections, df), ignore_index=True)
         return
 
     def remove_detections_near_time_gaps(self):
         """
 
         """
-        times = self.hilt_obj.hilt_resolved.index
+        times = self.hilt_obj['time']
         dt = (times[1:] - times[:-1]).total_seconds()
         bad_indices = np.array([])
         bad_index_range = int(5/(dt[0]*2))
@@ -179,9 +193,9 @@ class Identify_SAMPEX_Microbursts:
         data subdirectory.
         """
         # Drop duplicate detections, if any
-        pre_len = self.microburst_times.shape[0]
-        self.microburst_times.drop_duplicates(subset='dateTime', inplace=True)
-        print(f'{pre_len - self.microburst_times.shape[0]} duplicate detections dropped.')
+        pre_len = self.detections.shape[0]
+        self.detections.drop_duplicates(subset='dateTime', inplace=True)
+        print(f'{pre_len - self.detections.shape[0]} duplicate detections dropped.')
         # If the save_name is None, save to a default filename
         # that gets incremented if it already exists.
         if save_name is None:
@@ -197,7 +211,7 @@ class Identify_SAMPEX_Microbursts:
 
         # Save the microburst catalog
         log_path = pathlib.Path(config.PROJECT_DIR, 'data', 'catalog_log.csv')
-        self.microburst_times.to_csv(save_path, index=False)
+        self.detections.to_csv(save_path, index=False)
 
         # Log the saved catalog info.
         git_revision_hash = subprocess.check_output(
@@ -221,20 +235,19 @@ class Identify_SAMPEX_Microbursts:
 
     def test_detections(self):
         """ This method plots the microburst detections """
-        # plt.plot(pd.Series(self.hilt_obj.times), self.hilt_obj.counts, 'k') 
-        plt.plot(pd.Series(self.hilt_obj.times), self.hilt_obj.counts, 'k') 
-        plt.scatter(pd.Series(self.hilt_obj.times[self.stb.peak_idt]), 
-                    self.hilt_obj.counts[self.stb.peak_idt], 
+        plt.plot(self.hilt_obj['time'], self.hilt_obj['counts'], 'k') 
+        plt.scatter(self.hilt_obj['time'][self.stb.peak_idt], 
+                    self.hilt_obj['counts'][self.stb.peak_idt], 
                     c='r', marker='D')
         plt.show()
 
 class SAMPEX_Microburst_Widths:
-    def __init__(self, hilt_data, peak_idt, width_multiplier=2, plot_width_s=5):
+    def __init__(self, hilt_df, peak_idt, width_multiplier=2, plot_width_s=5):
         """
         
         """
-        self.hilt_data = hilt_data
-        self.hilt_times = self.hilt_data.index.to_numpy()
+        self.hilt_df = hilt_df
+        self.hilt_times = self.hilt_df.index.to_numpy()
         self.peak_idt = peak_idt
         self.width_multiplier = width_multiplier
         self.plot_width_s = plot_width_s
@@ -248,10 +261,10 @@ class SAMPEX_Microburst_Widths:
         peak_check_thresh = 5 # Look 100 ms around the peak count to find the true peak. 
         for i, index_i in enumerate(self.peak_idt):
             self.peak_idt[i] = index_i - peak_check_thresh + \
-                np.argmax(self.hilt_data['counts'][index_i-peak_check_thresh:index_i+peak_check_thresh])
+                np.argmax(self.hilt_df['counts'][index_i-peak_check_thresh:index_i+peak_check_thresh])
 
         # Use scipy to find the peak width at self.prominence_rel_height prominence
-        widths_tuple = scipy.signal.peak_widths(self.hilt_data['counts'], self.peak_idt, 
+        widths_tuple = scipy.signal.peak_widths(self.hilt_df['counts'], self.peak_idt, 
                                             rel_height=prominence_rel_height)
         self.prom_widths_s = 20E-3*widths_tuple[0]   
         self.width_height = widths_tuple[1]
@@ -281,7 +294,7 @@ class SAMPEX_Microburst_Widths:
                 self.hilt_times[peak_i]+pd.Timedelta(seconds=width_i)*self.width_multiplier
                         ]
             # If too little data points, assume a 500 ms fit width.
-            if len(self.hilt_data.loc[time_range[0]:time_range[1], :].index) < 5:
+            if len(self.hilt_df.loc[time_range[0]:time_range[1], :].index) < 5:
                 time_range = [
                             self.hilt_times[peak_i]-pd.Timedelta(seconds=0.25),
                             self.hilt_times[peak_i]+pd.Timedelta(seconds=0.25)
@@ -298,7 +311,7 @@ class SAMPEX_Microburst_Widths:
                     height_i,   # gauss amplitude 
                     t0,         # gauss center time
                     width_i,    # 2x gaus std.
-                    self.hilt_data.loc[time_range[0]:time_range[1], 'counts'].median(), # y-intercept
+                    self.hilt_df.loc[time_range[0]:time_range[1], 'counts'].median(), # y-intercept
                     0           # Slope
                     ]
             else:
@@ -328,10 +341,10 @@ class SAMPEX_Microburst_Widths:
         """
         Fits a gausian shape with an optinal linear detrending term.
         """
-        x_data = self.hilt_data.loc[time_range[0]:time_range[1], :].index
+        x_data = self.hilt_df.loc[time_range[0]:time_range[1], :].index
         current_date = x_data[0].floor('d')
         x_data_seconds = (x_data-current_date).total_seconds()
-        y_data = self.hilt_data.loc[time_range[0]:time_range[1], 'counts']
+        y_data = self.hilt_df.loc[time_range[0]:time_range[1], 'counts']
 
         if len(x_data) < len(p0):
             raise ValueError('Not enough data points to fit. Increase the '
@@ -388,10 +401,10 @@ class SAMPEX_Microburst_Widths:
             peak_time + pd.Timedelta(seconds=self.plot_width_s/2)
         ]
 
-        time_array = self.hilt_data.loc[plot_time_range[0]:plot_time_range[-1]].index
+        time_array = self.hilt_df.loc[plot_time_range[0]:plot_time_range[-1]].index
         current_date = time_array[0].floor('d')
         x_data_seconds = (time_array-current_date).total_seconds()
-        y_data = self.hilt_data.loc[plot_time_range[0]:plot_time_range[1], 'counts']
+        y_data = self.hilt_df.loc[plot_time_range[0]:plot_time_range[1], 'counts']
 
         popt[1] = (popt[1] - current_date).total_seconds()
         popt[2] = popt[2]/2.355 # Convert the Gaussian FWHM to std

@@ -197,7 +197,7 @@ class Load_SAMPEX_Attitude:
             self._skip_header(f)
             # Save the rest to a file using columns specified by the columns.keys() with the 
             # columns values for the column names.
-            self.attitude = pd.read_csv(f, delim_whitespace=True,
+            self.attitude = pd.read_csv(f, sep='\\s+',
                                         names=columns.values(), 
                                         usecols=columns.keys(),
                                         warn_bad_lines=True, error_bad_lines=False)

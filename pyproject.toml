@@ -1,0 +1,28 @@
+[build-system]
+requires = [ "setuptools>=61.2",]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sampex_microburst_widths"
+version = "3.0.0"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "pandas > 2.0.0",
+    "scipy",
+    "pytest",
+    "sampex > 1.0.0",
+    "progressbar2",
+    "scikit-learn >= 1.4"
+]
+
+[[project.authors]]
+name = "Mykhaylo Shumko"
+email = "msshumko@gmail.com"
+
+[project.urls]
+Homepage = "https://github.com/mshumko/sampex_microburst_widths"
+
+[tool.setuptools]
+packages = [ "sampex_microburst_widths",]
+include-package-data = false
