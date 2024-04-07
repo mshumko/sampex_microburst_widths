@@ -8,7 +8,7 @@ version = "3.0.0"
 dependencies = [
     "numpy",
     "matplotlib",
-    "pandas",
+    "pandas > 2.0.0",
     "scipy",
     "pytest",
     "sampex > 1.0.0",
