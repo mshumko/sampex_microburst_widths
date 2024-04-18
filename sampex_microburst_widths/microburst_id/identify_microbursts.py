@@ -150,7 +150,7 @@ class Identify_SAMPEX_Microbursts:
                 'dateTime':self.hilt_obj['time'][self.stb.peak_idt],
                 'width_s':gaus.prom_widths_s,
                 'width_height':gaus.width_height,
-                'peak_counts_s':counts[self.stb.peak_idt]/cadence,
+                'peak_counts_20ms':counts[self.stb.peak_idt],
                 'left_peak_base':gaus.left_peak_base,
                 'right_peak_base':gaus.right_peak_base,
                 'burst_param':np.round(self.stb.n_std.values[self.stb.peak_idt].flatten(), 1)
