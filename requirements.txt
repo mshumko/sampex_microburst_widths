@@ -6,7 +6,7 @@ scipy==1.12.0
 pytest==6.2.2
 sampex==1.0.0
 progressbar2==4.4.2
-scikit-learn==1.4.0
+scikit-learn==1.5.0
 
 # Finally install this package in editable (-e) 
 # mode so I can develop it 
